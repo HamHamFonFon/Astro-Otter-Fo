@@ -1,17 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <component :is="layout">
+      <router-view></router-view>
+    </component>
+  </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { provide, shallowRef} from "vue";
+import router from "@/router";
+import layouts from "@/layouts";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const layout = shallowRef('div');
+router.afterEach((to) => {
+  layout.value = layouts[to.meta.layout] || layouts['default']
+});
+provide('app:layout', layout);
 </script>
 
 <style>
@@ -20,7 +24,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
