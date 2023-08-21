@@ -27,7 +27,7 @@
                 class="text-white mr-5"
                 color="primary"
                 @click="scrollToSearch"
-            >Search galaxy, nebula, constellation...</v-btn
+            >Search objects</v-btn
             >
           </v-col>
           <v-col cols="12" sm="6">
@@ -62,8 +62,18 @@ export default {
     };
   },
   methods: {
-    scrollToSearch() {},
-    scrollToPages() {}
+    scrollToSearch() {
+      const homeSearch = document.getElementById('search');
+      if (homeSearch) {
+        homeSearch.scrollIntoView({ behavior: "smooth" })
+      }
+    },
+    scrollToPages() {
+      const homeCards = document.getElementById('pages');
+      if (homeCards) {
+        homeCards.scrollIntoView({ behavior: "smooth" })
+      }
+    }
   }
 }
 </script>

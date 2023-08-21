@@ -15,7 +15,8 @@ const AstroOtterLightThemes = {
         secondary: '#e9e9e9',
 
         appBarColor: '#1B2A32',
-        textGrey: '#e9e9e9'
+        grey: '#e9e9e9',
+        green: '#1ed760'
     }
 };
 
