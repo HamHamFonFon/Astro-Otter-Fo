@@ -8,9 +8,6 @@
   <!-- Search autocomplete component -->
   <a ref="search" id="search"></a>
   <SearchAutocomplete />
-  <v-toolbar>
-    <v-toolbar-title></v-toolbar-title>
-  </v-toolbar>
 
   <!-- Page cards component -->
   <a ref="pages" id="pages"></a>
@@ -58,7 +55,6 @@
       </v-container>
     </template>
   </ItemCard>
-
   <!-- Stats components ? -->
 </template>
 

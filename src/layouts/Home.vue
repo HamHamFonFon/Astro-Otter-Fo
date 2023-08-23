@@ -1,4 +1,6 @@
 <template>
+  <!-- No headerBar -->
+
   <!-- Body -->
   <v-main class="main-container"
     v-touch="{
@@ -10,11 +12,18 @@
       <slot></slot>
     </div>
   </v-main>
+
+  <!-- Footer -->
+  <FooterBar />
 </template>
 
 <script>
+import FooterBar from "@/components/Layout/FooterBar.vue";
 export default {
-  name: "HomeLayout"
+  name: "HomeLayout",
+  components: {
+    FooterBar
+  }
 }
 </script>
 

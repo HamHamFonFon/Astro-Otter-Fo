@@ -1,0 +1,91 @@
+<template>
+    <v-sheet
+        elevation="0"
+        class="landing-warpper"
+        color="background"
+    >
+      <v-container class="text-left pa-10">
+        <v-sheet
+            class="mx-auto"
+            color="transparent"
+            elevation="0"
+            max-width="1600"
+        >
+          <v-row>
+            <v-col cols="12" md="6">
+              <p class="my-4 text-grey">Discover wonders and mysteries of the universe</p>
+            </v-col>
+            <v-col cols="12" md="6">
+              <div class="d-flex flex-wrap justify-center justify-md-end pb-5">
+                <v-btn v-for="(socialNetwork, index) in socialNetworks"
+                       v-bind:key="index"
+                       color="blue-grey-darken-2"
+                       class="mx-3"
+                       @click="openSocialNetwork(socialNetwork.to)"
+                       icon
+                >
+                  <v-icon>{{ socialNetwork.icon }}</v-icon>
+                </v-btn>
+              </div>
+
+              <div class="d-flex flex-wrap justify-center justify-md-end">
+                <router-link
+                    class="text-primary mx-3 mb-3 font-weight-bold"
+                    v-for="nav in this.processedFooterMenu"
+                    :to="nav.path"
+                    v-bind:key="nav.key"
+                >
+                  <span class="text-grey">{{ nav.text }}</span>
+
+                </router-link
+                >
+              </div>
+            </v-col>
+          </v-row>
+          <hr class="my-3" />
+          <p class="text-center my-5">© All Rights Reserved</p>
+        </v-sheet>
+      </v-container>
+  </v-sheet>
+</template>
+
+<script>
+import configs from "@/configs";
+export default {
+  name: "FooterBar",
+  data() {
+    return {
+      socialNetworks: configs.socialNetworks,
+      footerPages: configs.footerPages
+    }
+  },
+  computed: {
+    processedFooterMenu() {
+      const allRoutes = this.$router.options.routes;
+      const footerPages = this.footerPages;
+      return this.buildMenu(footerPages, allRoutes);
+    }
+  },
+  methods: {
+    openSocialNetwork(link) {
+      window.open(link, '_blank')
+    },
+    buildMenu(footerPages, allRoutes) {
+      return footerPages.map(route => {
+        let routeName = route.routeName;
+        const routeItem = allRoutes.filter(route => route.name === routeName)[0];
+        let path = routeItem.path;
+        return {
+          key: routeItem.meta.key,
+          text: routeItem.meta.text,
+          path: path
+        }
+      });
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

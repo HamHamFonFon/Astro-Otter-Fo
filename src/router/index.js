@@ -50,7 +50,19 @@ const routes = [
     {
         path: '/constellations',
         name: 'constellations',
-        component: () => import('@/views/Constellations.vue'),
+        component: () => import('@/views/constellations/ConstellationList.vue'),
+        children: [
+            {
+                path: ':constellationId',
+                name: 'constellation',
+                component: () => import('@/views/constellations/ConstellationPage.vue'),
+                meta: {
+                    layout: 'page',
+                    key: '',
+                    text: ''
+                }
+            }
+        ],
         meta: {
             layout: 'page',
             key: "menu.constellations",
@@ -64,7 +76,7 @@ const routes = [
     {
         path: '/astrobin',
         name: 'astrobin',
-        component: () => import('@/views/Astrobin.vue'),
+        component: () => import('@/views/astrobin/Astrobin.vue'),
         children: [
             {
                 path: 'image-of-the-day',
@@ -92,6 +104,46 @@ const routes = [
 
     },
     {
+        path: '/contact-us',
+        name: 'contact',
+        meta: {
+            layout: 'page',
+            key: 'menu.contact',
+            text: 'Contact',
+            description: ''
+        }
+    },
+    {
+        path: '/support-astro-otter',
+        name: 'support',
+        meta: {
+            layout: 'page',
+            key: 'menu.support',
+            text: 'Support',
+            description: ''
+        }
+    },
+    {
+        path: '/legal-notice',
+        name: 'legal_notice',
+        meta: {
+            layout: 'page',
+            key: 'menu.legal_notice',
+            text: 'Legal notice',
+            description: ''
+        }
+    },
+    {
+        path: '/help/api',
+        name: 'astro_otter_api',
+        meta: {
+            layout: 'page',
+            key: 'menu.astro_otter_api',
+            text: 'API',
+            description: ''
+        }
+    },
+    {
         path: '/:notFound',
         component: () => import('@/views/NotFound.vue'),
         meta: {
@@ -104,5 +156,13 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 })
+
+router.beforeEach((to, from, next) => {
+    if (true === to.meta.requiresAuth) {
+        next("login");
+    } else {
+        next();
+    }
+});
 
 export default router

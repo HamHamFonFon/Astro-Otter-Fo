@@ -17,6 +17,9 @@ const AstroOtterLightThemes = {
         appBarColor: '#1B2A32',
         grey: '#e9e9e9',
         green: '#1ed760'
+    },
+    theme: {
+        grey: '#e9e9e9',
     }
 };
 
