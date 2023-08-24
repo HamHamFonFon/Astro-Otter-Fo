@@ -6,10 +6,11 @@ import router from '@/router';
 
 // Store
 import store from "@/store";
+
 // Vuetify
 import vuetify from "@/plugins/vuetify";
 
-const app = createApp(App);
+const app = createApp(App).use(store);
 
 app.use(router);
 app.use(store);
