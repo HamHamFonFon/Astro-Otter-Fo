@@ -55,7 +55,9 @@
       </v-container>
     </template>
   </ItemCard>
-  <!-- Stats components ? -->
+
+  <!-- Random DSO ? -->
+  <RandomDsoHomepage />
 </template>
 
 <script>
@@ -63,13 +65,15 @@ import HeroPresentation from '@/components/Home/HeroPresentation.vue'
 import SearchAutocomplete from "@/components/Home/SearchAutocomplete.vue";
 import ItemCard from "@/components/Home/ItemCard.vue";
 import configs from "@/configs";
+import RandomDsoHomepage from "@/components/Home/RandomDsoHomepage.vue";
 
 export default {
   name: "HomePage",
   components: {
     HeroPresentation,
     SearchAutocomplete,
-    ItemCard
+    ItemCard,
+    RandomDsoHomepage
   },
   data() {
     return {

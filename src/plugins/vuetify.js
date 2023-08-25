@@ -12,7 +12,7 @@ const AstroOtterLightThemes = {
         background: "#111b27",
         // surface: "#1E293B",
         primary: '#1B2A32', //'#273E4B',
-        secondary: '#e9e9e9',
+        secondary: '#253A46',
 
         appBarColor: '#1B2A32',
         grey: '#e9e9e9',
@@ -32,6 +32,22 @@ export default createVuetify({
     theme: {
         themes: {
             light: AstroOtterLightThemes
+        }
+    },
+    icons: {
+        values: {
+            myConstellation: {
+                component: require('@/assets/svg/constellation.svg').default,
+            },
+            myGalaxy: {
+                component: require('@/assets/svg/galaxy-cluster.svg').default,
+            },
+            myNebula: {
+                component: require('@/assets/svg/nebula.svg').default,
+            },
+            myPlanet: {
+                component: require('@/assets/svg/planet.svg').default,
+            }
         }
     }
 });

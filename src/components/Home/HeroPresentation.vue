@@ -36,7 +36,7 @@
                 block
                 size="x-large"
                 class="text-primary"
-                color="secondary"
+                color="grey"
                 @click="scrollToPages"
             >Explore catalogs</v-btn
             >

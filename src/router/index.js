@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '@/store';
+import { refreshTokens, login } from '@/services/auth';
 
 import backgroundAstrobin from '@/assets/images/background/astrobin.png'
 import backgroundConstellation from '@/assets/images/background/constellations.jpg'
@@ -101,13 +103,13 @@ const routes = [
             description: 'Search, filter and sort images from Astrobin API',
             image: backgroundAstrobin
         }
-
     },
     {
         path: '/contact-us',
         name: 'contact',
         meta: {
             layout: 'page',
+            icon: 'mdi-pencil',
             key: 'menu.contact',
             text: 'Contact',
             description: ''
@@ -157,12 +159,22 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+    /**
+     * Refresh Token before all route
+     */
+    console.log('JWT Token exist:'+ store.getters["auth/isLoggedIn"]);
+    if (store.getters["auth/isLoggedIn"]) {
+        await refreshTokens();
+    } else {
+        await login();
+    }
+
     if (true === to.meta.requiresAuth) {
         next("login");
-    } else {
-        next();
     }
+    next();
+
 });
 
 export default router

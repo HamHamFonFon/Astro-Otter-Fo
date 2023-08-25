@@ -1,4 +1,4 @@
-export default {
-    ENDPOINT_LOGIN: '/login_check',
-    ENDPOINT_REFRESH: '/token/refresh'
+export const ENDPOINT = {
+    LOGIN: '/login_check',
+    REFRESH: '/token/refresh'
 };

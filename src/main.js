@@ -7,10 +7,15 @@ import router from '@/router';
 // Store
 import store from "@/store";
 
+// Axios
+import axios from '@/services/axios';
+
 // Vuetify
 import vuetify from "@/plugins/vuetify";
 
-const app = createApp(App).use(store);
+const app = createApp(App);
+
+app.config.globalProperties.$axios = axios;
 
 app.use(router);
 app.use(store);

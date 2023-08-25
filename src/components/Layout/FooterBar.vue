@@ -2,7 +2,7 @@
     <v-sheet
         elevation="0"
         class="landing-warpper"
-        color="background"
+        color="secondary"
     >
       <v-container class="text-left pa-10">
         <v-sheet
