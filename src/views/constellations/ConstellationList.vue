@@ -1,14 +1,5 @@
 <template>
-    <v-parallax
-        :src="backgroundImage"
-        height="400"
-    >
-      <v-row class="w-auto fill-height" align="center" justify="center">
-        <div class="text-h2 text-white">
-          <div class="text-h4 text-white">Constellations</div>
-        </div>
-      </v-row>
-    </v-parallax>
+  <TitleImageHero title="Constellations" :url-image="backgroundImage"></TitleImageHero>
 
   <transition name="fade">
     <Message />
@@ -16,20 +7,16 @@
 
   <!--  list constellations  -->
   <transition name="fade">
-    <div v-if="!isLoading && constellations">
-      <div v-for="(constellation,index) in constellations" v-bind:key="index" >
-          <span class="text-white">{{ constellation.title }}</span>
-      </div>
-    </div>
-
+    <ContentList v-if="!isLoading" :constellations="constellations" />
   </transition>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import backgroundImage from '@/assets/images/background/constellations.jpg'
-
 import Message from "@/components/Layout/Message.vue";
+import TitleImageHero from "@/components/Content/TitleImageHero.vue";
+import ContentList from "@/components/Constellations/ContentList.vue";
 
 export default {
   name: "ConstellationList",
@@ -39,7 +26,9 @@ export default {
     }
   },
   components: {
-    Message
+    TitleImageHero,
+    Message,
+    ContentList
   },
   created() {
     this.$store.commit('message/setLoading', false);
@@ -47,12 +36,12 @@ export default {
   },
   mounted() {
     this.backgroundImage = backgroundImage;
-    this.$store.dispatch('constellations/fetchConstellations');
+    this.$store.dispatch("constellations/fetchConstellations");
   },
   computed: {
     ...mapState({ constellations: state => state.constellations }),
     isLoading() {
-      return this.loading;
+      return this.isLoading;
     }
   }
 

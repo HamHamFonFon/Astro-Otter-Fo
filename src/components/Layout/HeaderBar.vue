@@ -1,7 +1,7 @@
 <template>
   <v-app-bar
     color="secondary"
-    scroll-behavior="collapse"
+    mode="shift"
   >
     <v-toolbar color="secondary">
       <router-link to="home"><v-avatar class="mx-5">

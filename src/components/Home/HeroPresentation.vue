@@ -16,7 +16,7 @@
         >
 
           <h1 class="text-h2 mt-4 mx-auto text-shades-white">
-            Discover wonders and mysteries of the universe
+            Explore wonders and mysteries of the universe
           </h1>
         </v-card>
         <v-row class="mt-5">
@@ -31,15 +31,17 @@
             >
           </v-col>
           <v-col cols="12" sm="6">
-            <v-btn
-                variant="outlined"
-                block
-                size="x-large"
-                class="text-primary"
-                color="grey"
-                @click="scrollToPages"
-            >Explore catalogs</v-btn
-            >
+            <router-link to="catalogs">
+              <v-btn
+                  variant="outlined"
+                  block
+                  size="x-large"
+                  class="text-primary"
+                  color="grey">
+  <!--                @click="scrollToPages"-->
+                Browse catalogs
+              </v-btn>
+            </router-link>
           </v-col>
         </v-row>
       </v-sheet>

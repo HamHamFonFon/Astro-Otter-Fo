@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import DsoCard from "@/components/Dso/DsoCard.vue";
+import DsoCard from "@/components/Items/DsoCard.vue";
 export default {
   name: "RandomDsoHomepage",
   components: {DsoCard},

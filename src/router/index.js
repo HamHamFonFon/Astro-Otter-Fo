@@ -31,7 +31,7 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.catalogs",
-            description: 'Explore all deep space objects',
+            description: 'Browse all catalogs, seek amazing deep space objects and explore wonders of the universe',
             text: 'Catalogs',
             icon: 'catalogs',
             image: backgroundCatalogs
@@ -70,7 +70,7 @@ const routes = [
             key: "menu.constellations",
             text: 'Constellations',
             icon: 'constellation',
-            description: 'Explore the 88 constellations',
+            description: 'Explore the 88 constellations and discover their different objects',
             image: backgroundConstellation
         }
     },
@@ -100,7 +100,7 @@ const routes = [
             key: "menu.astrobin",
             icon: '',
             text: 'Astrobin API',
-            description: 'Search, filter and sort images from Astrobin API',
+            description: 'Search, filter, play and sort images from Astrobin API',
             image: backgroundAstrobin
         }
     },

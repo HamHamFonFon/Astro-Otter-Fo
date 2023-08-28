@@ -1,8 +1,8 @@
 <template>
   <v-row class="grid" :style="{ gridTemplateColumns: this.getColumnStyle() }">
     <slot
-        v-for="dso in dsoList"
-        :image="dso"
+        v-for="item in itemsList"
+        :item="item"
     >
     </slot>
   </v-row>
@@ -10,9 +10,9 @@
 
 <script>
 export default {
-  name: "DsoList",
+  name: "ItemsLists",
   props: {
-    dsoList: Object,
+    itemsList: Object,
     gap: Number,
     columns: {
       type: Number,

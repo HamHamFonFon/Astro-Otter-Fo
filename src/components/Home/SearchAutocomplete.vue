@@ -16,7 +16,7 @@
         <v-row align="center" justify="center">
           <v-col cols="12" lg="3">
             <h1 class="text-h5 font-weight-bold text-center text-grey" >
-              Find amazing deep space objects
+              Seek and find amazing deep space objects
             </h1>
           </v-col>
           <v-col cols="12" sm="12" md="9">
@@ -25,7 +25,7 @@
               :items="results"
               type="search"
               label="Search"
-              placeholder="Search"
+              placeholder="Search for galaxy, nebula, constellation..."
               rounded
               variant="outlined"
               append-inner-icon="mdi-magnify"

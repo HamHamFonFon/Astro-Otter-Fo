@@ -13,7 +13,7 @@
         >
           <v-row>
             <v-col cols="12" md="6">
-              <p class="my-4 text-grey">Discover wonders and mysteries of the universe</p>
+              <p class="my-4 text-grey">Explore wonders and mysteries of the universe</p>
             </v-col>
             <v-col cols="12" md="6">
               <div class="d-flex flex-wrap justify-center justify-md-end pb-5">

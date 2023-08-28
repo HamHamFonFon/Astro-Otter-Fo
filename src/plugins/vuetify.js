@@ -34,10 +34,15 @@ export default createVuetify({
             light: AstroOtterLightThemes
         }
     },
+    defaults :{
+        VRadioGroup: {
+            color: '#1ed760',
+        }
+    },
     icons: {
         values: {
-            myConstellation: {
-                component: require('@/assets/svg/constellation.svg').default,
+            constellation: {
+                component: () => require('@/assets/svg/constellation.svg').default,
             },
             myGalaxy: {
                 component: require('@/assets/svg/galaxy-cluster.svg').default,
