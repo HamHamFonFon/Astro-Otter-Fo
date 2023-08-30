@@ -3,7 +3,7 @@ export default {
     ASTROBIN_URL: 'https://www.astrobin.com/api/v1/',
     HEADERS: {
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*', // use or not ?
+        //'Access-Control-Allow-Origin': '*', // use or not ?
         'Content-Type': 'application/json'
     }
 }

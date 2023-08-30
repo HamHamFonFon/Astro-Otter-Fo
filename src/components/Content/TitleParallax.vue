@@ -5,7 +5,7 @@
   >
     <v-row class="w-auto fill-height" align="center" justify="center">
       <div class="text-h2 text-white">
-        <div class="text-h4 text-white">{{ title }}</div>
+        <div class="text-h2 text-white">{{ title }}</div>
       </div>
     </v-row>
   </v-parallax>

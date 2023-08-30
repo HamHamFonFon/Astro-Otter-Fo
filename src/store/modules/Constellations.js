@@ -10,34 +10,35 @@ const initialState = () => {
 const state = initialState;
 
 const actions = {
-    /*async*/ fetchConstellations({commit}) {
+    async fetchListConstellations({commit}) {
         try {
-            console.log('fetchConstellation');
             commit('resetState');
             commit('message/setLoading', true, { root: true });
             commit('message/setType', 'warning', { root: true });
-            commit('message/setMessage', 'Loading constellations data', { root: true })
+            commit('message/setMessage', 'Loading constellations list...', { root: true })
             commit('message/setHttpCode', null, { root: true })
 
-            let constellationMock = [
-                {constId: 'uma', title: 'Ursa major', image: 'https://astro-otter.space/build/images/const_thumbs/uma.jpg'},
-                {constId: 'ori', title: 'Orion', image: 'https://astro-otter.space/build/images/const_thumbs/ori.jpg'},
-                {constId: 'aql', title: 'Aquila', image: 'https://astro-otter.space/build/images/const_thumbs/aql.jpg'},
-                {constId: 'and', title: 'Andromeda', image: 'https://astro-otter.space/build/images/const_thumbs/and.jpg' }
-            ];
-            console.log(constellationMock);
-            constellationMock.forEach(constellation => commit('addConstellation', constellation))
-            commit('setTotalCount', constellationMock.length);
+            setTimeout(function () {
+                commit('setTotalCount', 4);
+                let constellationMock = [
+                    {constId: 'uma', title: 'Ursa major', image: 'https://astro-otter.space/build/images/const_thumbs/uma.jpg' },
+                    {constId: 'ori', title: 'Orion', image: 'https://astro-otter.space/build/images/const_thumbs/ori.jpg' },
+                    {constId: 'aql', title: 'Aquila', image: 'https://astro-otter.space/build/images/const_thumbs/aql.jpg' },
+                    {constId: 'and', title: 'Andromeda', image: 'https://astro-otter.space/build/images/const_thumbs/and.jpg' }
+                ];
+                constellationMock.forEach(constellation => commit('addConstellation', constellation))
 
-            commit('message/setType', 'success', { root: true });
-            commit('message/setMessage', 'Constellations data loaded', { root: true })
-            commit('message/setHttpCode', 200, { root: true })
-            commit('message/setLoading', false, { root: true });
+
+                commit('message/setType', 'success', { root: true });
+                commit('message/setMessage', 'Constellations data loaded', { root: true })
+                commit('message/setHttpCode', 200, { root: true })
+                commit('message/setLoading', false, { root: true });
+            }, 2000)
+
         } catch (error) {
             commit('message/setType', 'error', { root: true });
             commit('message/setMessage', error.message, { root: true })
             commit('message/setHttpCode', error.code, { root: true })
-            commit('message/setLoading', true, { root: true });
         }
     },
    /* async */ fetchConstellationById({ commit }, id) {

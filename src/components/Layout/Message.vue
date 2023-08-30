@@ -1,8 +1,7 @@
 <template>
-  <div class="d-flex justify-center ma-4">
+  <div v-if="isLoading" class="d-flex justify-center ma-4">
     <v-col sm="8">
       <v-alert
-          v-if="isLoading"
           :type="computedType"
           border="start"
           prominent
@@ -11,7 +10,7 @@
 <!--        <img :src="imgLoading" v-if="'warning' === computedType" style="width: 32px;" :alt="computedType">-->
         <div id="blockMessage" style="margin: 1em;">
           <v-progress-circular :color="computedType" indeterminate v-if="'warning' === computedType"></v-progress-circular>
-          <span>{{ computedMsg }}</span>
+          <span class="text-grey text-h6">{{ computedMsg }}</span>
         </div>
 
       </v-alert>

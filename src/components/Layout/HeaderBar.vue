@@ -4,7 +4,7 @@
     mode="shift"
   >
     <v-toolbar color="secondary">
-      <router-link to="home"><v-avatar class="mx-5">
+      <router-link to="home"><v-avatar class="mx-2">
         <v-img :src="logo" ></v-img>
       </v-avatar></router-link>
 

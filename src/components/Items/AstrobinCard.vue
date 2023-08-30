@@ -1,12 +1,11 @@
 <template>
   <v-card
       class="ma-3"
-      color="transparent"
+      color="secondary"
   >
-    <router-link :to="{name: 'constellation', params: { constellationId: item.constId } }">
       <v-img
           :src="item.image"
-          :lazy-src="item.image"
+          :lazy-src="item.lazyImage"
           class="bg-grey-lighten-2"
           height="300"
           cover
@@ -25,21 +24,26 @@
         </template>
         <v-card-title class="text-h6 text-white">{{ item.title }}</v-card-title>
       </v-img>
-
       <v-card-actions color="primary">
-        <v-list-item class="w-100"  color="red">
+        <v-list-item class="w-100">
           <template v-slot:prepend>
-            {{ item.title }}
+            <v-icon color="grey" icon="mdi-account" />{{ item.user }}
+          </template>
+          <template v-slot:append>
+            <div class="justify-self-end">
+              <v-icon icon="mdi-eye" color="grey"></v-icon> <span class="subheading me-2">{{ item.views }}</span>
+              <v-icon icon="mdi-heart" color="grey"></v-icon> <span class="subheading me-2">{{ item.likes }}</span>
+            </div>
           </template>
         </v-list-item>
+
       </v-card-actions>
-    </router-link>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "ConstellationCard",
+  name: "AstrobinCard",
   props: {
     item: {
       type: Object
@@ -54,9 +58,5 @@ export default {
 }
 .v-img {
   border-bottom: solid #1ed760;
-}
-
-a {
-  text-decoration: none;
 }
 </style>

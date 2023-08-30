@@ -75,8 +75,8 @@
 
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
           <v-sheet class="pa-3" elevation="0" color="transparent">
-            <v-container color="transparent">
-              <v-row align="center" color="transparent">
+            <v-container>
+              <v-row align="center">
                 <ItemsLists :items-list="dsoList" :columns="5" :gap="0">
                   <template v-slot="{ item, index }">
                     <DsoCard v-bind:key="index" :dso="item"></DsoCard>
@@ -86,6 +86,8 @@
             </v-container>
           </v-sheet>
         </v-sheet>
+
+
       </v-container>
     </v-sheet>
   </transition>

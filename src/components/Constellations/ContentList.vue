@@ -4,7 +4,7 @@
       <v-container color="transparent">
         <v-row align="center" color="transparent">
 
-          <ItemsLists :items-list="constellations" :columns="4" :gap="0">
+          <ItemsLists :items-list="constellations" :columns="4">
             <template v-slot="{ item, index }">
               <ConstellationCard v-bind:key="index" :constellation="item" />
             </template>

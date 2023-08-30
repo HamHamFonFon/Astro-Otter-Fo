@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="ma-3"
-    color="transparent"
+    color="secondary"
   >
 <!--    <router-link :to="{ name: 'dso', params: { dtoId: item.id } }">-->
       <v-img
@@ -26,7 +26,7 @@
         <v-card-title class="text-h6 text-white">{{ dso.title }}</v-card-title>
       </v-img>
 <!--    </router-link>-->
-    <v-card-actions :style="{ backgroundColor: '#0D1117' }">
+    <v-card-actions color="primary">
       <v-list-item class="w-100"  color="red">
         <template v-slot:prepend>
           <v-icon color="grey" icon="mdi-account" />{{ dso.type }}
