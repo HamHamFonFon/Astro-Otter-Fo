@@ -1,10 +1,10 @@
 <template>
-  <h2>Astrobin</h2>
+
 </template>
 
 <script>
 export default {
-  name: "AstrobinHome"
+  name: "TopPicks"
 }
 </script>
 

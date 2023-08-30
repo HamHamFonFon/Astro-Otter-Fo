@@ -8,7 +8,7 @@ import router from '@/router';
 import store from "@/store";
 
 // Axios
-import axios from '@/services/axios';
+import axios from '@/services/axiosApi';
 
 // Vuetify
 import vuetify from "@/plugins/vuetify";

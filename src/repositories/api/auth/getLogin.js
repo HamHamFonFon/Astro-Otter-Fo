@@ -1,6 +1,6 @@
 import { ENDPOINT } from "@/repositories/api/auth/endpoint.js";
 import * as WS from '@/repositories/api/abstractWebservice'
-import axios from "@/services/axios";
+import axios from "@/services/axiosApi";
 
 const API_CREDENTIALS = {
     login: 'Guest', //process.env.VUE_APP_LOGIN,

@@ -78,21 +78,33 @@ const routes = [
     {
         path: '/astrobin',
         name: 'astrobin',
-        component: () => import('@/views/astrobin/Astrobin.vue'),
+        component: () => import('@/views/astrobin/AstrobinHome.vue'),
         children: [
-            {
-                path: 'image-of-the-day',
-                name: 'today',
-                // component: () => import(''),
-            },
+
             {
                 path: 'top-picks',
                 name: 'toppicks',
                 // component: () => import(''),
+                meta: {
+                    layout: 'page',
+                    key: "menu.astrobin.toppicks",
+                    text: 'Top-picks',
+                    icon: '',
+                    description: '',
+                    image: backgroundConstellation
+                }
             },
             {
-                path: 'image/:astrobinId',
-                name: 'image',
+                path: 'images',
+                name: 'images',
+                meta: {
+                    layout: 'page',
+                    key: "menu.astrobin.images",
+                    text: 'Images',
+                    icon: '',
+                    description: 'Search, filter and sort images from Astrobin website',
+                    image: backgroundConstellation
+                }
             }
         ],
         meta: {
@@ -102,6 +114,19 @@ const routes = [
             text: 'Astrobin API',
             description: 'Search, filter, play and sort images from Astrobin API',
             image: backgroundAstrobin
+        }
+    },
+    {
+        path: '/astrobin/image-of-the-day',
+        name: 'today',
+        component: () => import('@/views/astrobin/ImageOfTheDay.vue'),
+        meta: {
+            layout: 'page',
+            key: "menu.astrobin.today",
+            text: 'Image of the day',
+            icon: '',
+            description: 'Display selected image of the day and last ten images of the day',
+            image: backgroundConstellation
         }
     },
     {

@@ -1,4 +1,5 @@
 export default [
-    { routeName: ''},
-    { routeName: ''},
+    { routeName: 'today'},
+    // { routeName: 'toppicks'},
+    // { routeName: 'images'}
 ];

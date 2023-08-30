@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     this.backgroundImage = backgroundImage;
-    this.$store.dispatch("constellations/fetchConstellations");
+    this.$store.dispatch('constellations/fetchConstellations');
   },
   computed: {
     ...mapState({ constellations: state => state.constellations }),
