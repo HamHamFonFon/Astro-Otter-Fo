@@ -1,5 +1,11 @@
 <template>
-  <TitlePage title="Astrobin API" />
+  <TitleImageHero title=""  :url-image="astrobinLogo" />
+
+  <v-toolbar height="30">
+    <v-toolbar-title class="text-h6 align-center">
+      This product uses the AstroBin API but is not endorsed or certified by AstroBin.
+    </v-toolbar-title>
+  </v-toolbar>
 
   <ItemCard :items="this.processedItems">
     <template v-slot="{item, index}">
@@ -45,26 +51,28 @@
 </template>
 
 <script>
-import TitlePage from "@/components/Content/TitlePage.vue";
 import configs from "@/configs";
 import ItemCard from "@/components/Home/ItemCard.vue";
+import TitleImageHero from "@/components/Content/TitleImageHero.vue";
+import AstrobinLogo from '@/assets/images/background/astrobin.png'
+
 
 export default {
   name: "AstrobinHome",
   data() {
     return {
-      astrobinMenu: configs.astrobinMenu
+      astrobinMenu: configs.astrobinMenu,
+      astrobinLogo: AstrobinLogo
     }
   },
   components: {
-    ItemCard,
-    TitlePage
+    TitleImageHero,
+    ItemCard
   },
   computed: {
     processedItems() {
       const allAstrobinRoutes = this.$router.options.routes;
       const homeAstrobinRoutes = this.astrobinMenu;
-      console.log(allAstrobinRoutes, homeAstrobinRoutes)
       return this.buildPageItems(homeAstrobinRoutes, allAstrobinRoutes);
     }
   },

@@ -23,7 +23,7 @@
             </v-expansion-panel-title>
             <v-expansion-panel-text bg-color="secondary">
               <v-row class="" align="center" justify="center">
-                  <v-radio-group inline>
+                  <v-radio-group inline v-model="filteringConstellation">
                     <v-radio label="All" value="all"></v-radio>
                     <v-radio label="Northern hemisphere" value="north"></v-radio>
                     <v-radio label="Southern hemisphere" value="south"></v-radio>
@@ -61,13 +61,15 @@ import Message from "@/components/Layout/Message.vue";
 import TitleImageHero from "@/components/Content/TitleImageHero.vue";
 import ItemsLists from "@/components/Items/ItemsList.vue";
 import ConstellationCard from "@/components/Items/ConstellationCard.vue";
+import {ref} from "vue";
 // import ItemsLists from "@/components/Items/ItemsList.vue";
 
 export default {
   name: "ConstellationList",
   data () {
     return {
-      backgroundImage: null
+      backgroundImage: null,
+      filteringConstellation: ''
     }
   },
   components: {
@@ -90,8 +92,16 @@ export default {
     isLoading() {
       return this.isLoading;
     }
-  }
+  },
+  setup() {
+    const filters = ref(['All', 'Nothern hemisphere', 'Southern hemisphere', 'Zodiac']);
+    const activeFilter = ref('All');
 
+    return {
+      filters,
+      activeFilter
+    }
+  }
 }
 </script>
 

@@ -3,6 +3,7 @@ import store from '@/store';
 import { refreshTokens, login } from '@/services/auth';
 
 import backgroundAstrobin from '@/assets/images/background/astrobin.png'
+import backgroundIOTD from '@/assets/images/background/bg-6.webp'
 import backgroundConstellation from '@/assets/images/background/constellations.jpg'
 import backgroundCatalogs from '@/assets/images/background/bg-4.webp'
 
@@ -33,7 +34,7 @@ const routes = [
             key: "menu.catalogs",
             description: 'Browse all catalogs, seek amazing deep space objects and explore wonders of the universe',
             text: 'Catalogs',
-            icon: 'catalogs',
+            icon: 'mdi-tooltip-text-outline',
             image: backgroundCatalogs
         }
     },
@@ -80,7 +81,6 @@ const routes = [
         name: 'astrobin',
         component: () => import('@/views/astrobin/AstrobinHome.vue'),
         children: [
-
             {
                 path: 'top-picks',
                 name: 'toppicks',
@@ -110,7 +110,7 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.astrobin",
-            icon: '',
+            icon: 'mdi-tooltip-text-outline',
             text: 'Astrobin API',
             description: 'Search, filter, play and sort images from Astrobin API',
             image: backgroundAstrobin
@@ -126,7 +126,7 @@ const routes = [
             text: 'Image of the day',
             icon: '',
             description: 'Display selected image of the day and last ten images of the day',
-            image: backgroundConstellation
+            image: backgroundIOTD
         }
     },
     {

@@ -31,6 +31,7 @@ provide('app:layout', layout);
 
 a {
   text-decoration: none;
+  all: unset;
 }
 
 </style>

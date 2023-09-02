@@ -1,3 +1,5 @@
+import { ImagesWs } from '@/repositories/astrobin/images';
+
 const initialState = () => {
     return {
         images: [],
@@ -9,6 +11,12 @@ const initialState = () => {
 const state = initialState;
 
 const actions = {
+    /**
+     *
+     * @param commit
+     * @param id
+     * @returns {Promise<void>}
+     */
     async fetchImageById({ commit }, id) {
         commit('message/setLoading', true, { root: true });
         commit('message/setType', 'warning', { root: true });
@@ -16,7 +24,14 @@ const actions = {
         commit('message/setHttpCode', null, { root: true })
 
         try {
+            const wsResponse = await ImagesWs.GET_IMAGE_BY_ID(id);
+            commit('updateImage', wsResponse);
+            commit('setTotalCount', 1);
 
+            commit('message/setType', 'success', { root: true });
+            commit('message/setMessage', 'Image "' + wsResponse.title + '" from Astrobin loaded', { root: true })
+            commit('message/setHttpCode', 200, { root: true })
+            commit('message/setLoading', false, { root: true });
         } catch (error) {
             commit('message/setType', 'error', { root: true });
             commit('message/setMessage', error.message, { root: true })
@@ -33,10 +48,15 @@ const mutations = {
             state[key] = s[key];
         })
     },
+    addImage: (state, image) => {
+        state.images.push(image);
+    },
     updateImage: (state, newImage) => {
         state.images = [newImage];
     },
-
+    setTotalCount: (state, totalCount) => {
+        state.totalCount = totalCount;
+    },
 }
 
 const getters = {

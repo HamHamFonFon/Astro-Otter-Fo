@@ -2,24 +2,30 @@
   <v-app-bar
     color="secondary"
     mode="shift"
+    :density="!this.$isMobile() ? 'default' : 'compact'"
   >
     <v-toolbar color="secondary">
-      <router-link to="home"><v-avatar class="mx-2">
-        <v-img :src="logo" ></v-img>
-      </v-avatar></router-link>
+      <router-link to="home">
+        <v-avatar class="mx-2"><v-img :src="logo" ></v-img></v-avatar>
+      </router-link>
+      <v-divider vertical thickness="2" inset :class="!this.$isMobile() ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
 
-      <v-divider vertical thickness="2" inset class="ml-5 mr-1"></v-divider>
+<!--      <div style="border: 1px red solid;"><v-icon>mdi-ab-testing</v-icon></div>-->
+      <div style="border: 1px green solid;"><v-icon icon="planet"></v-icon></div>
+      <div style="border: 1px blue solid;"><v-icon>planet</v-icon></div>
+      <div style="border: 1px red solid;"><CustomIcon icon-name="planet" /></div>
 
       <v-btn v-for="(menuItem, index) in this.processedMenu(this.menu, allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
-          <span class="text-grey">{{ menuItem.text }}</span>
-
+          <span v-if="!this.$isMobile()" class="text-grey">{{ menuItem.text }}</span>
+          <v-icon v-else-if="this.$isMobile()">{{ menuItem.icon }}</v-icon>
         </router-link>
       </v-btn>
 
-      <v-divider vertical thickness="2" inset class="ml-5 mr-1"></v-divider>
+      <v-divider vertical thickness="2" inset :class="!this.$isMobile() ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
       <Transition>
         <v-autocomplete
+            v-if="!this.$isMobile()"
             v-show="showSearch"
             v-model="select"
             v-model:search="search"
@@ -35,22 +41,19 @@
         ></v-autocomplete>
       </Transition>
       <v-btn icon @click="displaySearch">
-        <v-icon >mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-flag-outline</v-icon>
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
-
   </v-app-bar>
 </template>
 
 <script>
 import logo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
+import CustomIcon from "@/icons/CustomIcon.vue";
 export default {
   name: "HeaderBar",
+  components: {CustomIcon},
   data() {
     return {
       menu: configs.headerMenu,
@@ -83,7 +86,7 @@ export default {
         const routeItem = allRoutes.filter(route => route.name === routeName)[0];
         return {
           key: routeItem.meta.key,
-          icon: routeItem.meta.icon,
+          icon: routeItem.meta.icon ?? 'mdi-tooltip-text-outline',
           path: routeItem.path,
           text: routeItem.meta.text
         };
@@ -98,16 +101,13 @@ export default {
       setTimeout(() => {
         this.loading = false;
       }, 500);
-    }
+    },
+
   }
 }
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-}
-
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.8s ease;

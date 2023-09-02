@@ -6,6 +6,8 @@ import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import * as labs from "vuetify/labs/components";
 
+// import ConstellationIcon from "@/icons/ConstellationIcon.vue";
+
 const AstroOtterLightThemes = {
     dark: false,
     colors: {
@@ -40,19 +42,32 @@ export default createVuetify({
         }
     },
     icons: {
-        values: {
-            constellation: {
-                component: () => require('@/assets/svg/constellation.svg').default,
-            },
-            myGalaxy: {
-                component: require('@/assets/svg/galaxy-cluster.svg').default,
-            },
-            myNebula: {
-                component: require('@/assets/svg/nebula.svg').default,
-            },
-            myPlanet: {
-                component: require('@/assets/svg/planet.svg').default,
+        constellation: {
+            component: () => import('@/icons/CustomIcon.vue'),
+            props: {
+                iconName: "constellation"
             }
-        }
+        },
+        planet: {
+            component: () => import('@/icons/CustomIcon.vue'),
+            props: {
+                iconName: "planet"
+            }
+        },
+        telescop: {
+            component: () => import('@/icons/CustomIcon.vue'),
+            props: {
+                iconName: "telescop"
+            }
+        },
+        nebula: {
+            component: () => import('@/icons/CustomIcon.vue'),
+            props: {
+                iconName: "nebula"
+            }
+        },
+    },
+    options: {
+        customProperties: true
     }
 });

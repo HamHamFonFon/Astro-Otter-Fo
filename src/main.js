@@ -14,10 +14,15 @@ import axios from '@/services/axiosApi';
 import vuetify from "@/plugins/vuetify";
 import VueMobileDetection from 'vue-mobile-detection'
 
+// icons
+import CustomIcon from "@/icons/CustomIcon.vue";
+
 // Create APP
 const app = createApp(App);
 
 app.config.globalProperties.$axios = axios;
+
+app.component('CustomIcon', CustomIcon);
 
 app.use(VueMobileDetection)
 app.use(router);
