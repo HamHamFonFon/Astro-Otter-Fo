@@ -12,6 +12,7 @@
     "axios": "^1.4.0",
     "core-js": "^3.32.1",
     "vue": "^3.2.13",
+    "vue-mobile-detection": "^2.0.1",
     "vue-router": "^4.2.4",
     "vuetify": "^3.3.13",
     "vuex": "^4.1.0"

@@ -1,4 +1,5 @@
 import 'vuetify/dist/vuetify.min.css';
+import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
 import '@mdi/font/css/materialdesignicons.css';
 
 import { createVuetify } from "vuetify";
@@ -36,36 +37,47 @@ export default createVuetify({
             light: AstroOtterLightThemes
         }
     },
-    defaults :{
-        VRadioGroup: {
-            color: '#1ed760',
-        }
-    },
     icons: {
+        defaultSet: "mdi",
+        aliases,
+        sets: {
+            mdi
+        },
         constellation: {
-            component: () => import('@/icons/CustomIcon.vue'),
+            component: () => import('@/components/icons/CustomIcon.vue'),
             props: {
                 iconName: "constellation"
             }
         },
         planet: {
-            component: () => import('@/icons/CustomIcon.vue'),
+            component: () => import('@/components/icons/CustomIcon.vue'),
             props: {
                 iconName: "planet"
             }
         },
         telescop: {
-            component: () => import('@/icons/CustomIcon.vue'),
+            component: () => import('@/components/icons/CustomIcon.vue'),
             props: {
                 iconName: "telescop"
             }
         },
         nebula: {
-            component: () => import('@/icons/CustomIcon.vue'),
+            component: () => import('@/components/icons/CustomIcon.vue'),
             props: {
                 iconName: "nebula"
             }
         },
+        test: {
+            component: () => import('@/components/icons/CustomIcon.vue'),
+            props: {
+                iconName: "test"
+            }
+        }
+    },
+    defaults :{
+        VRadioGroup: {
+            color: '#1ed760',
+        }
     },
     options: {
         customProperties: true

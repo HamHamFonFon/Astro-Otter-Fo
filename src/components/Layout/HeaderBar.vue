@@ -10,15 +10,16 @@
       </router-link>
       <v-divider vertical thickness="2" inset :class="!this.$isMobile() ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
 
-<!--      <div style="border: 1px red solid;"><v-icon>mdi-ab-testing</v-icon></div>-->
-      <v-icon icon="planet"></v-icon>
-      <v-icon>planet</v-icon>
-<CustomIcon icon-name="planet" />
+      <v-icon>constellation</v-icon>
+      <CustomIcon icon-name="constellation"></CustomIcon>
+<!--      <v-icon :icon="$vuetify.icons.constellation.default"></v-icon>-->
+<!--      <CustomIcon icon-name="test"/>-->
+
 
       <v-btn v-for="(menuItem, index) in this.processedMenu(this.menu, allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
           <span v-if="!this.$isMobile()" class="text-grey">{{ menuItem.text }}</span>
-          <v-icon v-else-if="this.$isMobile()">{{ menuItem.icon }}</v-icon>
+<!--          <v-icon v-else-if="this.$isMobile()"></v-icon>-->
         </router-link>
       </v-btn>
 
@@ -50,11 +51,12 @@
 <script>
 import logo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
-import CustomIcon from "@/icons/CustomIcon.vue";
+import CustomIcon from "@/components/icons/CustomIcon.vue";
 
 export default {
   name: "HeaderBar",
   components: {CustomIcon},
+  // components: {CustomIcon},
   data() {
     return {
       menu: configs.headerMenu,

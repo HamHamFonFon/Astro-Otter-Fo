@@ -5,7 +5,8 @@ import { refreshTokens, login } from '@/services/auth';
 import backgroundAstrobin from '@/assets/images/background/astrobin.png'
 import backgroundIOTD from '@/assets/images/background/bg-6.webp'
 import backgroundConstellation from '@/assets/images/background/constellations.jpg'
-import backgroundCatalogs from '@/assets/images/background/background_vlt.jpg'; // '@/assets/images/background/bg-4.webp'
+import backgroundCatalogs from '@/assets/images/background/background_vlt.jpg';
+import CustomIcon from "@/components/icons/CustomIcon.vue"; // '@/assets/images/background/bg-4.webp'
 
 const routes = [
     {
@@ -36,7 +37,7 @@ const routes = [
             layout: 'page',
             key: "menu.catalogs",
             text: 'Catalogs',
-            icon: 'mdi-tooltip-text-outline',
+            icon: CustomIcon,
             image: backgroundCatalogs,
             // seo
             title: '',
