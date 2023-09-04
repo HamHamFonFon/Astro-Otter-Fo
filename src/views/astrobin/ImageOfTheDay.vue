@@ -11,9 +11,7 @@
         v-if="!isLoading"
     >
 
-
       <TitleParallax :url-image="astrobinIOTD.image.urlHd" :title="astrobinIOTD.image.title"></TitleParallax>
-
 
       <v-toolbar height="30">
         <v-toolbar-title class="text-h6 align-center">

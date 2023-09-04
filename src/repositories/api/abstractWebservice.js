@@ -1,18 +1,21 @@
 import apiConfig from '@/configs/api';
 
-// const buildApiUrl = (endpoint, params) => {
-//     let urlApi = apiConfig.API_URL + endpoint;
-//     return (null === params) ? urlApi : urlApi + '/' + params
-// }
+const customHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Method': ' GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+};
 
 const buildApiHeaders = (params) => {
     return {
-        'headers': apiConfig.HEADERS,
+        'headers': {
+            ...apiConfig.HEADERS,
+            ...customHeaders
+        },
         'params': params
     }
 }
 
 export {
-    // buildApiUrl,
     buildApiHeaders
 }

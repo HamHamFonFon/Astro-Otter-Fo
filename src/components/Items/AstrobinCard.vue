@@ -3,6 +3,7 @@
       class="ma-3"
       color="secondary"
   >
+    <a :href="astrobinImageUrl(item.id)" target="_blank">
       <v-img
           :src="item.image"
           :lazy-src="item.lazyImage"
@@ -24,29 +25,35 @@
         </template>
         <v-card-title class="text-h6 text-white">{{ item.title }}</v-card-title>
       </v-img>
-      <v-card-actions color="primary">
-        <v-list-item class="w-100">
-          <template v-slot:prepend>
-            <v-icon color="grey" icon="mdi-account" />{{ item.user }}
-          </template>
-          <template v-slot:append>
-            <div class="justify-self-end">
-              <v-icon icon="mdi-eye" color="grey"></v-icon> <span class="subheading me-2">{{ item.views }}</span>
-              <v-icon icon="mdi-heart" color="grey"></v-icon> <span class="subheading me-2">{{ item.likes }}</span>
-            </div>
-          </template>
-        </v-list-item>
-
-      </v-card-actions>
+    </a>
+    <v-card-actions color="primary">
+      <v-list-item class="w-100">
+        <template v-slot:prepend>
+          <v-icon color="grey" icon="mdi-account" />{{ item.user }}
+        </template>
+        <template v-slot:append>
+          <div class="justify-self-end">
+            <v-icon icon="mdi-eye" color="grey"></v-icon> <span class="subheading me-2">{{ item.views }}</span>
+            <v-icon icon="mdi-heart" color="grey"></v-icon> <span class="subheading me-2">{{ item.likes }}</span>
+          </div>
+        </template>
+      </v-list-item>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import api from "@/configs/api";
 export default {
   name: "AstrobinCard",
   props: {
     item: {
       type: Object
+    }
+  },
+  methods: {
+    astrobinImageUrl: (imageId) => {
+      return api.ASTROBIN_HOST + '/' + imageId;
     }
   }
 }
@@ -58,5 +65,8 @@ export default {
 }
 .v-img {
   border-bottom: solid #1ed760;
+}
+.v-img:hover {
+  cursor: pointer;
 }
 </style>

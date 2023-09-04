@@ -5,7 +5,7 @@ import { refreshTokens, login } from '@/services/auth';
 import backgroundAstrobin from '@/assets/images/background/astrobin.png'
 import backgroundIOTD from '@/assets/images/background/bg-6.webp'
 import backgroundConstellation from '@/assets/images/background/constellations.jpg'
-import backgroundCatalogs from '@/assets/images/background/bg-4.webp'
+import backgroundCatalogs from '@/assets/images/background/background_vlt.jpg'; // '@/assets/images/background/bg-4.webp'
 
 const routes = [
     {
@@ -22,6 +22,9 @@ const routes = [
             key: "menu.home",
             text: "Home",
             icon: "mdi-view-dashboard-outline",
+            // seo
+            title: 'Explore wonders and mysteries of the universe',
+            description: 'Astro Otter is a celestial atlas containing more than 9600 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel.'
         }
     },
     // DSO
@@ -32,10 +35,12 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.catalogs",
-            description: 'Browse all catalogs, seek amazing deep space objects and explore wonders of the universe',
             text: 'Catalogs',
             icon: 'mdi-tooltip-text-outline',
-            image: backgroundCatalogs
+            image: backgroundCatalogs,
+            // seo
+            title: '',
+            description: 'Browse all catalogs, seek amazing deep space objects and explore wonders of the universe',
         }
     },
     {
@@ -71,8 +76,10 @@ const routes = [
             key: "menu.constellations",
             text: 'Constellations',
             icon: 'constellation',
+            image: backgroundConstellation,
+            // seo
+            title: '',
             description: 'Explore the 88 constellations and discover their different objects',
-            image: backgroundConstellation
         }
     },
     // Astrobin
@@ -112,8 +119,10 @@ const routes = [
             key: "menu.astrobin",
             icon: 'mdi-tooltip-text-outline',
             text: 'Astrobin API',
+            image: backgroundAstrobin,
+            // seo
+            title: '',
             description: 'Search, filter, play and sort images from Astrobin API',
-            image: backgroundAstrobin
         }
     },
     {
@@ -125,8 +134,10 @@ const routes = [
             key: "menu.astrobin.today",
             text: 'Image of the day',
             icon: '',
+            image: backgroundIOTD,
+            // seo
+            title: '',
             description: 'Display selected image of the day and last ten images of the day',
-            image: backgroundIOTD
         }
     },
     {
@@ -137,6 +148,8 @@ const routes = [
             icon: 'mdi-pencil',
             key: 'menu.contact',
             text: 'Contact',
+            // seo
+            title: '',
             description: ''
         }
     },
@@ -147,6 +160,8 @@ const routes = [
             layout: 'page',
             key: 'menu.support',
             text: 'Support',
+            // seo
+            title: '',
             description: ''
         }
     },
@@ -157,6 +172,8 @@ const routes = [
             layout: 'page',
             key: 'menu.legal_notice',
             text: 'Legal notice',
+            // seo
+            title: '',
             description: ''
         }
     },
@@ -167,6 +184,8 @@ const routes = [
             layout: 'page',
             key: 'menu.astro_otter_api',
             text: 'API',
+            // seo
+            title: '',
             description: ''
         }
     },
@@ -185,15 +204,16 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-    /**
-     * Refresh Token before all route
-     */
-    console.log('JWT Token exist:'+ store.getters["auth/isLoggedIn"]);
-    if (store.getters["auth/isLoggedIn"]) {
+    // Set refresh JWT token for requests
+    console.log('Is JWT Token exist: '+ store.getters["auth/isLoggedIn"]);
+    if (true === store.getters["auth/isLoggedIn"]) {
         await refreshTokens();
     } else {
         await login();
     }
+
+    // SEO
+    document.title = 'Astro-Otter - ' + to.meta.title ?? 'Astro-Otter';
 
     if (true === to.meta.requiresAuth) {
         next("login");

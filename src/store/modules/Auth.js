@@ -18,9 +18,8 @@ const mutations = {
 
 const actions = {
     async fetchLogin({ commit }) {
-        console.log('Store Auth, action login');
         try {
-            const wsResponse = await AuthWs.GET_LOGIN;
+            const wsResponse = await AuthWs.GET_LOGIN();
             const { accessToken, refreshToken } = wsResponse;
             console.log(accessToken, refreshToken);
             commit('setAccessToken', accessToken);
@@ -28,7 +27,6 @@ const actions = {
 
             return true;
         } catch (error) {
-            console.log(error);
             return false;
         }
     },

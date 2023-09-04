@@ -56,7 +56,6 @@ import ItemCard from "@/components/Home/ItemCard.vue";
 import TitleImageHero from "@/components/Content/TitleImageHero.vue";
 import AstrobinLogo from '@/assets/images/background/astrobin.png'
 
-
 export default {
   name: "AstrobinHome",
   data() {
@@ -74,7 +73,7 @@ export default {
       const allAstrobinRoutes = this.$router.options.routes;
       const homeAstrobinRoutes = this.astrobinMenu;
       return this.buildPageItems(homeAstrobinRoutes, allAstrobinRoutes);
-    }
+    },
   },
   methods: {
     buildPageItems: (homeAstrobinRoutes, allRoutes) => {

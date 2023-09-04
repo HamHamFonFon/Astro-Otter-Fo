@@ -1,9 +1,10 @@
+const ASTROBIN_HOST = 'https://www.astrobin.com';
 export default {
     API_URL: 'https://astro-otter.space/api/',
-    ASTROBIN_URL: 'https://www.astrobin.com/api/v1/',
+    ASTROBIN_HOST: ASTROBIN_HOST,
+    ASTROBIN_API_URL: ASTROBIN_HOST + '/api/v1/',
     HEADERS: {
         'Accept': 'application/json',
-        //'Access-Control-Allow-Origin': '*', // use or not ?
         'Content-Type': 'application/json'
     }
 }

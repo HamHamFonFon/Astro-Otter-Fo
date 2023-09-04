@@ -23,7 +23,7 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        <v-card-title class="text-h6 text-white">{{ item.title }}</v-card-title>
+        <v-card-title class="text-center text-h6 text-white">{{ item.title }}</v-card-title>
       </v-img>
 
       <v-card-actions color="primary">

@@ -1,6 +1,5 @@
 <template>
-<!--  <div v-html="iconContent" />-->
-  <img :src="iconContent" width="32" height="32" color="white" />
+  <div style="border: 1px green solid" v-html="iconContent" />
 </template>
 
 <script>
@@ -15,14 +14,12 @@ export default {
   computed: {
     iconContent () {
       try {
-        console.log('Load '+`@/assets/svg/${this.iconName}.svg` +' file');
         const icon = require(`@/assets/svg/${this.iconName}.svg`);
-        return icon; //.default;
+        return icon
       } catch (err) {
         console.error(`Error loading SVG icon: ${this.iconName}`);
         return null;
       }
-
     }
   }
 }

@@ -11,9 +11,9 @@
       <v-divider vertical thickness="2" inset :class="!this.$isMobile() ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
 
 <!--      <div style="border: 1px red solid;"><v-icon>mdi-ab-testing</v-icon></div>-->
-      <div style="border: 1px green solid;"><v-icon icon="planet"></v-icon></div>
-      <div style="border: 1px blue solid;"><v-icon>planet</v-icon></div>
-      <div style="border: 1px red solid;"><CustomIcon icon-name="planet" /></div>
+      <v-icon icon="planet"></v-icon>
+      <v-icon>planet</v-icon>
+<CustomIcon icon-name="planet" />
 
       <v-btn v-for="(menuItem, index) in this.processedMenu(this.menu, allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
@@ -51,6 +51,7 @@
 import logo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
 import CustomIcon from "@/icons/CustomIcon.vue";
+
 export default {
   name: "HeaderBar",
   components: {CustomIcon},

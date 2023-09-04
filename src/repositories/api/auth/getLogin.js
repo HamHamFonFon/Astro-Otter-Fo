@@ -3,22 +3,21 @@ import * as WS from '@/repositories/api/abstractWebservice'
 import axios from "@/services/axiosApi";
 
 const API_CREDENTIALS = {
-    login: 'Guest', //process.env.VUE_APP_LOGIN,
-    password: process.env.VUE_APP_PWD
+    login: process.env.VUE_APP_APILOGIN,
+    password: process.env.VUE_APP_APIPWD
 }
 
 export const GET_LOGIN = async () => {
-    console.log('WS GET_LOGIN', API_CREDENTIALS);
     try {
-        // let apiLogin = WS.buildApiUrl(ENDPOINT.ENDPOINT_LOGIN, null);
         let routeParams = {
             'username': API_CREDENTIALS.login,
             'password': API_CREDENTIALS.password,
         }
-        console.log(routeParams);
+
         let config = WS.buildApiHeaders(routeParams);
         const response = await axios.post(ENDPOINT.LOGIN, config);
 
+        console.log(response.data);
         if (200 !== response.status) {
             const error = new Error(response.statusText);
             error.code = response.status;
