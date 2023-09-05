@@ -1,3 +1,16 @@
+<script setup>
+defineProps({
+  title: String,
+  urlImage: String
+});
+</script>
+
+<script>
+export default {
+  name: "TitleImageHero"
+}
+</script>
+
 <template>
   <div class="lazyBackground">
     <v-img
@@ -14,15 +27,7 @@
 
 </template>
 
-<script>
-export default {
-  name: "TitleImageHero",
-  props: {
-    title: String,
-    urlImage: String,
-  }
-}
-</script>
+
 
 <style scoped>
   .lazyBackground {
@@ -30,7 +35,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.5;
-    color: '#FFFFF';
+    color: '#FFFFFF';
     filter: grayscale(100%);
   }
 </style>

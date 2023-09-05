@@ -1,3 +1,13 @@
+<script setup>
+defineProps({
+  title: String
+});
+</script>
+<script>
+export default {
+  name: "TitlePage",
+}
+</script>
 <template>
   <v-toolbar height="150" color="transparent">
     <v-toolbar-title class="text-h6 font-weight-bold">
@@ -7,14 +17,7 @@
   </v-toolbar>
 </template>
 
-<script>
-export default {
-  name: "TitlePage",
-  props: {
-    title: String
-  }
-}
-</script>
+
 
 <style scoped>
 

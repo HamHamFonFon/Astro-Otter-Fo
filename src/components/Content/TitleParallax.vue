@@ -1,3 +1,14 @@
+<script setup>
+defineProps({
+  title: String,
+  urlImage: String
+});
+</script>
+<script>
+export default {
+  name: "TitleParallax",
+}
+</script>
 <template>
   <v-parallax
     cover
@@ -11,15 +22,7 @@
   </v-parallax>
 </template>
 
-<script>
-export default {
-  name: "TitleParallax",
-  props: {
-    title: String,
-    urlImage: String,
-  }
-}
-</script>
+
 
 <style scoped>
 
