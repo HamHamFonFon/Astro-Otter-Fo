@@ -42,7 +42,6 @@ import { reactive, ref } from "vue";
 
 const searchDto = ref(null);
 const results = reactive([]);
-
 </script>
 <script>
 export default {

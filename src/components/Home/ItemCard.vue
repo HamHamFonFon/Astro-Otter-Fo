@@ -11,15 +11,18 @@
   </v-sheet>
 </template>
 
+<script setup>
+defineProps({
+  items: {
+    type: Object,
+    default: null,
+  }
+})
+</script>
+
 <script>
 export default {
-  name: "ItemCard",
-  props: {
-    items: {
-      type: Object,
-      default: null,
-    }
-  }
+  name: "ItemCard"
 }
 </script>
 

@@ -56,7 +56,9 @@ const backgroundStyle = computed(() => ({
   backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', height: '100vh', display: 'flex'
 }));
 
-
+/**
+ *
+ */
 function scrollToSearch() {
   const homeSearch = document.getElementById('search');
   if (homeSearch) {
