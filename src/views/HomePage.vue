@@ -36,7 +36,9 @@
                 </h2>
               </v-card>
               <div class="text-center">
-                <v-btn size="x-large" class="text-white" color="primary" :to="item.path">Explore</v-btn>
+                <router-link :to="item.path">
+                  <v-btn size="x-large" class="text-white" color="primary">Explore</v-btn>
+                </router-link>
               </div>
             </v-sheet>
           </v-col>
@@ -45,6 +47,7 @@
               <router-link :to="item.path">
                 <v-img
                     height="420"
+                    class="v-card--hover"
                     cover
                     :src="item.image"
                 ></v-img>

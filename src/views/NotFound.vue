@@ -4,24 +4,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed, defineAsyncComponent } from "vue";
 import backgroundImage from '@/assets/images/notfound/interstellar-black-hole.jpg'
-import Error404 from "@/components/Layout/Error404.vue";
-import {computed} from "vue";
+const Error404 = defineAsyncComponent(() => import('@/components/Layout/Error404.vue'))
+
+const backgroundStyle = computed(() => ({
+  backgroundImage: `url(${backgroundImage})`,
+}));
+</script>
+
+<script>
 export default {
   name: "NotFound",
-  components: {
-    Error404
-  },
-  setup() {
-    const backgroundStyle = computed(() => ({
-      backgroundImage: `url(${backgroundImage})`,
-    }));
-
-    return {
-      backgroundStyle
-    };
-  }
 }
 </script>
 
