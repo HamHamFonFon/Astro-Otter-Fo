@@ -11,7 +11,7 @@
 
   <!-- Page cards component -->
   <a ref="pages" id="pages"></a>
-  <ItemCard :items="this.processedItems">
+  <ItemCard :items="processedItems">
     <template v-slot="{item, index}">
       <v-toolbar>
         <v-toolbar-title></v-toolbar-title>
@@ -60,50 +60,55 @@
   <RandomDsoHomepage />
 </template>
 
-<script>
-import HeroPresentation from '@/components/Home/HeroPresentation.vue'
-import SearchAutocomplete from "@/components/Home/SearchAutocomplete.vue";
-import ItemCard from "@/components/Home/ItemCard.vue";
-import configs from "@/configs";
-import RandomDsoHomepage from "@/components/Home/RandomDsoHomepage.vue";
+<script setup>
+import {computed, defineAsyncComponent} from 'vue'
 
-export default {
-  name: "HomePage",
-  components: {
-    HeroPresentation,
-    SearchAutocomplete,
-    ItemCard,
-    RandomDsoHomepage
-  },
-  data() {
-    return {
-      homePageRoutes: configs.homePages
-    }
-  },
-  computed: {
-    processedItems() {
-      const allRoutes = this.$router.options.routes;
-      const homePageRoutes = this.homePageRoutes
-      return this.buildHomeItems(homePageRoutes, allRoutes);
-    }
-  },
-  methods: {
-    buildHomeItems: (homePageRoutes, allRoutes) => {
-      return homePageRoutes.map(route => {
-        let routeName = route.routeName;
-        const routeItem = allRoutes.filter(route => route.name === routeName)[0];
-        let path = routeItem.path;
-        return {
-          key: routeItem.meta.key,
-          image: routeItem.meta.image,
-          icon: routeItem.meta.icon,
-          text: routeItem.meta.text,
-          description: routeItem.meta.description,
-          path: path
-        }
-      });
-    }
+import configs from "@/configs";
+
+/**
+ * Components
+ */
+import ItemCard from "@/components/Home/ItemCard.vue";
+import { useRouter} from "vue-router";
+const HeroPresentation = defineAsyncComponent(() => import('@/components/Home/HeroPresentation.vue'))
+const SearchAutocomplete = defineAsyncComponent(() => import("@/components/Home/SearchAutocomplete.vue"))
+const RandomDsoHomepage = defineAsyncComponent(() => import("@/components/Home/RandomDsoHomepage.vue"))
+
+/**
+ * Data
+ * @type {[{routeName: string},{routeName: string},{routeName: string}]}
+ */
+const homePageRoutes = configs.homePages;
+
+/**
+ * Computed
+ * @type {ComputedRef<*>}
+ */
+const processedItems = computed(() => {
+  const allRoutes = useRouter().options.routes; //this.$router.options.routes;
+  return buildHomeItems(homePageRoutes, allRoutes);
+});
+
+function buildHomeItems(homePageRoutes, allRoutes) {
+  return homePageRoutes.map(route => {
+  let routeName = route.routeName;
+  const routeItem = allRoutes.filter(route => route.name === routeName)[0];
+  let path = routeItem.path;
+  return {
+    key: routeItem.meta.key,
+    image: routeItem.meta.image,
+    icon: routeItem.meta.icon,
+    text: routeItem.meta.text,
+    description: routeItem.meta.description,
+    path: path
   }
+});
+}
+</script>
+
+<script>
+export default {
+  name: "HomePage"
 }
 </script>
 
