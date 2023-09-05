@@ -37,15 +37,16 @@
   </v-sheet>
 </template>
 
+<script setup>
+import { reactive, ref } from "vue";
+
+const searchDto = ref(null);
+const results = reactive([]);
+
+</script>
 <script>
 export default {
-  name: "SearchAutocomplete",
-  data () {
-    return {
-      searchDto: null,
-      results: []
-    }
-  }
+  name: "SearchAutocomplete"
 }
 </script>
 

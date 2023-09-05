@@ -56,7 +56,6 @@ import CustomIcon from "@/components/icons/CustomIcon.vue";
 export default {
   name: "HeaderBar",
   components: {CustomIcon},
-  // components: {CustomIcon},
   data() {
     return {
       menu: configs.headerMenu,

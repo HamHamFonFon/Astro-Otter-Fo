@@ -37,9 +37,8 @@
                   block
                   size="x-large"
                   class="text-primary"
-                  color="grey">
-  <!--                @click="scrollToPages"-->
-                Browse catalogs
+                  color="grey"
+                >Browse catalogs
               </v-btn>
             </router-link>
           </v-col>
@@ -49,34 +48,26 @@
   </v-sheet>
 </template>
 
-<script>
+<script setup>
 import backgroundImage from '@/assets/images/background/bg-1.webp'
 import {computed} from "vue";
-export default {
-  name: "HeroPresentation",
-  setup() {
-    const backgroundStyle = computed(() => ({
-      backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', height: '100vh', display: 'flex'
-    }));
 
-    return {
-      backgroundStyle
-    };
-  },
-  methods: {
-    scrollToSearch() {
-      const homeSearch = document.getElementById('search');
-      if (homeSearch) {
-        homeSearch.scrollIntoView({ behavior: "smooth" })
-      }
-    },
-    scrollToPages() {
-      const homeCards = document.getElementById('pages');
-      if (homeCards) {
-        homeCards.scrollIntoView({ behavior: "smooth" })
-      }
-    }
+const backgroundStyle = computed(() => ({
+  backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', height: '100vh', display: 'flex'
+}));
+
+
+function scrollToSearch() {
+  const homeSearch = document.getElementById('search');
+  if (homeSearch) {
+    homeSearch.scrollIntoView({ behavior: "smooth" })
   }
+}
+</script>
+
+<script>
+export default {
+  name: "HeroPresentation"
 }
 </script>
 
