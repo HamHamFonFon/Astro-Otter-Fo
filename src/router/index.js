@@ -32,7 +32,7 @@ const routes = [
     {
         path: '/catalogs',
         name: 'catalogs',
-        component: () => import('@/views/CatalogsPage.vue'),
+        component: () => import('@/views/dso/CatalogsPage.vue'),
         meta: {
             layout: 'page',
             key: "menu.catalogs",

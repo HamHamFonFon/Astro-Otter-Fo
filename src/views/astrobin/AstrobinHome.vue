@@ -7,7 +7,7 @@
     </v-toolbar-title>
   </v-toolbar>
 
-  <ItemCard :items="this.processedItems">
+  <ItemCard :items="processedItems">
     <template v-slot="{item, index}">
       <v-container class="text-center" :data-index="index">
         <v-row>
@@ -50,48 +50,43 @@
   </ItemCard>
 </template>
 
-<script>
+<script setup>
+import {computed, defineAsyncComponent, ref} from 'vue'
 import configs from "@/configs";
-import ItemCard from "@/components/Home/ItemCard.vue";
-import TitleImageHero from "@/components/Content/TitleImageHero.vue";
 import AstrobinLogo from '@/assets/images/background/astrobin.png'
 
-export default {
-  name: "AstrobinHome",
-  data() {
+import ItemCard from "@/components/Home/ItemCard.vue";
+import {useRouter} from "vue-router";
+const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'))
+
+const astrobinLogo = ref(AstrobinLogo);
+const astrobinMenu = configs.astrobinMenu;
+
+const processedItems = computed(() => {
+  const allRoutes = useRouter().options.routes;
+  return buildPageItems(astrobinMenu, allRoutes)
+});
+
+function buildPageItems(homeAstrobinRoutes, allRoutes) {
+  return homeAstrobinRoutes.map(route => {
+    let routeName = route.routeName;
+    const routeItem = allRoutes.filter(route => route.name === routeName)[0];
+    let path = routeItem.path;
     return {
-      astrobinMenu: configs.astrobinMenu,
-      astrobinLogo: AstrobinLogo
+      key: routeItem.meta.key,
+      image: routeItem.meta.image,
+      icon: routeItem.meta.icon,
+      text: routeItem.meta.text,
+      description: routeItem.meta.description,
+      path: path
     }
-  },
-  components: {
-    TitleImageHero,
-    ItemCard
-  },
-  computed: {
-    processedItems() {
-      const allAstrobinRoutes = this.$router.options.routes;
-      const homeAstrobinRoutes = this.astrobinMenu;
-      return this.buildPageItems(homeAstrobinRoutes, allAstrobinRoutes);
-    },
-  },
-  methods: {
-    buildPageItems: (homeAstrobinRoutes, allRoutes) => {
-      return homeAstrobinRoutes.map(route => {
-        let routeName = route.routeName;
-        const routeItem = allRoutes.filter(route => route.name === routeName)[0];
-        let path = routeItem.path;
-        return {
-          key: routeItem.meta.key,
-          image: routeItem.meta.image,
-          icon: routeItem.meta.icon,
-          text: routeItem.meta.text,
-          description: routeItem.meta.description,
-          path: path
-        }
-      });
-    }
-  }
+  });
+}
+</script>
+
+<script>
+export default {
+  name: "AstrobinHome"
 }
 </script>
 
