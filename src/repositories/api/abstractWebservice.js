@@ -1,15 +1,16 @@
 import apiConfig from '@/configs/api';
 
-const customHeaders = {
+const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Method': ' GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, Authorization, X-Requested-With, Authorization'
 };
 
-const buildApiHeaders = (queryParams) => {
+const buildApiHeaders = (customHeaders, queryParams) => {
     return {
         'headers': {
             ...apiConfig.HEADERS,
+            ...corsHeaders,
             ...customHeaders
         },
         'params': queryParams,

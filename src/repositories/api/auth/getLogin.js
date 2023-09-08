@@ -14,8 +14,7 @@ export const GET_LOGIN = async () => {
             'password': API_CREDENTIALS.password,
         }
 
-        let config = WS.buildApiHeaders(null);
-        console.log(ENDPOINT.LOGIN, requestBody, config)
+        let config = WS.buildApiHeaders({'Access-Control-Allow-Credentials': 'true'}, null);
         const response = await axios.post(ENDPOINT.LOGIN, requestBody, config);
 
         console.log(response.data);
