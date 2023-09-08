@@ -4,4 +4,4 @@ import { GET_REFRESH } from "@/repositories/api/auth/getRefresh";
 export const AuthWs = {
     GET_LOGIN,
     GET_REFRESH
-}
+};
