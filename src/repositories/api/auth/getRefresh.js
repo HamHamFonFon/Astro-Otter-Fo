@@ -7,9 +7,12 @@ export const GET_REFRESH = async (refreshToken) => {
     try {
         // If existing, send request and store new JWT token
         if (null !== refreshToken) {
-            // let apiLogin = WS.buildApiUrl(ENDPOINT.ENDPOINT_REFRESH, null);
-            let config = WS.buildApiHeaders({'refresh_token': refreshToken});
-            const response = await axios.post(ENDPOINT.REFRESH, config);
+            let requestBody = {
+                'refresh_token': refreshToken
+            }
+            let config = WS.buildApiHeaders(null);
+
+            const response = await axios.post(ENDPOINT.REFRESH, requestBody, config);
             if (200 !== response.status) {
                 const error = new Error(response.statusText);
                 error.code = response.status;

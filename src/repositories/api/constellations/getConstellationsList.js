@@ -5,7 +5,7 @@ import axios from "@/services/axiosApi";
 export const GET_CONSTELLATION_LIST = async () => {
     try {
         let config = WS.buildApiHeaders(null);
-        const response = await axios.post(ENDPOINT.LIST, config);
+        const response = await axios.get(ENDPOINT.LIST, config);
         if (200 !== response.status) {
             const error = new Error(response.statusText);
             error.code = response.status;

@@ -9,13 +9,14 @@ const API_CREDENTIALS = {
 
 export const GET_LOGIN = async () => {
     try {
-        let routeParams = {
+        let requestBody = {
             'username': API_CREDENTIALS.login,
             'password': API_CREDENTIALS.password,
         }
 
-        let config = WS.buildApiHeaders(routeParams);
-        const response = await axios.post(ENDPOINT.LOGIN, config);
+        let config = WS.buildApiHeaders(null);
+        console.log(ENDPOINT.LOGIN, requestBody, config)
+        const response = await axios.post(ENDPOINT.LOGIN, requestBody, config);
 
         console.log(response.data);
         if (200 !== response.status) {
