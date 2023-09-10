@@ -102,18 +102,6 @@ const routes = [
                     image: backgroundConstellation
                 }
             },
-            {
-                path: 'images',
-                name: 'images',
-                meta: {
-                    layout: 'page',
-                    key: "menu.astrobin.images",
-                    text: 'Images',
-                    icon: '',
-                    description: 'Search, filter and sort images from Astrobin website',
-                    image: backgroundConstellation
-                }
-            }
         ],
         meta: {
             layout: 'page',
@@ -137,8 +125,23 @@ const routes = [
             icon: '',
             image: backgroundIOTD,
             // seo
-            title: '',
+            title: 'Astrobin Image Of The Day',
             description: 'Display selected image of the day and last ten images of the day',
+        }
+    },
+    {
+        path: '/astrobin/browse-images',
+        name: 'browser',
+        component: () => import('@/views/astrobin/BrowseImages.vue'),
+        meta: {
+            layout: 'page',
+            key: "menu.astrobin.images",
+            text: 'Browse Astrobin API',
+            icon: '',
+            image: backgroundConstellation,
+            title: 'Astrobin images browser',
+            description: 'Search, filter and sort images from Astrobin website',
+
         }
     },
     {
