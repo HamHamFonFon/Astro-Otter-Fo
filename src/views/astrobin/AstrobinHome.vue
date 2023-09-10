@@ -1,5 +1,5 @@
 <template>
-  <TitleImageHero title=""  :url-image="astrobinLogo" />
+  <TitleImageHero title="" :url-image="astrobinLogo" />
 
   <v-toolbar height="30">
     <v-toolbar-title class="text-h6 align-center">
@@ -57,6 +57,7 @@ import AstrobinLogo from '@/assets/images/background/astrobin.png'
 
 import ItemCard from "@/components/Home/ItemCard.vue";
 import {useRouter} from "vue-router";
+
 const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'))
 
 const astrobinLogo = ref(AstrobinLogo);

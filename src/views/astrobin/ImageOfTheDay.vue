@@ -39,36 +39,37 @@
   </transition>
 </template>
 
-<script>
-import {mapGetters, mapState} from "vuex";
+<script setup>
+import {computed, defineAsyncComponent, onMounted} from "vue";
 
-import Message from "@/components/Layout/Message.vue";
-import TitleParallax from "@/components/Content/TitleParallax.vue";
-import ItemsLists from "@/components/Items/ItemsList.vue";
-import AstrobinCard from "@/components/Items/AstrobinCard.vue";
+import {useStore} from "vuex";
+const store = useStore();
+
+const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
+const TitleParallax  = defineAsyncComponent(() => import('@/components/Content/TitleParallax.vue'));
+const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
+const AstrobinCard = defineAsyncComponent(() => import('@/components/Items/AstrobinCard.vue'))
+
+const fetchImageOfTheDay = () => {
+  store.dispatch('astrobinIOTD/fetchImageOfTheDay');
+}
+const fetchListImagesOfTheDay = () => {
+  store.dispatch('astrobinIOTD/fetchListImagesOfTheDay')
+}
+
+onMounted(() => {
+  fetchImageOfTheDay();
+  fetchListImagesOfTheDay();
+});
+
+const astrobinIOTD = computed(() => store.state.astrobinIOTD);
+const sortedTodayImage = computed(() => store.getters["astrobinIOTD/sortedTodayImages"]);
+const isLoading = computed(() => store.state.message.isLoading);
+</script>
+
+<script>
 export default {
-  name: "ImageOfTheDay",
-  components: {
-    AstrobinCard,
-    ItemsLists,
-    TitleParallax,
-    Message
-  },
-  mounted() {
-    this.$store.dispatch('astrobinIOTD/fetchImageOfTheDay');
-    this.$store.dispatch('astrobinIOTD/fetchListImagesOfTheDay')
-  },
-  computed: {
-    ...mapState(
-        { astrobinIOTD: state => state.astrobinIOTD }
-    ),
-    ...mapGetters({
-      sortedTodayImage: 'astrobinIOTD/sortedTodayImages'
-    }),
-    isLoading() {
-      return this.isLoading
-    }
-  }
+  name: "ImageOfTheDay"
 }
 </script>
 
