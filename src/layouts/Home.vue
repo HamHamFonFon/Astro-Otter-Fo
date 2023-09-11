@@ -17,13 +17,15 @@
   <FooterBar />
 </template>
 
+<script setup>
+import {defineAsyncComponent} from "vue";
+
+const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
+</script>
+
 <script>
-import FooterBar from "@/components/Layout/FooterBar.vue";
 export default {
   name: "HomeLayout",
-  components: {
-    FooterBar
-  }
 }
 </script>
 

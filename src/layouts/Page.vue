@@ -17,24 +17,21 @@
   <FooterBar />
 </template>
 
-<script>
+<script setup>
 
-import HeaderBar from "@/components/Layout/HeaderBar.vue";
-import FooterBar from "@/components/Layout/FooterBar.vue";
+import {computed, defineAsyncComponent} from "vue";
+import {useRouter} from "vue-router";
+
+const HeaderBar = defineAsyncComponent(() => import('@/components/Layout/HeaderBar.vue'));
+const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
+
+const allRoutes = computed(() => useRouter().options.routes)
 // import BreadCrumb from "@/components/Layout/BreadCrumb.vue";
+</script>
 
+<script>
 export default {
   name: "PageLayout",
-  components: {
-    // BreadCrumb,
-    HeaderBar,
-    FooterBar
-  },
-  computed: {
-    allRoutes() {
-      return this.$router.options.routes;
-    }
-  }
 }
 </script>
 
