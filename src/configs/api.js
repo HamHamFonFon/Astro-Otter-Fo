@@ -11,6 +11,6 @@ export default {
     HEADERS_CORS: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Method': ' GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, Authorization, X-Requested-With, Authorization'
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Requested-With, Authorization'
     }
 };
