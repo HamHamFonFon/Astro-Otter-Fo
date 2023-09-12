@@ -12,18 +12,24 @@ const actions = {
 };
 
 const mutations = {
-    setLoading: (state, payload) => {
-        state.loading = payload;
+    setMessage: (state, { loading, type, message, httpCode }) => {
+        state.loading = loading;
+        state.type = type;
+        state.message = message;
+        state.httpCode = httpCode;
     },
-    setType: (state, payload) => {
-        state.type = payload;
-    },
-    setMessage: (state, payload) => {
-        state.message = payload;
-    },
-    setHttpCode: (state, payload) => {
-        state.httpCode = payload;
-    }
+    // setLoading: (state, payload) => {
+    //     state.loading = payload;
+    // },
+    // setType: (state, payload) => {
+    //     state.type = payload;
+    // },
+    // setMessage: (state, payload) => {
+    //     state.message = payload;
+    // },
+    // setHttpCode: (state, payload) => {
+    //     state.httpCode = payload;
+    // }
 };
 
 export default {

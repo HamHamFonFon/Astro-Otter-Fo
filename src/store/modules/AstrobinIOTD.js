@@ -15,10 +15,13 @@ const actions = {
      * @returns {Promise<void>}
      */
     async fetchImageOfTheDay({commit}) {
-        commit('message/setLoading', true, { root: true });
-        commit('message/setType', 'warning', { root: true });
-        commit('message/setMessage', 'Loading Image Of The Day from Astrobin...', { root: true })
-        commit('message/setHttpCode', null, { root: true })
+        commit('message/setMessage', {
+            'loading': true,
+            'type': 'warning',
+            'message': 'Loading Image Of The Day from Astrobin...',
+            'httpCode': null
+        }, { root: true });
+
         try {
             // WS Image Of The Day
             const wsResponse = await WS.GET_TODAY_WS(0, 1);
@@ -29,17 +32,22 @@ const actions = {
             const wsResponseImage = await ImagesWs.GET_IMAGE_BY_ID(wsResponse.astrobinImageId)
             commit("setImage", wsResponseImage);
 
-            commit('message/setType', 'success', { root: true });
-            commit('message/setMessage', 'Image of the day loaded.', { root: true })
-            commit('message/setHttpCode', 200, { root: true })
             setTimeout(function() {
-                commit('message/setLoading', false, { root: true });
+                commit('message/setMessage', {
+                    'loading': false,
+                    'type': 'success',
+                    'message': 'Image of the day loaded.',
+                    'httpCode': 200
+                }, { root: true })
             }, 1000)
             //
         } catch (error) {
-            commit('message/setType', 'error', { root: true });
-            commit('message/setMessage', error.message, { root: true })
-            commit('message/setHttpCode', error.code, { root: true })
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'error',
+                'message': error.message,
+                'httpCode': error.code
+            }, { root: true })
         }
     },
     /**

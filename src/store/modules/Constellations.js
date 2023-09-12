@@ -15,45 +15,62 @@ const actions = {
     async fetchListConstellations({commit}) {
         try {
             commit('resetState');
-            commit('message/setLoading', true, { root: true });
-            commit('message/setType', 'warning', { root: true });
-            commit('message/setMessage', 'Loading constellations list...', { root: true })
-            commit('message/setHttpCode', null, { root: true })
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'warning',
+                'message': 'Loading constellations list...',
+                'httpCode': null
+            }, { root: true });
 
             const constellationsResponse = await ConstellationWs.GET_CONSTELLATION_LIST();
             constellationsResponse.forEach(constellation => commit("addConstellation", constellation));
             commit('setTotalCount', constellationsResponse.length);
 
-            commit('message/setType', 'success', { root: true });
-            commit('message/setMessage', 'Constellations data loaded', { root: true })
-            commit('message/setHttpCode', 200, { root: true })
-            commit('message/setLoading', false, { root: true });
+            commit('message/setMessage', {
+                'loading': false, // CHANGE IT
+                'type': 'success',
+                'message': 'Constellations data loaded',
+                'httpCode': 200
+            }, { root: true });
+
         } catch (error) {
-            commit('message/setType', 'error', { root: true });
-            commit('message/setMessage', error.message, { root: true })
-            commit('message/setHttpCode', error.code, { root: true })
+            commit('message/setMessage', {
+                'loading': true, // CHANGE IT
+                'type': 'error',
+                'message': error.message,
+                'httpCode': error.code
+            }, { root: true });
         }
     },
-    async  fetchConstellationById({ commit }, id) {
+    async fetchConstellationById({ commit }, id) {
         commit('resetState');
-        commit('message/setLoading', true, { root: true });
-        commit('message/setType', 'warning', { root: true });
-        commit('message/setMessage', 'Loading constellation data...', { root: true })
-        commit('message/setHttpCode', null, { root: true })
+        commit('message/setMessage', {
+            'loading': true,
+            'type': 'warning',
+            'message': 'Loading constellation data...',
+            'httpCode': null
+        }, { root: true });
+
         try {
             const constellationResponse = await ConstellationWs.GET_CONSTELLATION_ITEM(id);
-            commit('message/setType', 'success', { root: true });
-            commit('message/setMessage', 'Constellation "' + constellationResponse.generic + '" loaded', { root: true })
-            commit('message/setHttpCode', 200, { root: true })
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'success',
+                'message': 'Constellation "' + constellationResponse.generic + '" loaded',
+                'httpCode': 200
+            }, { root: true });
             commit('updateConstellation', constellationResponse);
             commit('setTotalCount', 1);
+
             commit('message/setLoading', false, { root: true });
 
         } catch (error) {
-            commit('message/setType', 'error', { root: true });
-            commit('message/setMessage', error.message, { root: true })
-            commit('message/setHttpCode', error.code, { root: true })
-            commit('message/setLoading', true, { root: true });
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'error',
+                'message': error.message,
+                'httpCode': error.code
+            }, { root: true });
         }
 
     }

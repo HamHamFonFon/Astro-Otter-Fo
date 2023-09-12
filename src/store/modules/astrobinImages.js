@@ -18,37 +18,52 @@ const actions = {
      * @returns {Promise<void>}
      */
     async fetchImageById({ commit }, id) {
-        commit('message/setLoading', true, { root: true });
-        commit('message/setType', 'warning', { root: true });
-        commit('message/setMessage', 'Loading astrobin image "' + id + '"', { root: true })
-        commit('message/setHttpCode', null, { root: true })
+        commit('message/setMessage', {
+            'loading': true,
+            'type': 'warning',
+            'message': 'Loading astrobin image "' + id + '"',
+            'httpCode': null
+        }, { root: true });
 
         try {
             const wsResponse = await ImagesWs.GET_IMAGE_BY_ID(id);
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'success',
+                'message': 'Image "' + wsResponse.title + '" from Astrobin loaded',
+                'httpCode': 200
+            }, { root: true });
             commit('updateImage', wsResponse);
             commit('setTotalCount', 1);
-
-            commit('message/setType', 'success', { root: true });
-            commit('message/setMessage', 'Image "' + wsResponse.title + '" from Astrobin loaded', { root: true })
-            commit('message/setHttpCode', 200, { root: true })
             commit('message/setLoading', false, { root: true });
         } catch (error) {
-            commit('message/setType', 'error', { root: true });
-            commit('message/setMessage', error.message, { root: true })
-            commit('message/setHttpCode', error.code, { root: true })
-            commit('message/setLoading', true, { root: true });
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'error',
+                'message': error.message,
+                'httpCode': error.code
+            }, { root: true });
         }
     },
-
+    /**
+     *
+     * @param commit
+     * @param formData
+     * @param offset
+     * @param limit
+     * @returns {Promise<void>}
+     */
     async fetchImages({ commit }, { formData, offset, limit}) {
         if (0 === offset) {
             commit('resetState');
         }
 
-        commit('message/setLoading', true, { root: true });
-        commit('message/setType', 'warning', { root: true });
-        commit('message/setMessage', 'Load images from Astrobin API', { root: true })
-        commit('message/setHttpCode', null, { root: true })
+        commit('message/setMessage', {
+            'loading': true,
+            'type': 'warning',
+            'message': 'Load images from Astrobin API',
+            'httpCode': null
+        }, { root: true });
 
         try {
             console.log(formData)
@@ -58,10 +73,13 @@ const actions = {
                 'title__icontains': 'm42'
             }
             const wsResponse = await ImagesWs.GET_IMAGES_BY(params, offset, limit);
-            // Message
-            commit('message/setType', 'success', { root: true });
-            commit('message/setMessage', 'Images loaded', { root: true })
-            commit('message/setHttpCode', 200, { root: true })
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'success',
+                'message': 'Images loaded',
+                'httpCode': 200
+            }, { root: true });
+
             // WS response
             commit('setTotalCount', wsResponse.totalCount);
             commit('setOffset', wsResponse.offset);
@@ -77,14 +95,17 @@ const actions = {
                     likes: r.likes
                 });
             });
+
             // Display
             commit('message/setLoading', false, { root: true });
 
         } catch (error) {
-            commit('message/setType', 'error', { root: true });
-            commit('message/setMessage', error.message, { root: true })
-            commit('message/setHttpCode', error.code, { root: true })
-            // commit('message/setLoading', true, { root: true });
+            commit('message/setMessage', {
+                'loading': true,
+                'type': 'error',
+                'message': error.message,
+                'httpCode': error.code
+            }, { root: true });
         }
     }
 };
