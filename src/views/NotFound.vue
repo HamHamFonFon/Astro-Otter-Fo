@@ -14,12 +14,6 @@ const backgroundStyle = computed(() => ({
 }));
 </script>
 
-<script>
-export default {
-  name: "NotFound",
-}
-</script>
-
 <style scoped>
 .background {
   background-size: cover;

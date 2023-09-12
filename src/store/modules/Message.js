@@ -18,9 +18,9 @@ const mutations = {
         state.message = message;
         state.httpCode = httpCode;
     },
-    // setLoading: (state, payload) => {
-    //     state.loading = payload;
-    // },
+    setLoading: (state, payload) => {
+        state.loading = payload;
+    },
     // setType: (state, payload) => {
     //     state.type = payload;
     // },

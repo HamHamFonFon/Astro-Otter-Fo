@@ -94,35 +94,27 @@
 
 </template>
 
-<script>
-import Message from "@/components/Layout/Message.vue"
-import TitlePage from "@/components/Content/TitlePage.vue";
-import ItemsLists from "@/components/Items/ItemsList.vue";
-import DsoCard from "@/components/Items/DsoCard.vue";
+<script setup>
+import {defineAsyncComponent, onBeforeMount, reactive, ref} from "vue";
+import {useStore} from "vuex";
+const store = useStore();
 
-export default {
-  name: "CatalogsPage",
-  components: {
-    TitlePage,
-    DsoCard,
-    ItemsLists,
-    Message
-  },
-  created() {
-    this.$store.commit('message/setLoading', false);
-  },
-  data() {
-    return {
-      count: 9614,
-      list_facets: null,
-      dsoList : [
-        {dsoId: 'm42', image: 'https://www.astrobin.com/cc5kpv/0/rawthumb/regular/', title: 'Orion nebula', type: '', constellation: 'Orion'},
-        {dsoId: 'm31', image: 'https://www.astrobin.com/si8zi0/0/rawthumb/regular/', title: 'Andromeda galaxy', type: 'spiral galaxy', constellation: 'Andromeda'},
-        {dsoId: 'ngc7293', image: 'https://www.astrobin.com/379758/0/rawthumb/regular/', title: 'Helix nebula', type: '', constellation: 'Aquila'},
-      ]
-    }
-  }
-}
+const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
+const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
+const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
+const DsoCard = defineAsyncComponent(() => import('@/components/Items/DsoCard.vue'));
+
+const count = ref(9614);
+const list_facets = reactive({});
+const dsoList = reactive([
+  {dsoId: 'm42', image: 'https://www.astrobin.com/cc5kpv/0/rawthumb/regular/', title: 'Orion nebula', type: '', constellation: 'Orion'},
+  {dsoId: 'm31', image: 'https://www.astrobin.com/si8zi0/0/rawthumb/regular/', title: 'Andromeda galaxy', type: 'spiral galaxy', constellation: 'Andromeda'},
+  {dsoId: 'ngc7293', image: 'https://www.astrobin.com/379758/0/rawthumb/regular/', title: 'Helix nebula', type: '', constellation: 'Aquila'}
+])
+
+onBeforeMount(() => {
+  store.commit('message/setLoading', false);
+});
 </script>
 
 <style scoped>
