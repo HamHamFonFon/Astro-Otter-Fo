@@ -85,12 +85,5 @@ function buildPageItems(homeAstrobinRoutes, allRoutes) {
 }
 </script>
 
-<script>
-export default {
-  name: "AstrobinHome"
-}
-</script>
-
 <style scoped>
-
 </style>

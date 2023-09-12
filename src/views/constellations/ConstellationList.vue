@@ -54,55 +54,42 @@
   </transition>
 </template>
 
-<script>
-import { mapState } from "vuex";
-import backgroundImage from '@/assets/images/background/constellations.jpg'
-import Message from "@/components/Layout/Message.vue";
-import TitleImageHero from "@/components/Content/TitleImageHero.vue";
-import ItemsLists from "@/components/Items/ItemsList.vue";
-import ConstellationCard from "@/components/Items/ConstellationCard.vue";
-import {ref} from "vue";
-// import ItemsLists from "@/components/Items/ItemsList.vue";
+<script setup>
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
+import { useStore} from "vuex";
+const store = useStore();
+import backgroundConstellationImage from '@/assets/images/background/constellations.jpg';
 
-export default {
-  name: "ConstellationList",
-  data () {
-    return {
-      backgroundImage: null,
-      filteringConstellation: ''
-    }
-  },
-  components: {
-    ConstellationCard,
-    ItemsLists,
-    TitleImageHero,
-    Message,
-    // ContentList
-  },
-  created() {
-    this.$store.commit('message/setLoading', false);
-    this.$store.commit('constellations/setTotalCount', 0);
-  },
-  mounted() {
-    this.backgroundImage = backgroundImage;
-    this.$store.dispatch('constellations/fetchListConstellations');
-  },
-  computed: {
-    ...mapState({ constellations: state => state.constellations }),
-    isLoading() {
-      return this.isLoading;
-    }
-  },
-  setup() {
-    const filters = ref(['All', 'Nothern hemisphere', 'Southern hemisphere', 'Zodiac']);
-    const activeFilter = ref('All');
+// Components
+const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
+const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'));
 
-    return {
-      filters,
-      activeFilter
-    }
-  }
+const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
+const ConstellationCard = defineAsyncComponent(() => import('@/components/Items/ConstellationCard.vue'));
+
+// Datas
+// const filters = ref(['All', 'Nothern hemisphere', 'Southern hemisphere', 'Zodiac']);
+// const activeFilter = ref('All');
+const backgroundImage = ref(backgroundConstellationImage);
+const filteringConstellation = reactive({});
+
+//
+onBeforeMount(() => {
+  store.commit('message/setLoading', false);
+  store.commit('constellations/setTotalCount', 0);
+})
+
+// Functions
+const fetchListConstellations = () => {
+  store.dispatch('constellations/fetchListConstellations');
 }
+
+onMounted(() => {
+  fetchListConstellations();
+})
+
+const constellations = computed(() => store.state.constellations);
+const isLoading = computed(() => store.state.message.isLoading);
 </script>
 
 <style scoped>

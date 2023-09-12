@@ -67,12 +67,6 @@ const sortedTodayImage = computed(() => store.getters["astrobinIOTD/sortedTodayI
 const isLoading = computed(() => store.state.message.isLoading);
 </script>
 
-<script>
-export default {
-  name: "ImageOfTheDay"
-}
-</script>
-
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {

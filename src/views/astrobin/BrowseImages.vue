@@ -144,12 +144,6 @@ const isLoading = computed(() => store.state.message.isLoading);
 const sortedImages = computed(() => store.getters["astrobinImages/sortedImages"]);
 </script>
 
-<script>
-export default {
-  name: "BrowseImages"
-}
-</script>
-
 <style scoped>
 
 </style>
