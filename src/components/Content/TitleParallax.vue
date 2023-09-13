@@ -4,11 +4,6 @@ defineProps({
   urlImage: String
 });
 </script>
-<script>
-export default {
-  name: "TitleParallax",
-}
-</script>
 <template>
   <v-parallax
     cover

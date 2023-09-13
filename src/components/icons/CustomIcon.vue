@@ -27,13 +27,5 @@ onErrorCaptured((error) => {
   console.error(`Error in CustomIcon component: ${error}`);
 });
 </script>
-
-<script>
-
-export default {
-  name: "CustomIcon"
-}
-</script>
-
 <style scoped>
 </style>

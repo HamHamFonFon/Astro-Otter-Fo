@@ -15,7 +15,6 @@
     >
 
       <v-container class="text-left">
-
         <v-expansion-panels bg-color="secondary">
           <v-expansion-panel bg-color="secondary">
             <v-expansion-panel-title color="secondary">

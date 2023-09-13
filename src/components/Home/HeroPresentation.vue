@@ -67,12 +67,6 @@ function scrollToSearch() {
 }
 </script>
 
-<script>
-export default {
-  name: "HeroPresentation"
-}
-</script>
-
 <style scoped>
 
 </style>

@@ -42,20 +42,17 @@
   </v-card>
 </template>
 
-<script>
+<script setup>
 import api from "@/configs/api";
-export default {
-  name: "AstrobinCard",
-  props: {
-    item: {
-      type: Object
-    }
-  },
-  methods: {
-    astrobinImageUrl: (imageId) => {
-      return api.ASTROBIN_HOST + '/' + imageId;
-    }
+
+defineProps({
+  item: {
+    type: Object
   }
+})
+
+const astrobinImageUrl = (imageId) => {
+  return api.ASTROBIN_HOST + '/' + imageId;
 }
 </script>
 

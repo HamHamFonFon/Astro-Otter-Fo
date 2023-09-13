@@ -37,15 +37,13 @@
   </v-card>
 </template>
 
-<script>
-export default {
-  name: "ConstellationCard",
-  props: {
-    item: {
-      type: Object
-    }
+<script setup>
+defineProps({
+  item: {
+    type: Object,
+    default: null
   }
-}
+});
 </script>
 
 <style scoped>

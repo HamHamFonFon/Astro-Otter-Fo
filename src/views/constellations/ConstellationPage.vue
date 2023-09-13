@@ -1,31 +1,32 @@
 <template>
-  <transition name="fade" v-if="constellation">
+  <transition name="fade">
+    <Message />
+  </transition>
+  <transition name="fade" v-if="!isLoading && constellation">
     <h2>{{ constellation.title }}</h2>
   </transition>
 
 </template>
 
-<script>
-import { mapGetters } from "vuex";
+<script setup>
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref} from "vue";
+const store = useStore();
+const route = useRoute();
 
-export default {
-  name: "ConstellationPage",
-  data () {
-    return {
-      constellationId: null
-    }
-  },
-  mounted() {
-    this.constellationId = this.$route.params.constellationId;
-    this.$store.dispatch('constellations/fetchConstellationById', this.constellationId);
-  },
-  computed: {
-    ...mapGetters({'constellation': 'constellations/getConstellationById'}),
-    // constellation() {
-    //   return this.$store.getters['constellations/getConstellationById'](this.constellationId)
-    // }
-  }
-}
+const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
+
+import { useStore} from "vuex";
+import {useRoute} from "vue-router";
+
+const constellationId = ref(route.params.constellationId);
+
+onBeforeMount(() => {
+  store.commit('message/setLoading', true);
+})
+
+onMounted(() => store.dispatch('constellations/fetchConstellationById', constellationId));
+const constellation = computed(() => store.getters['constellations/getConstellationById'](constellationId));
+const isLoading = computed(() => store.state.message.isLoading);
 </script>
 
 <style scoped>

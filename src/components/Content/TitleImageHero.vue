@@ -5,12 +5,6 @@ defineProps({
 });
 </script>
 
-<script>
-export default {
-  name: "TitleImageHero"
-}
-</script>
-
 <template>
   <div class="lazyBackground">
     <v-img

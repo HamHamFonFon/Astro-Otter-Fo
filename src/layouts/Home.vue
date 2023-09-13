@@ -23,12 +23,6 @@ import {defineAsyncComponent} from "vue";
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
 </script>
 
-<script>
-export default {
-  name: "HomeLayout",
-}
-</script>
-
 <style>
   .main-container {
     height: 100%;

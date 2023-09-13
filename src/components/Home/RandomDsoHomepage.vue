@@ -40,14 +40,6 @@ const items = reactive({
     }
   ]
 });
-
-
-</script>
-
-<script>
-export default {
-  name: "RandomDsoHomepage"
-}
 </script>
 
 <style scoped>

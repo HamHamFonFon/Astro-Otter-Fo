@@ -24,13 +24,6 @@
   </v-container>
 </template>
 
-<script>
-
-export default {
-  name: "404Component"
-}
-</script>
-
 <style scoped>
 .fill-height {
   height: 100vh;

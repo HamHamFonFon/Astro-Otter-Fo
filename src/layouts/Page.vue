@@ -1,5 +1,4 @@
 <template>
-
   <!-- Add bar -->
   <HeaderBar :allRoutes="allRoutes" />
 
@@ -27,12 +26,6 @@ const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterB
 
 const allRoutes = computed(() => useRouter().options.routes)
 // import BreadCrumb from "@/components/Layout/BreadCrumb.vue";
-</script>
-
-<script>
-export default {
-  name: "PageLayout",
-}
 </script>
 
 <style scoped>

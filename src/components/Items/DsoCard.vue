@@ -43,15 +43,13 @@
   </v-card>
 </template>
 
-<script>
-export default {
-  name: "DsoCard",
-  props: {
-    dso: {
-      type: Object
-    }
+<script setup>
+defineProps({
+  dso: {
+    type: Object
   }
-}
+})
+
 </script>
 
 <style scoped>

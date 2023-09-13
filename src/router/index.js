@@ -45,7 +45,7 @@ const routes = [
         }
     },
     {
-        path: '/catalog/:dtoId',
+        path: '/catalogs/:dtoId',
         name: 'dso',
         // component: () => import(''),
         meta: {
@@ -55,23 +55,11 @@ const routes = [
         }
     },
 
-    // Constellation
+    // Constellations
     {
         path: '/constellations',
         name: 'constellations',
         component: () => import('@/views/constellations/ConstellationList.vue'),
-        children: [
-            {
-                path: ':constellationId',
-                name: 'constellation',
-                component: () => import('@/views/constellations/ConstellationPage.vue'),
-                meta: {
-                    layout: 'page',
-                    key: '',
-                    text: ''
-                }
-            }
-        ],
         meta: {
             layout: 'page',
             key: "menu.constellations",
@@ -81,6 +69,18 @@ const routes = [
             // seo
             title: '',
             description: 'Explore the 88 constellations and discover their different objects',
+        }
+    },
+    {
+        path: '/constelllations/:constellationId',
+        name: 'constellation',
+        component: () => import('@/views/constellations/ConstellationPage.vue'),
+        meta: {
+            layout: 'page',
+            key: '',
+            // seo
+            title: '',
+            description: '',
         }
     },
     // Astrobin
