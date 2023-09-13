@@ -18,34 +18,35 @@
   </div>
 </template>
 
-<script>
-import { mapState } from "vuex";
-import imgLoading from '@/assets/images/layout/loading.gif'
+<script setup>
+import {computed} from "vue";
+import { useStore } from "vuex";
+const store = useStore();
 
-export default {
-  name: "ErrorMessage",
-  data () {
-    return {
-      imgLoading: imgLoading
-    }
-  },
-  computed: {
-    ...mapState({
-      msgError: state => state.message.message,
-      type: state => state.message.type,
-      loading: state => state.message.loading
-    }),
-    computedMsg() {
-      return this.msgError;
-    },
-    computedType() {
-      return this.type
-    },
-    isLoading() {
-      return this.loading
-    }
-  }
-}
+
+const computedMsg = computed(() => store.state.message.message);
+const computedType = computed(() => store.state.message.type);
+const isLoading = computed(() => store.state.message.loading);
+
+// export default {
+//
+//   computed: {
+//     ...mapState({
+//       msgError: state => state.message.message,
+//       type: state => state.message.type,
+//       loading: state => state.message.loading
+//     }),
+//     computedMsg() {
+//       return this.msgError;
+//     },
+//     computedType() {
+//       return this.type
+//     },
+//     isLoading() {
+//       return this.loading
+//     }
+//   }
+// }
 </script>
 
 <style scoped>

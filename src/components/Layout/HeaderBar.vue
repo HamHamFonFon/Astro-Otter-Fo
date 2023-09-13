@@ -16,7 +16,7 @@
 <!--      <CustomIcon icon-name="test"/>-->
 
 
-      <v-btn v-for="(menuItem, index) in this.processedMenu(this.menu, allRoutes)" stacked="" v-bind:key="index" class="text-none">
+      <v-btn v-for="(menuItem, index) in processedMenu(menu, allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
           <span v-if="!this.$isMobile()" class="text-grey">{{ menuItem.text }}</span>
 <!--          <v-icon v-else-if="this.$isMobile()"></v-icon>-->
@@ -48,65 +48,62 @@
   </v-app-bar>
 </template>
 
-<script>
-import logo from '@/assets/images/logos/astro_otter_200-200.png'
+<script setup>
+import {computed, defineAsyncComponent, ref, watch} from "vue";
+
+import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
-import CustomIcon from "@/components/icons/CustomIcon.vue";
 
-export default {
-  name: "HeaderBar",
-  components: {CustomIcon},
-  data() {
-    return {
-      menu: configs.headerMenu,
-      logo: logo,
-      showSearch: false,
-      loading: false,
-      select: null,
-      search: null
-    }
-  },
-  props: {
-    allRoutes: {
-      type: Array
-    }
-  },
-  watch: {
-    search (val) {
-      val && val !== this.select && this.querySearch(val)
-    }
-  },
-  computed: {
-    processedMenu() {
-      return this.buildMenu;
-    }
-  },
-  methods: {
-    buildMenu: (items, allRoutes) => {
-      return items.map(route => {
-        let routeName = route.routeName;
-        const routeItem = allRoutes.filter(route => route.name === routeName)[0];
-        return {
-          key: routeItem.meta.key,
-          icon: routeItem.meta.icon ?? 'mdi-tooltip-text-outline',
-          path: routeItem.path,
-          text: routeItem.meta.text
-        };
-      })
-    },
-    displaySearch() {
-      this.showSearch = !this.showSearch;
-    },
-    querySearch: (v) => {
-      console.log('Send ' + v + ' to Astro otter API');
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-      }, 500);
-    },
+// Components
+const CustomIcon = defineAsyncComponent(() => import("@/components/icons/CustomIcon.vue"));
 
+// Data
+const menu = ref(configs.headerMenu);
+const logo = ref(astroOtterLogo);
+const showSearch = ref(false);
+const loading = ref(false);
+const select = ref(null);
+const search = ref(null);
+
+// Props
+defineProps({
+  allRoutes: {
+    type: Array
   }
-}
+});
+
+// Methods
+const buildMenu = (items, allRoutes) => {
+  return items.map(route => {
+    let routeName = route.routeName;
+    const routeItem = allRoutes.filter(route => route.name === routeName)[0];
+    return {
+      key: routeItem.meta.key,
+      icon: routeItem.meta.icon ?? 'mdi-tooltip-text-outline',
+      path: routeItem.path,
+      text: routeItem.meta.text
+    };
+  })
+};
+const displaySearch = () => {
+  this.showSearch = !this.showSearch;
+};
+
+const querySearch = (v) => {
+  console.log('Send ' + v + ' to Astro otter API');
+  this.loading = true;
+  setTimeout(() => {
+    this.loading = false;
+  }, 500);
+};
+
+// Computed
+const processedMenu = computed(() => buildMenu);
+
+// Watch
+watch(search, (val) => {
+  val && val !== this.select && querySearch(val)
+})
 </script>
 
 <style scoped>
