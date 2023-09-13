@@ -1,5 +1,5 @@
 <template>
-  <v-row class="grid" :style="{ gridTemplateColumns: this.getColumnStyle(), gridGap: this.getGapStyle() }">
+  <v-row class="grid" :style="{ gridTemplateColumns: getColumnStyle(), gridGap: getGapStyle() }">
     <slot
         v-for="item in itemsList"
         :item="item"
@@ -8,29 +8,34 @@
   </v-row>
 </template>
 
-<script>
-export default {
-  name: "ItemsLists",
-  props: {
-    itemsList: Object,
-    gap: {
-      type: Number,
-      default: 0
-    },
-    columns: {
-      type: Number,
-      default: 0
-    }
-  },
-  methods: {
-    getColumnStyle() {
-      return (this.$isMobile()) ? `repeat(auto-fill, minmax(350px, 1fr))` :  `repeat(${this.columns}, 1fr)`;
-    },
+<script setup>
+import {computed} from "vue";
 
-    getGapStyle() {
-      return `${this.gap}em`;
-    }
+const isMobile = computed(() => {
+  return screen.width <= 766;
+});
+
+
+const props = defineProps({
+  itemsList: {
+    type: Object
+  },
+  gap: {
+    type: Number,
+    default: 0
+  },
+  columns: {
+    type: Number,
+    default: 0
   }
+});
+
+const getColumnStyle = () => {
+  return (isMobile.value) ? `repeat(auto-fill, minmax(350px, 1fr))` :  `repeat(${props.columns}, 1fr)`;
+}
+
+const getGapStyle = () => {
+  return `${props.gap}em`;
 }
 </script>
 

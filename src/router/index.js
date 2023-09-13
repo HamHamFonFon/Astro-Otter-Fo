@@ -11,6 +11,7 @@ import CustomIcon from "@/components/icons/CustomIcon.vue"; // '@/assets/images/
 const routes = [
     {
         path: '/',
+        name: 'root',
         redirect: '/home',
         meta: {}
     },
