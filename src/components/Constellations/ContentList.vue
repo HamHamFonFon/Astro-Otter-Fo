@@ -16,18 +16,18 @@
   </v-sheet>
 </template>
 
-<script>
-import ItemsLists from "@/components/Items/ItemsList.vue";
-import ConstellationCard from "@/components/Items/ConstellationCard.vue";
-export default {
-  name: "ContentList",
-  components: {
-    ItemsLists, ConstellationCard
-  },
-  props: {
-    constellations: Object
+<script setup>
+import {defineAsyncComponent} from "vue";
+
+const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
+const ConstellationCard =defineAsyncComponent(() => import('@/components/Items/ConstellationCard.vue'));
+
+defineProps({
+  constellations: {
+    type: Object
   }
-}
+});
+
 </script>
 
 <style scoped>

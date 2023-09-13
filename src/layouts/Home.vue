@@ -14,13 +14,15 @@
   </v-main>
 
   <!-- Footer -->
-  <FooterBar />
+  <FooterBar :allRoutes="allRoutes" />
 </template>
 
 <script setup>
-import {defineAsyncComponent} from "vue";
+import {computed, defineAsyncComponent} from "vue";
+import {useRouter} from "vue-router";
 
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
+const allRoutes = computed(() => useRouter().options.routes)
 </script>
 
 <style>

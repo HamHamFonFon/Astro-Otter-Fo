@@ -31,7 +31,7 @@
               <div class="d-flex flex-wrap justify-center justify-md-end">
                 <router-link
                     class="text-primary mx-3 mb-3 font-weight-bold"
-                    v-for="nav in this.processedFooterMenu"
+                    v-for="nav in processedFooterMenu(footerPages, props.allRoutes)"
                     :to="nav.path"
                     v-bind:key="nav.key"
                 >
@@ -49,41 +49,37 @@
   </v-sheet>
 </template>
 
-<script>
+<script setup>
 import configs from "@/configs";
-export default {
-  name: "FooterBar",
-  data() {
-    return {
-      socialNetworks: configs.socialNetworks,
-      footerPages: configs.footerPages
-    }
-  },
-  computed: {
-    processedFooterMenu() {
-      const allRoutes = this.$router.options.routes;
-      const footerPages = this.footerPages;
-      return this.buildMenu(footerPages, allRoutes);
-    }
-  },
-  methods: {
-    openSocialNetwork(link) {
-      window.open(link, '_blank')
-    },
-    buildMenu(footerPages, allRoutes) {
-      return footerPages.map(route => {
-        let routeName = route.routeName;
-        const routeItem = allRoutes.filter(route => route.name === routeName)[0];
-        let path = routeItem.path;
-        return {
-          key: routeItem.meta.key,
-          text: routeItem.meta.text,
-          path: path
-        }
-      });
-    }
+import {computed, ref} from "vue";
+
+const socialNetworks = ref(configs.socialNetworks);
+const footerPages = ref(configs.footerPages);
+
+const props = defineProps({
+  allRoutes: {
+    type: Array
   }
-}
+});
+
+const openSocialNetwork= (link) => {
+  window.open(link, '_blank')
+};
+
+const buildMenu = (footerPages, allRoutes) => {
+  return footerPages.map(route => {
+    let routeName = route.routeName;
+    const routeItem = allRoutes.filter(route => route.name === routeName)[0];
+    let path = routeItem.path;
+    return {
+      key: routeItem.meta.key,
+      text: routeItem.meta.text,
+      path: path
+    }
+  });
+};
+
+const processedFooterMenu = computed(() => buildMenu );
 </script>
 
 <style scoped>

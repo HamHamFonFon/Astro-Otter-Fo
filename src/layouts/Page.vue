@@ -13,7 +13,7 @@
   </v-main>
 
   <!-- Footer -->
-  <FooterBar />
+  <FooterBar :allRoutes="allRoutes" />
 </template>
 
 <script setup>
