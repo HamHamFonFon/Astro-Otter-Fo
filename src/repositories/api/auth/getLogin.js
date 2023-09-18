@@ -1,7 +1,6 @@
 import { ENDPOINT } from "@/repositories/api/auth/endpoint.js";
 import * as WS from '@/repositories/api/abstractWebservice'
 import axios from "@/services/axiosApi";
-import apiConfig from '@/configs/api';
 
 const API_CREDENTIALS = {
     login: process.env.VUE_APP_APILOGIN,
@@ -10,19 +9,14 @@ const API_CREDENTIALS = {
 
 export const GET_LOGIN = async () => {
     try {
-        let requestBody = {
+        let requestBody = JSON.stringify({
             'username': API_CREDENTIALS.login,
             'password': API_CREDENTIALS.password,
-        }
+        });
 
-        let customHeaders = {
-            ...{'Access-Control-Allow-Credentials': 'true'},
-            ...apiConfig.HEADERS_CORS
-        }
-        let config = WS.buildApiHeaders(customHeaders, null);
+        let config = WS.buildApiHeaders(null, null, null);
         const response = await axios.post(ENDPOINT.LOGIN, requestBody, config);
 
-        console.log(response.data);
         if (200 !== response.status) {
             const error = new Error(response.statusText);
             error.code = response.status;

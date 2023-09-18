@@ -10,7 +10,7 @@ export const GET_REFRESH = async (refreshToken) => {
             let requestBody = {
                 'refresh_token': refreshToken
             }
-            let config = WS.buildApiHeaders(null);
+            let config = WS.buildApiHeaders(null, null, null);
 
             const response = await axios.post(ENDPOINT.REFRESH, requestBody, config);
             if (200 !== response.status) {
