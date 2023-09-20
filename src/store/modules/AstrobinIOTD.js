@@ -1,6 +1,11 @@
 import * as WS from '@/repositories/astrobin/iotd/webservice'
 import { ImagesWs } from '@/repositories/astrobin/images';
 
+/**
+ * TODO : remove tis store
+ * @returns {{date: null, image: {}, astrobinImageId: null, listTodayImages: *[]}}
+ */
+
 const state = () => ({
     date: null,
     image: {},
