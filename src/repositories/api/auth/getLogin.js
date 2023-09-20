@@ -25,7 +25,7 @@ export const GET_LOGIN = async () => {
 
         return {
             'jwtToken': response.data.token,
-            //'refreshToken': response.data.refresh_token, // uncomment when API Rest will be with API Platform
+            'refreshToken': null // response.data.refresh_token,, uncomment when API Rest will be with API Platform
         }
     } catch (err) {
         const error = new Error(err.message);
