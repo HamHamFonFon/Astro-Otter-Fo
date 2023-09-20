@@ -1,12 +1,12 @@
 <template>
   <v-card
       class="ma-3"
-      color="transparent"
+      color="primary"
   >
-    <router-link :to="{name: 'constellation', params: { constellationId: item.constId } }">
+    <router-link :to="{name: 'constellation', params: { constellationId: item.id.toLowerCase(), constellationName: item.alt.toLowerCase() } }">
       <v-img
-          :src="item.image"
-          :lazy-src="item.image"
+          :src="cover"
+          :lazy-src="cover"
           class="bg-grey-lighten-2"
           height="300"
           cover
@@ -23,13 +23,13 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        <v-card-title class="text-center text-h6 text-white">{{ item.title }}</v-card-title>
+        <v-card-title class="text-center text-h6 text-white">{{ item.alt }}</v-card-title>
       </v-img>
 
-      <v-card-actions color="primary">
-        <v-list-item class="w-100"  color="red">
+      <v-card-actions color="background">
+        <v-list-item class="w-100">
           <template v-slot:prepend>
-            {{ item.title }}
+            {{ item.generic }}
           </template>
         </v-list-item>
       </v-card-actions>
@@ -38,12 +38,28 @@
 </template>
 
 <script setup>
-defineProps({
+import { onMounted, ref} from "vue";
+const cover = ref(null);
+
+const props = defineProps({
   item: {
     type: Object,
     default: null
   }
 });
+
+onMounted(() => {
+  try {
+    getCoverUrl();
+  } catch (error) {
+    console.error(`Error loading cover file ${props.item.cover}`, error);
+  }
+});
+
+const getCoverUrl = async () => {
+  cover.value = (await import(`@/assets/images/constellations/cover/${props.item.cover}`)).default;
+}
+
 </script>
 
 <style scoped>
@@ -56,5 +72,8 @@ defineProps({
 
 a {
   text-decoration: none;
+}
+.v-img:hover {
+  cursor: pointer;
 }
 </style>

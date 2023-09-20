@@ -3,7 +3,7 @@
     <v-sheet max-width="1600" class="mx-auto pa-5" elevation="0" color="transparent">
       <v-container>
         <v-row align="center">
-          <v-col cols="12" md="4" v-for="item in items.items" :key="item.id">
+          <v-col cols="12" md="4" v-for="item in state.items.value" :key="item.id">
             <DsoCard :dso="item" />
           </v-col>
         </v-row>
@@ -14,32 +14,23 @@
 
 <script setup>
 import DsoCard from "@/components/Items/DsoCard.vue";
-import {reactive} from "vue";
-const items = reactive({
-  items: [
-    {
-      dsoId: 'm42',
-      image: 'https://www.astrobin.com/cc5kpv/0/rawthumb/regular/',
-      title: 'Orion nebula',
-      type: '',
-      constellation: 'Orion'
-    },
-    {
-      dsoId: 'm31',
-      image: 'https://www.astrobin.com/si8zi0/0/rawthumb/regular/',
-      title: 'Andromeda galaxy',
-      type: 'spiral galaxy',
-      constellation: 'Andromeda'
-    },
-    {
-      dsoId: 'ngc7293',
-      image: 'https://www.astrobin.com/379758/0/rawthumb/regular/',
-      title: 'Helix nebula',
-      type: '',
-      constellation: 'Aquila'
-    }
-  ]
+import {DsoWs} from "@/repositories/api/dso";
+import { onMounted, reactive} from "vue";
+const state = reactive({ items: {}});
+
+onMounted(() => {
+  getRandomDso();
 });
+
+const getRandomDso = async () => {
+  try {
+    state.items.value = await DsoWs.GET_RANDOM(0, 3);
+  } catch (err) {
+    console.error(err.message);
+  }
+
+}
+
 </script>
 
 <style scoped>
