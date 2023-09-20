@@ -5,8 +5,8 @@
   >
 <!--    <router-link :to="{ name: 'dso', params: { dtoId: item.id } }">-->
       <v-img
-          :src="dso.image"
-          :lazy-src="dso.image"
+          :src="dso.astrobin.url_hd"
+          :lazy-src="dso.astrobin.url_hd"
           class="bg-grey-lighten-2"
           height="300"
           cover
@@ -23,7 +23,7 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        <v-card-title class="text-h6 text-white">{{ dso.title }}</v-card-title>
+        <v-card-title class="text-h6 text-white">{{ dso.name }}</v-card-title>
       </v-img>
 <!--    </router-link>-->
     <v-card-actions color="primary">
@@ -34,7 +34,7 @@
 
         <template v-slot:append>
           <div class="justify-self-end">
-            <v-icon color="grey"></v-icon> <span class="subheading me-2">{{ dso.constellation }}</span>
+            <v-icon color="grey" icon="iconConstellation"></v-icon> <span class="subheading me-2">{{ dso.constellation.alt }}</span>
           </div>
         </template>
       </v-list-item>

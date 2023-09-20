@@ -23,10 +23,7 @@
             <v-expansion-panel-text bg-color="secondary">
               <v-row class="" align="center" justify="center">
                   <v-radio-group inline v-model="filteringConstellation">
-                    <v-radio label="All" value="all"></v-radio>
-                    <v-radio label="Northern hemisphere" value="north"></v-radio>
-                    <v-radio label="Southern hemisphere" value="south"></v-radio>
-                    <v-radio label="Zodiac" value="zodiac"></v-radio>
+                    <v-radio :label="filter.label" :value="filter.value" v-for="filter in state.filters.value" v-bind:key="filter"></v-radio>
                   </v-radio-group>
               </v-row>
             </v-expansion-panel-text>
@@ -37,7 +34,7 @@
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
               <v-row align="center">
-                <ItemsLists :items-list="constellations.constellations" :columns="4">
+                <ItemsLists :items-list="constellations.constellations" :columns="5">
                   <template v-slot="{ item, index }">
                     <ConstellationCard v-bind:key="index" :item="item" />
                   </template>
@@ -67,20 +64,26 @@ const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsLi
 const ConstellationCard = defineAsyncComponent(() => import('@/components/Items/ConstellationCard.vue'));
 
 // Datas
-// const filters = ref(['All', 'Nothern hemisphere', 'Southern hemisphere', 'Zodiac']);
-// const activeFilter = ref('All');
 const backgroundImage = ref(backgroundConstellationImage);
 const filteringConstellation = reactive({});
 
+const state = reactive({
+  filteringConstellation: {},
+  filters: {}
+});
 //
 onBeforeMount(() => {
-  store.commit('message/setLoading', false);
-  store.commit('constellations/setTotalCount', 0);
+  if (88 !== store.getters['constellations/getTotalCount']) {
+    store.commit('message/setLoading', false);
+    store.commit('constellations/setTotalCount', 0);
+  }
 })
 
 // Functions
 const fetchListConstellations = () => {
-  store.dispatch('constellations/fetchListConstellations');
+  if (0 === store.getters['constellations/getAllConstellations'].length) {
+    store.dispatch('constellations/fetchListConstellations');
+  }
 }
 
 onMounted(() => {
@@ -89,6 +92,13 @@ onMounted(() => {
 
 const constellations = computed(() => store.state.constellations);
 const isLoading = computed(() => store.state.message.isLoading);
+
+state.filters.value = computed(() => {
+  return Array.from(constellations.value).map(constellation => {
+    return {'label': constellation.kind , 'value': constellation.loc };
+  })
+});
+
 </script>
 
 <style scoped>

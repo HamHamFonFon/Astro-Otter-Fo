@@ -30,6 +30,6 @@ const allRoutes = computed(() => useRouter().options.routes)
 
 <style scoped>
 .main-background {
-  background-image: linear-gradient(135deg, #111b27, #253A46); /** #243b55 **/
+  background-image: linear-gradient(135deg, #111b27, #633535); /** #253A46 **/
 }
 </style>
