@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store';
-import { refreshTokens, login } from '@/services/auth';
+import {login, refreshToken} from '@/services/auth';
 
 import backgroundAstrobin from '@/assets/images/background/astrobin.png'
 import backgroundIOTD from '@/assets/images/background/bg-6.webp'
@@ -210,9 +210,15 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     // Set refresh JWT token for requests
-    console.log('Is JWT Token exist: '+ store.getters["auth/isLoggedIn"]);
+    const timestamp = new Date().getTime()
+
     if (true === store.getters["auth/isLoggedIn"]) {
-        await refreshTokens();
+        let expireTokenDate = store.getters["auth/getJwtExp"].exp ?? null;
+        if (expireTokenDate && expireTokenDate < timestamp) {
+            await refreshToken();
+        } else {
+            await login();
+        }
     } else {
         await login();
     }
@@ -224,7 +230,6 @@ router.beforeEach(async (to, from, next) => {
         next("login");
     }
     next();
-
 });
 
 export default router

@@ -1,4 +1,5 @@
 import { AuthWs } from '@/repositories/api/auth';
+import { jwtParser } from '@/services/jwtParser';
 
 const state = () => {
     return {
@@ -20,19 +21,25 @@ const actions = {
     async fetchLogin({ commit }) {
         try {
             const wsResponse = await AuthWs.GET_LOGIN();
-            const { accessToken, refreshToken } = wsResponse;
-            console.log(accessToken, refreshToken);
-            commit('setAccessToken', accessToken);
+            const { jwtToken, refreshToken } = wsResponse;
+
+            commit('setAccessToken', jwtToken);
             commit('setRefreshToken', refreshToken)
 
+            localStorage.setItem('jwtToken', jwtToken)
             return true;
         } catch (error) {
             return false;
         }
     },
 
+    /**
+     *
+     * @param commit
+     * @param getters
+     * @returns {Promise<boolean>}
+     */
     async fetchRefreshToken({ commit }) {
-        console.log('Store Auth, action refreshToken');
         try {
             const wsResponse = await AuthWs.GET_REFRESH(state.refreshToken)
             const { jwtToken } = wsResponse.data;
@@ -43,12 +50,13 @@ const actions = {
             return false;
         }
     }
+
+
 }
 
 const getters = {
-    isLoggedIn(state) {
-        return !!state.accessToken;
-    }
+    isLoggedIn: (state) => !!state.accessToken,
+    getJwtExp: (state) => jwtParser(state.accessToken)
 };
 
 export default {

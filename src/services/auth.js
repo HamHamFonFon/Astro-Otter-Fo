@@ -5,6 +5,6 @@ export async function login() {
     return store.dispatch('auth/fetchLogin');
 }
 
-export async function refreshTokens() {
+export async function refreshToken() {
     return store.dispatch('auth/fetchRefreshToken');
 }
