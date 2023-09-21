@@ -11,6 +11,7 @@
       <slot></slot>
 
       <SocialSharing />
+      <BackToTop />
     </div>
   </v-main>
 
@@ -24,8 +25,10 @@ import {computed, defineAsyncComponent} from "vue";
 import {useRouter} from "vue-router";
 
 const HeaderBar = defineAsyncComponent(() => import('@/components/Layout/HeaderBar.vue'));
-const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
+
+const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
+const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
 
 const allRoutes = computed(() => useRouter().options.routes)
 // import BreadCrumb from "@/components/Layout/BreadCrumb.vue";
