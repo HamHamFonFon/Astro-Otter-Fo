@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    color="transparent"
+    :color="backgroundColor"
     @click="$event => showButtons = !showButtons"
     class="hover-button elevation-10"
   >
@@ -13,7 +13,7 @@
         v-if="showButtons"
         elevation="10"
         class="d-flex flex-column mb-1 hovered-buttons"
-        color="transparent"
+        :color="backgroundColor"
     >
       <v-btn
           @click="showButtons = false"
@@ -42,7 +42,7 @@
   </transition>
 </template>
 <script setup>
-import {reactive, ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import {useRoute} from "vue-router";
 
 const route = useRoute();
@@ -68,6 +68,8 @@ const currentRoute = ref(route.path);
 const sharePage = () => {
   alert(currentRoute.value);
 };
+
+const backgroundColor = computed(() => (screen.width <= 760) ? 'primary': 'transparent')
 
 </script>
 
