@@ -23,7 +23,7 @@
             <v-expansion-panel-text bg-color="secondary">
               <v-row class="" align="center" justify="center">
                   <v-radio-group inline v-model="filteringConstellation">
-                    <v-radio :label="filter.label" :value="filter.value" v-for="filter in state.filters.value" v-bind:key="filter"></v-radio>
+                    <v-radio :label="filter" :value="filter" v-for="filter in state.filters.value" v-bind:key="filter" />
                   </v-radio-group>
               </v-row>
             </v-expansion-panel-text>
@@ -91,14 +91,9 @@ onMounted(() => {
 })
 
 const constellations = computed(() => store.state.constellations);
-const isLoading = computed(() => store.state.message.isLoading);
+const isLoading = computed(() => store.state.message.loading);
 
-state.filters.value = computed(() => {
-  return Array.from(constellations.value).map(constellation => {
-    return {'label': constellation.kind , 'value': constellation.loc };
-  })
-});
-
+state.filters.value = [...new Set(store.getters['constellations/getAllConstellations'].map(c => c.kind)), 'all'];
 </script>
 
 <style scoped>

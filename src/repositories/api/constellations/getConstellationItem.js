@@ -10,9 +10,9 @@ export const GET_CONSTELLATION_ITEM = async (idConstellation) => {
     }
 
     try {
-        let config = WS.buildApiHeaders({'id': idConstellation});
-        const response = await axios.get(ENDPOINT.ITEM, config);
-        console.log(response);
+        let config = WS.buildApiHeaders(null, null, null);
+        let endpoint = ENDPOINT.ITEM + idConstellation;
+        const response = await axios.get(endpoint, config);
         return response.data;
     } catch (err) {
         const error = new Error(err.message);

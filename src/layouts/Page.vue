@@ -9,6 +9,8 @@
   <v-main class="main-container main-background">
     <div class="flex-fill">
       <slot></slot>
+
+      <SocialSharing />
     </div>
   </v-main>
 
@@ -22,6 +24,7 @@ import {computed, defineAsyncComponent} from "vue";
 import {useRouter} from "vue-router";
 
 const HeaderBar = defineAsyncComponent(() => import('@/components/Layout/HeaderBar.vue'));
+const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
 
 const allRoutes = computed(() => useRouter().options.routes)

@@ -25,13 +25,17 @@ const actions = {
             const constellationsResponse = await ConstellationWs.GET_CONSTELLATION_LIST();
             constellationsResponse.forEach(constellation => commit("addConstellation", constellation));
             commit('setTotalCount', constellationsResponse.length);
-
             commit('message/setMessage', {
-                'loading': false, // CHANGE IT
                 'type': 'success',
+                'loading': true,
                 'message': 'Constellations data loaded',
                 'httpCode': 200
             }, { root: true });
+
+            setTimeout(() => {
+                commit('message/setLoading', false, { root: true })
+            }, 1000);
+
 
         } catch (error) {
             commit('message/setMessage', {
@@ -98,7 +102,7 @@ const getters = {
     getAllConstellations: (state) => state.constellations,
     getTotalCount: (state) => state.totalCount,
     getConstellationById: (state) => (id) => {
-        return state.constellations.find(constellation => id === constellation.id);
+        return state.constellations.find(constellation => id === constellation.alt.toLowerCase());
     },
 };
 

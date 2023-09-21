@@ -73,7 +73,7 @@ const routes = [
         }
     },
     {
-        path: '/constelllations/:constellationId',
+        path: '/constelllations/:constellationId/:constellationName',
         name: 'constellation',
         component: () => import('@/views/constellations/ConstellationPage.vue'),
         meta: {

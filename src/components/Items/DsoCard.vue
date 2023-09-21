@@ -5,6 +5,7 @@
   >
 <!--    <router-link :to="{ name: 'dso', params: { dtoId: item.id } }">-->
       <v-img
+          v-if="dso.astrobin"
           :src="dso.astrobin.url_hd"
           :lazy-src="dso.astrobin.url_hd"
           class="bg-grey-lighten-2"
@@ -34,7 +35,8 @@
 
         <template v-slot:append>
           <div class="justify-self-end">
-            <v-icon color="grey" icon="iconConstellation"></v-icon> <span class="subheading me-2">{{ dso.constellation.alt }}</span>
+            <v-icon color="grey" icon="iconConstellation"></v-icon>
+            <span class="subheading me-2">{{ dso.constellation.generic }}</span>
           </div>
         </template>
       </v-list-item>
