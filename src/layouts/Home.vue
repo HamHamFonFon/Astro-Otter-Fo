@@ -2,12 +2,7 @@
   <!-- No headerBar -->
 
   <!-- Body -->
-  <v-main class="main-container"
-    v-touch="{
-      // left: () => (this.$store.commit('customizedTheme/setShowSideBar', false)),
-      // right: () => (this.$store.commit('customizedTheme/setShowSideBar', true))
-    }"
-  >
+  <v-main class="main-container">
     <div class="flex-fill">
       <slot></slot>
 
@@ -26,7 +21,6 @@ import {useRouter} from "vue-router";
 
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
-
 
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
 const allRoutes = computed(() => useRouter().options.routes)
