@@ -101,8 +101,8 @@ const mutations = {
 const getters = {
     getAllConstellations: (state) => state.constellations,
     getTotalCount: (state) => state.totalCount,
-    getConstellationById: (state) => (id) => {
-        return state.constellations.find(constellation => id === constellation.alt.toLowerCase());
+    getConstellationById: (state) => (constellationId) => {
+        return state.constellations.filter(constellation => constellationId === constellation.id.toLowerCase())[0];
     },
 };
 
