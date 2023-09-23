@@ -11,9 +11,10 @@
     >
       <TitleImageHero :title="constellationRef.value.alt" :urlImage="constellationCover"></TitleImageHero>
 
-      <v-divider></v-divider>
-      <v-container v-if="constellationRef.value.description">
-        <v-row>
+      <v-container class="text-left">
+
+        <!-- Description -->
+        <v-row v-if="constellationRef.value.description">
           <v-col cols="12" md="6">
             <v-sheet elevation="0">
               <v-card
@@ -26,25 +27,24 @@
             </v-sheet>
           </v-col>
         </v-row>
-      </v-container>
 
-      <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
-        <v-sheet class="pa-3" elevation="0" color="transparent">
-          <v-container>
-            <v-row align="center">
-              <ItemsLists :items-list="items.value" :columns="5">
-                <template v-slot="{ item, index }">
-                  <DsoCard v-bind:key="index" :dso="item" />
-                </template>
-              </ItemsLists>
-            </v-row>
-          </v-container>
+        <!--  Items-->
+        <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
+          <v-sheet class="pa-3" elevation="0" color="transparent">
+            <v-container>
+              <v-row align="center">
+                <ItemsLists :items-list="items.value" :columns="5">
+                  <template v-slot="{ item, index }">
+                    <DsoCard v-bind:key="index" :dso="item" />
+                  </template>
+                </ItemsLists>
+              </v-row>
+            </v-container>
+          </v-sheet>
         </v-sheet>
-      </v-sheet>
+      </v-container>
     </v-sheet>
-
   </transition>
-
 </template>
 
 <script setup>
@@ -122,9 +122,7 @@ const fetchDsoByConstellation = async () => {
 };
 
 const isLoading = computed(() => store.state.message.loading);
-const constellationCover = computed(() => {
-  return require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`)
-});
+const constellationCover = computed(() =>  require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`));
 </script>
 
 <style scoped>

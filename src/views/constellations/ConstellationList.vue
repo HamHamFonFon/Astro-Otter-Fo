@@ -15,26 +15,27 @@
     >
 
       <v-container class="text-left">
-        <v-expansion-panels bg-color="secondary">
-          <v-expansion-panel bg-color="secondary">
-            <v-expansion-panel-title color="secondary">
-              Filtering constellations
-            </v-expansion-panel-title>
-            <v-expansion-panel-text bg-color="secondary">
-              <v-row class="" align="center" justify="center">
-                  <v-radio-group inline v-model="filteringConstellation">
-                    <v-radio :label="filter" :value="filter" v-for="filter in state.filters.value" v-bind:key="filter" />
-                  </v-radio-group>
-              </v-row>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-        </v-expansion-panels>
+          <FilterList
+            v-model="filterConstellation"
+            label="Filter constellations"
+            placeholder="Filter by name (e.q. 'Orion', 'Andromeda')..."
+          />
+
+          <v-container class="align-center" align="center">
+            <v-radio-group inline>
+              <v-radio label="Radio 1" value="1"></v-radio>
+              <v-radio label="Radio 2" value="2"></v-radio>
+              <v-radio label="Radio 3" value="3"></v-radio>
+              <v-radio label="Radio 4" value="4"></v-radio>
+            </v-radio-group>
+          </v-container>
+
 
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
               <v-row align="center">
-                <ItemsLists :items-list="constellations.constellations" :columns="5">
+                <ItemsLists :items-list="constellations" :columns="5">
                   <template v-slot="{ item, index }">
                     <ConstellationCard v-bind:key="index" :item="item" />
                   </template>
@@ -43,7 +44,6 @@
             </v-container>
           </v-sheet>
         </v-sheet>
-
       </v-container>
     </v-sheet>
 
@@ -51,27 +51,27 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
-import { useStore} from "vuex";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref} from "vue";
+import {useStore} from "vuex";
 const store = useStore();
+
 import backgroundConstellationImage from '@/assets/images/background/constellations.jpg';
 
 // Components
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
-const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'));
 
+const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'));
+const FilterList = defineAsyncComponent(() => import('@/components/Content/FilterList.vue'));
 const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
 const ConstellationCard = defineAsyncComponent(() => import('@/components/Items/ConstellationCard.vue'));
 
 // Datas
 const backgroundImage = ref(backgroundConstellationImage);
-const filteringConstellation = reactive({});
+const filterConstellation = ref(null);
 
-const state = reactive({
-  filteringConstellation: {},
-  filters: {}
-});
-//
+/**
+ * Before mount, set Store
+ */
 onBeforeMount(() => {
   if (88 !== store.getters['constellations/getTotalCount']) {
     store.commit('message/setLoading', false);
@@ -79,21 +79,30 @@ onBeforeMount(() => {
   }
 })
 
-// Functions
+/**
+ * OnMount, fetch list constellation function
+ */
+onMounted(() => {
+  fetchListConstellations();
+})
+
+/**
+ * Functions
+ */
 const fetchListConstellations = () => {
   if (0 === store.getters['constellations/getAllConstellations'].length) {
     store.dispatch('constellations/fetchListConstellations');
   }
 }
 
-onMounted(() => {
-  fetchListConstellations();
-})
-
-const constellations = computed(() => store.state.constellations);
 const isLoading = computed(() => store.state.message.loading);
-
-state.filters.value = [...new Set(store.getters['constellations/getAllConstellations'].map(c => c.kind)), 'all'];
+const constellations = computed(() => {
+  const text = filterConstellation.value ?? '';
+  if (2 < text.length) {
+    return store.state.constellations.constellations.filter(c => c.alt.toLowerCase().startsWith(text.toLowerCase()));
+  }
+  return store.state.constellations.constellations;
+});
 </script>
 
 <style scoped>

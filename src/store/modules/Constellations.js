@@ -34,7 +34,7 @@ const actions = {
 
             setTimeout(() => {
                 commit('message/setLoading', false, { root: true })
-            }, 1000);
+            }, 500);
 
 
         } catch (error) {
