@@ -88,7 +88,7 @@ const fetchListImagesOfTheDay = async () => {
           id: r.astrobin_id,
           image: r.urlRegular,
           lazyImage: r.urlGallery,
-          date: response.date,
+          date: response.date, // we use date of GET_TODAY_WS response, not image object response
           title: r.title,
           user: r.user,
           views: r.views,
@@ -122,13 +122,14 @@ onMounted(() => {
   fetchListImagesOfTheDay();
 });
 
+const isLoading = computed(() => store.state.message.loading);
 const astrobinIOTD = computed(() => astrobinIOTDRef.value);
 const sortedTodayImage = computed(() => {
   return listAstrobinIOTDRef.value.slice().sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
   });
 });
-const isLoading = computed(() => store.state.message.loading);
+
 </script>
 
 <style scoped>
