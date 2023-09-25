@@ -18,8 +18,6 @@ defineProps({
           &#169; {{ user }}
         </h4>
       </div>
-
-
     </v-row>
   </v-parallax>
 </template>
