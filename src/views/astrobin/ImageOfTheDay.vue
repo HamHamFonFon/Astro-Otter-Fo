@@ -10,7 +10,6 @@
         color="transparent"
         v-if="!isLoading"
     >
-
       <TitleParallax :url-image="astrobinIOTD.urlHd" :title="astrobinIOTD.title" :user="astrobinIOTD.user"></TitleParallax>
 
       <v-toolbar height="30">
@@ -40,7 +39,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
 
 import {useStore} from "vuex";
 import * as WS from "@/repositories/astrobin/iotd/webservice";
@@ -48,7 +47,7 @@ import {ImagesWs} from "@/repositories/astrobin/images";
 const store = useStore();
 
 const astrobinIOTDRef = reactive({});
-const listAstrobinIOTDRef = reactive([]);
+const listAstrobinIOTDRef = ref([]);
 
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitleParallax  = defineAsyncComponent(() => import('@/components/Content/TitleParallax.vue'));
@@ -80,30 +79,34 @@ const fetchImageOfTheDay = async () => {
 
 }
 const fetchListImagesOfTheDay = async () => {
-  const wsResponse = await WS.GET_TODAY_WS(1, 16);
-  wsResponse.forEach(response => {
-    const wsResponseImage = ImagesWs.GET_IMAGE_BY_ID(response.astrobinImageId);
-    wsResponseImage.then(r => {
-      let astrobinIOTD = {
-        id: r.astrobin_id,
-        image: r.urlRegular,
-        lazyImage: r.urlGallery,
-        date: response.date,
-        title: r.title,
-        user: r.user,
-        views: r.views,
-        likes: r.likes
-      };
-      listAstrobinIOTDRef.push(astrobinIOTD)
+  try {
+    const wsResponse = await WS.GET_TODAY_WS(1, 16);
+    wsResponse.forEach(response => {
+      const wsResponseImage = ImagesWs.GET_IMAGE_BY_ID(response.astrobinImageId);
+      wsResponseImage.then(r => {
+        let astrobinIOTD = {
+          id: r.astrobin_id,
+          image: r.urlRegular,
+          lazyImage: r.urlGallery,
+          date: response.date,
+          title: r.title,
+          user: r.user,
+          views: r.views,
+          likes: r.likes
+        };
+        listAstrobinIOTDRef.value.push(astrobinIOTD)
+      });
     });
-  });
-}
+  } catch (error) {
+    store.commit('message/setMessage', {
+      'loading': true,
+      'type': 'error',
+      'message': error.message,
+      'httpCode': error.code
+    }, { root: true })
+  }
 
-// const sortedTodayImagesByDate = () => {
-//   return [...listAstrobinIOTDRef].sort((a, b) => {
-//     return new Date(b.date) - new Date(a.date);
-//   });
-// };
+}
 
 onBeforeMount(() => {
   store.commit('message/setMessage', {
@@ -120,7 +123,11 @@ onMounted(() => {
 });
 
 const astrobinIOTD = computed(() => astrobinIOTDRef.value);
-const sortedTodayImage = computed(() => listAstrobinIOTDRef /*sortedTodayImagesByDate*/);
+const sortedTodayImage = computed(() => {
+  return listAstrobinIOTDRef.value.slice().sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+});
 const isLoading = computed(() => store.state.message.loading);
 </script>
 
