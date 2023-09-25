@@ -21,16 +21,6 @@
             placeholder="Filter by name (e.q. 'Orion', 'Andromeda')..."
           />
 
-          <v-container class="align-center" align="center">
-            <v-radio-group inline>
-              <v-radio label="Radio 1" value="1"></v-radio>
-              <v-radio label="Radio 2" value="2"></v-radio>
-              <v-radio label="Radio 3" value="3"></v-radio>
-              <v-radio label="Radio 4" value="4"></v-radio>
-            </v-radio-group>
-          </v-container>
-
-
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
