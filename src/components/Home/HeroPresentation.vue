@@ -31,16 +31,14 @@
             >
           </v-col>
           <v-col cols="12" sm="6">
-            <router-link to="catalogs">
               <v-btn
-                  variant="outlined"
                   block
                   size="x-large"
-                  class="text-primary"
+                  variant="outlined"
+                  class="text-white mr-5"
                   color="grey"
                 >Browse catalogs
               </v-btn>
-            </router-link>
           </v-col>
         </v-row>
       </v-sheet>
