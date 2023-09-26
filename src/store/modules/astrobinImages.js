@@ -45,89 +45,15 @@ const actions = {
             }, { root: true });
         }
     },
-    /**
-     *
-     * @param commit
-     * @param formData
-     * @param offset
-     * @param limit
-     * @returns {Promise<void>}
-     */
-    async fetchImages({ commit }, { formData, offset, limit}) {
-        if (0 === offset) {
-            commit('resetState');
-        }
 
-        commit('message/setMessage', {
-            'loading': true,
-            'type': 'warning',
-            'message': 'Load images from Astrobin API',
-            'httpCode': null
-        }, { root: true });
-
-        try {
-            console.log(formData)
-            // let params = {};
-            // params[formData.type] = formData.term;
-            let params = {
-                'title__icontains': 'm42'
-            }
-            const wsResponse = await ImagesWs.GET_IMAGES_BY(params, offset, limit);
-            commit('message/setMessage', {
-                'loading': true,
-                'type': 'success',
-                'message': 'Images loaded',
-                'httpCode': 200
-            }, { root: true });
-
-            // WS response
-            commit('setTotalCount', wsResponse.totalCount);
-            commit('setOffset', wsResponse.offset);
-            wsResponse.listImages.forEach(r => {
-                commit('addImage', {
-                    id: r.astrobin_id,
-                    image: r.urlRegular,
-                    lazyImage: r.urlGallery,
-                    date: r.date,
-                    title: r.title,
-                    user: r.user,
-                    views: r.views,
-                    likes: r.likes
-                });
-            });
-
-            // Display
-            commit('message/setLoading', false, { root: true });
-
-        } catch (error) {
-            commit('message/setMessage', {
-                'loading': true,
-                'type': 'error',
-                'message': error.message,
-                'httpCode': error.code
-            }, { root: true });
-        }
-    }
 };
 
 const mutations = {
-    resetState: (state) => {
-        const s = initialState();
-        Object.keys(s).forEach(key => {
-            state[key] = s[key];
-        })
-    },
-    addImage: (state, image) => {
-        state.images.push(image);
-    },
     updateImage: (state, newImage) => {
         state.images = [newImage];
     },
     setTotalCount: (state, totalCount) => {
         state.totalCount = totalCount;
-    },
-    setOffset: (state, offset) => {
-        state.offset = offset;
     },
 }
 
