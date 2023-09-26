@@ -86,9 +86,6 @@ onMounted(() => {
  * @returns {Promise<void>}
  */
 const fetchConstellation = async () => {
-  if (88 === store.getters['constellations/getTotalCount']) {
-    constellationRef.value = store.getters['constellations/getConstellationById'](constellationId.value);
-  } else {
     try {
       constellationRef.value = await ConstellationWs.GET_CONSTELLATION_ITEM(constellationId.value);
     } catch (err) {
@@ -98,7 +95,6 @@ const fetchConstellation = async () => {
         'message': err.message,
         'httpCode': err.code
       }, { root: true })
-    }
   }
   store.commit('message/setLoading', false);
 };

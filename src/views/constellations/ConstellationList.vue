@@ -41,11 +41,12 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
 import {useStore} from "vuex";
 const store = useStore();
 
 import backgroundConstellationImage from '@/assets/images/background/constellations.jpg';
+import {ConstellationWs} from "@/repositories/api/constellations";
 
 // Components
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
@@ -57,16 +58,19 @@ const ConstellationCard = defineAsyncComponent(() => import('@/components/Items/
 
 // Datas
 const backgroundImage = ref(backgroundConstellationImage);
+const constellationsRef = reactive([]);
 const filterConstellation = ref(null);
 
 /**
  * Before mount, set Store
  */
 onBeforeMount(() => {
-  if (88 !== store.getters['constellations/getTotalCount']) {
-    store.commit('message/setLoading', false);
-    store.commit('constellations/setTotalCount', 0);
-  }
+  store.commit('message/setMessage', {
+    'loading': true,
+    'type': 'warning',
+    'message': 'Loading constellations list...',
+    'httpCode': null
+  }, { root: true });
 })
 
 /**
@@ -79,19 +83,39 @@ onMounted(() => {
 /**
  * Functions
  */
-const fetchListConstellations = () => {
-  if (0 === store.getters['constellations/getAllConstellations'].length) {
-    store.dispatch('constellations/fetchListConstellations');
+const fetchListConstellations = async () => {
+  try {
+    const constellationResponse = await ConstellationWs.GET_CONSTELLATION_LIST();
+    constellationResponse.forEach(c => constellationsRef.push(c));
+    store.commit('message/setMessage', {
+      'type': 'success',
+      'loading': false,
+      'message': 'Constellations loaded',
+      'httpCode': 200
+    }, { root: true });
+  } catch (error) {
+    store.commit('message/setMessage', {
+      'loading': true, // CHANGE IT
+      'type': 'error',
+      'message': error.message,
+      'httpCode': error.code
+    }, { root: true });
   }
+
+  setTimeout(function() {
+    store.commit('message/setLoading', false);
+  }, 1000);
 }
 
 const isLoading = computed(() => store.state.message.loading);
 const constellations = computed(() => {
   const text = filterConstellation.value ?? '';
+  const listConstellations = constellationsRef;
+  [...listConstellations].sort((a, b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0))
   if (2 < text.length) {
-    return store.state.constellations.constellations.filter(c => c.alt.toLowerCase().startsWith(text.toLowerCase()));
+    return listConstellations.filter(c => c.alt.toLowerCase().startsWith(text.toLowerCase()));
   }
-  return store.state.constellations.constellations;
+  return listConstellations;
 });
 </script>
 
