@@ -1,52 +1,46 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <v-form @submit.prevent="submitForm">
     <v-row align="center" justify="center">
-      <v-col cols="12" sm="3">
+      <v-col cols="12" sm="4">
 
         <v-select
           label="Filtering by..."
           v-model="formData.type"
           :items="astrobinFiltersRef"
-          item-value="key"
-          item-title="value"
+          item-value="text"
+          item-title="label"
           variant="outlined"
-          required
           clearable
         ></v-select>
       </v-col>
 
-      <v-col cols="12" sm="4">
+      <v-col cols="12" sm="6">
         <v-text-field
-            type="search"
-            label="Search terms"
-            v-model="formData.term"
-            variant="outlined"
-            required
-            clearable
+          type="search"
+          label="Search terms"
+          v-model="formData.term"
+          variant="outlined"
+          required
+          clearable
         >
         </v-text-field>
       </v-col>
 
       <v-col cols="12" sm="2">
-        <v-btn type="submit" color="primary text-white" variant="elevated" size="x-large"> Search </v-btn>
-      </v-col>
-
-      <v-col cols="12" sm="3">
-        <v-select
-            label="Sort results by..."
-            v-model="formData.sort"
+        <v-btn
+            type="submit"
+            block
+            size="x-large"
             variant="outlined"
-            required
-            clearable
-            disabled=""
-        ></v-select>
+            class="text-white mr-5"
+            color="grey"
+        > Search </v-btn>
       </v-col>
     </v-row>
-  </form>
+  </v-form>
 </template>
 
 <script setup>
-
 import {ref, toRefs} from "vue";
 import astrobinFilters from '@/configs/astrobinFilters'
 const astrobinFiltersRef = ref(astrobinFilters);

@@ -23,28 +23,40 @@
           <v-container class="text-left">
             <v-sheet elevation="1" class="mx-auto landing-warpper" rounded color="transparent">
               <v-sheet class="pa-3" elevation="0" color="transparent">
-                <v-container>
-                  <h5 v-if="totalCount" class="text-h6 mt-5">Results: {{ totalCount }} images</h5>
-                  <v-row align="center">
-                    <ItemsLists :items-list="sortedImages" :columns="4">
-                      <template v-slot="{ item, index }">
-                        <AstrobinCard v-bind:key="index" :item="item" />
-                      </template>
-                    </ItemsLists>
-                  </v-row>
-                </v-container>
+                <v-row align="left" justify="left">
+                  <v-col cols="12" sm="4">
+                    <h5 v-if="totalCount" class="text-h6 mt-5">Results: {{ totalCount }} images</h5>
+                  </v-col>
+                  <v-col cols="12" sm="4" align="right">
+                    <v-select
+                        label="Sort results by..."
+                        variant="outlined"
+                        required
+                        clearable
+                    ></v-select>
+                  </v-col>
+                </v-row>
+                <v-row align="center">
+                  <ItemsLists :items-list="sortedImages" :columns="4">
+                    <template v-slot="{ item, index }">
+                      <AstrobinCard v-bind:key="index" :item="item" />
+                    </template>
+                  </ItemsLists>
+                </v-row>
+
+                <v-row align="center" justify="center">
+                  <v-btn
+                      prepend-icon="mdi-plus"
+                      size="x-large"
+                      variant="outlined"
+                      class="text-white mr-5"
+                      color="grey"
+                      v-if="totalCount > countItems"
+                      @click="moreItems"
+                  > <span>Show more</span> </v-btn>
+                </v-row>
               </v-sheet>
             </v-sheet>
-
-            <v-row align="center" justify="center">
-              <v-btn
-                  prepend-icon="mdi-plus"
-                  variant="outlined"
-                  primary
-                  v-if="totalCount > countItems"
-                  @click="moreItems"
-              > <span>Show more</span> </v-btn>
-            </v-row>
           </v-container>
         </div>
       </transition>
@@ -71,7 +83,7 @@ import {ImagesWs} from "@/repositories/astrobin/images";
 
 const title = ref('Browse Astrobin API');
 // Pre submit
-const limit = ref(20);
+const limit = ref(5);
 const offset = ref(20);
 const formData = ref({
   type: null,
@@ -99,8 +111,11 @@ const handleFormSubmission = () => {
     let params = {};
     params[formData.value.type] = formData.value.term;
 
+    console.log(
+        params
+    );
     fetchImages(params, offset, limit);
-    store.commit('message/setLoading', false, { root: true });
+    // store.commit('message/setLoading', false, { root: true });
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -125,7 +140,6 @@ const moreItems = () => {
     params[formData.value.type] = formData.value.term;
 
     fetchImages(params, offset, limit);
-    store.commit('message/setLoading', false, {root: true});
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -151,6 +165,7 @@ const fetchImages = async(params, offset, limit) => {
       likes: r.likes
     });
   });
+  store.commit('message/setLoading', false, {root: true});
 }
 
 const isLoading = computed(() => store.state.message.loading);
