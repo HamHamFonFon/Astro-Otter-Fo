@@ -29,22 +29,30 @@
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
 
-              <v-row align="center" justify="center">
-                Results : {{ nbItems }} / {{ totalRef }}
-                <v-divider></v-divider>
-                <v-radio-group inline align="justify" justify v-model="selectedFilter" label="Filtering by type">
-                  <div>
-                    <v-radio label="All" value="all" @change="filteringItemsByType()"></v-radio>
-                  </div>
-                  <div v-for="radio in filtersByType" v-bind:key="radio">
-                    <v-radio :label="radio.label" :value="radio.name" @change="filteringItemsByType"></v-radio>
-                  </div>
-                </v-radio-group>
-                <v-divider></v-divider>
+              <v-row>
+                <v-col cols="12" sm="4" v-for="(array, key) in filtersBy" v-bind:key="key">
+                  <v-select
+                      v-model="selectedFilter[key]"
+                      :label="key"
+                      variant="outlined"
+                      :items="array"
+                      item-title="label"
+                      item-value="name"
+                      @update:modelValue="fetchDsoByConstellation"
+                      clearable
+                  >
+                  </v-select>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12" sm="12">
+                  <span class="text-white">{{ nbItems }} items on {{ totalRef }}</span>
+                </v-col>
               </v-row>
 
               <v-row align="center">
-                <ItemsLists :items-list="items" :columns="5">
+                <ItemsLists :items-list="items" :columns="4">
                   <template v-slot="{ item, index }">
                     <DsoCard v-bind:key="index" :dso="item" />
                   </template>
@@ -88,11 +96,13 @@ import {DsoWs} from "@/repositories/api/dso";
 const constellationId = ref(route.params.constellationId);
 const constellationRef = reactive({});
 // DSO
-const selectedFilter = ref('all');
+const selectedFilter = reactive({});
 const items = ref([]);
 const filtersRef = ref([]);
 const totalRef = ref(0);
 const offset = ref(0);
+const limit = ref(20);
+
 // Button more
 const btnLabel = ref('Show more')
 const btnIcon = ref('mdi-plus');
@@ -136,11 +146,15 @@ const fetchConstellation = async () => {
  */
 const fetchDsoByConstellation = async () => {
   try {
-    const { data, filters, total} = await DsoWs.GET_DSO_LIST({constellation: constellationId.value}, offset.value, 20);
+    let params = {
+      ...{constellation: constellationId.value},
+      ...selectedFilter
+    };
+    const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
     items.value = data;
     filtersRef.value = filters;
     totalRef.value = total;
-    offset.value += 20;
+    offset.value = 20;
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -156,7 +170,11 @@ const showMoreItems = async  () => {
   btnLabel.value = 'Load data...';
   btnLoading.value = true;
   try {
-    const { data, filters, total} = await DsoWs.GET_DSO_LIST({constellation: constellationId.value}, offset.value, 20);
+    let params = {
+      ...{constellation: constellationId.value},
+      ...selectedFilter
+    };
+    const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, offset.value, limit.value);
     items.value = [...items.value, ...data]
     filtersRef.value = filters;
     totalRef.value = total;
@@ -173,17 +191,18 @@ const showMoreItems = async  () => {
   btnLoading.value = false;
 }
 
-const filteringItemsByType = () => {
-  if ('all' === selectedFilter.value) {
-    selectedFilter.value = '';
-  }
-  items.value.filter((item) => 'type.'+ item.type === selectedFilter.value);
-}
-
 const isLoading = computed(() => store.state.message.loading);
 const constellationCover = computed(() =>  require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`));
 const nbItems = computed(() => items.value.length)
-const filtersByType = computed(() => filtersRef.value['type'])
+const filtersBy = computed(() => {
+  return Object.keys(filtersRef.value)
+    .filter((type) => type !== 'constellation')
+    .reduce((obj, key) => {
+      return Object.assign(obj, {
+        [key]: filtersRef.value[key]
+      });
+    }, {})
+});
 </script>
 
 <style scoped>
