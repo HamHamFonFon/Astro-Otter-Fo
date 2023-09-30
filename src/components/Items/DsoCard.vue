@@ -69,10 +69,10 @@ const props = defineProps({
 })
 const { dso } = toRefs(props);
 
-const imageCover = computed(() => (props.dso.astrobinUser) ? props.dso.astrobin.url_regular: defaultImage );
-const imageLazyCover = computed(() => (props.dso.astrobinUser) ? props.dso.astrobin.url_gallery: defaultImage );
-const title = computed(() => props.dso.fullNameAlt );
-const otherDesigs = computed(() => props.dso.desigs./*filter((v,i,a) => {
+const imageCover = computed(() => (dso.value.astrobinUser) ? dso.value.astrobin.url_regular: defaultImage );
+const imageLazyCover = computed(() => (dso.value.astrobinUser) ? dso.value.astrobin.url_gallery: defaultImage );
+const title = computed(() => dso.value.fullNameAlt );
+const otherDesigs = computed(() => dso.value.desigs./*filter((v,i,a) => {
   if (props.dso.name === v) {
     a.splice(i, 1);
     return true;
