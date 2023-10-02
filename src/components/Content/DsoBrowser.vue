@@ -15,7 +15,6 @@
                 item-value="name"
                 @update:modelValue="fetchDsoList"
                 clearable
-                :disabled="('magnitude' === key)"
             >
             </v-select>
           </v-col>
@@ -23,7 +22,7 @@
 
         <!-- Sorts -->
         <v-row>
-          <v-col cols="12" sm="12">
+          <v-col align-self="start" cols="6" sm="6">
             <span class="text-white">{{ nbItems }} items on {{ totalRef }}</span>
           </v-col>
         </v-row>
@@ -32,7 +31,7 @@
         <v-row align="center">
           <ItemsLists :items-list="items" :columns="4">
             <template v-slot="{ item, index }">
-              <DsoCard v-bind:key="index" :dso="item" />
+              <DsoCard v-bind:key="index" :dso="item" v-if="item" />
             </template>
           </ItemsLists>
         </v-row>
@@ -54,10 +53,13 @@
 </template>
 
 <script setup>
+import { saveShareLink } from '@/services/saveShareLink';
 import {computed, defineAsyncComponent, onMounted, reactive, ref, toRefs} from "vue";
 import {useStore} from "vuex";
 import {DsoWs} from "@/repositories/api/dso";
 
+import {useRoute} from "vue-router";
+const route = useRoute();
 const store = useStore();
 
 // Components
@@ -73,7 +75,7 @@ const totalRef = ref(0);
 
 const selectedFilters = reactive({});
 const filtersRef = ref([]);
-
+const urlShare = ref(null);
 const btnLabel = ref('Show more')
 const btnIcon = ref('mdi-plus');
 const btnLoading = ref(false);
@@ -100,15 +102,20 @@ onMounted(() => {
 const fetchDsoList = async () => {
   try {
     const defaultFilters = {[defaultFilterName.value]: defaultFilterValue.value}
+    const queryParams = route.query;
+    const locale = {locale: 'en'};
     let params = {
       ...defaultFilters,
-      ...selectedFilters
+      ...queryParams,
+      ...selectedFilters,
+      ...locale
     };
-    const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
+    const {data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
     items.value = data;
     filtersRef.value = filters;
     totalRef.value = total;
     offset.value = 20;
+    urlShare.value = saveShareLink(route.path, params);
   } catch (error) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -117,16 +124,16 @@ const fetchDsoList = async () => {
       'httpCode': error.code
     }, { root: true })
   }
-  //store.commit('message/setLoading', false);
+  store.commit('message/setLoading', false);
 };
 
 const showMoreItems = async  () => {
   btnLabel.value = 'Load data...';
   btnLoading.value = true;
   try {
-    const defaultFilters = {};
+    const defaultFilters = {[defaultFilterName.value]: defaultFilterValue.value}
     let params = {
-      defaultFilters,
+      ...defaultFilters,
       ...selectedFilters
     };
     const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, offset.value, limit.value);
@@ -146,6 +153,7 @@ const showMoreItems = async  () => {
   btnLoading.value = false;
 };
 
+
 const getCountColumns = (filters) => 12/Object.keys(filters).length;
 
 // Computed
@@ -159,7 +167,14 @@ const filtersBy = computed(() => {
         });
       }, {})
 });
-
+// const itemsSorted = computed(() => {
+//   return [...items.value].sort(function(a, b) {
+//     return a.id.localeCompare(b.id, undefined, {
+//       numeric: true,
+//       sensitivity: 'base'
+//     });
+//   });
+// })
 </script>
 
 <style scoped>

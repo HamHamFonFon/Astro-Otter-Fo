@@ -31,7 +31,7 @@
 <!--    </router-link>-->
 
     <v-card-text v-if="dso.description">
-      {{ dso.description.substring(0, 20) }}&hellip;
+      {{ dso.description.substring(0, 60) }}&hellip;
     </v-card-text>
     <v-card-actions color="">
       <v-btn text>

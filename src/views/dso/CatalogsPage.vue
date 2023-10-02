@@ -23,6 +23,7 @@
 <script setup>
 import {computed, defineAsyncComponent, onBeforeMount} from "vue";
 import {useStore} from "vuex";
+
 const store = useStore();
 
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
@@ -32,6 +33,8 @@ const DsoBrowser = defineAsyncComponent(() => import('@/components/Content/DsoBr
 onBeforeMount(() => {
   store.commit('message/setLoading', false);
 });
+
+
 
 const isLoading = computed(() => store.state.message.loading);
 </script>

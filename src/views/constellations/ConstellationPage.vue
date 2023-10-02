@@ -33,6 +33,9 @@
 
 <script setup>
 import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
+import { useStore} from "vuex";
+import {useRoute} from "vue-router";
+
 const store = useStore();
 const route = useRoute();
 
@@ -40,8 +43,7 @@ const Message = defineAsyncComponent(() => import('@/components/Layout/Message.v
 const TitleImageHero = defineAsyncComponent(() => import("@/components/Content/TitleImageHero.vue"));
 const DsoBrowser = defineAsyncComponent(() => import('@/components/Content/DsoBrowser.vue'))
 
-import { useStore} from "vuex";
-import {useRoute} from "vue-router";
+
 import {ConstellationWs} from "@/repositories/api/constellations";
 
 // Constellation
