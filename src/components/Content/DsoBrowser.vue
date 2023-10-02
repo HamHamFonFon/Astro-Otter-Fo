@@ -5,7 +5,7 @@
 
         <!--  Filters-->
         <v-row>
-          <v-col cols="12" sm="4" v-for="(array, key) in filtersBy" v-bind:key="key">
+          <v-col cols="12" :sm="getCountColumns(filtersBy)" v-for="(array, key) in filtersBy" v-bind:key="key">
             <v-select
                 v-model="selectedFilters[key]"
                 :label="key"
@@ -15,6 +15,7 @@
                 item-value="name"
                 @update:modelValue="fetchDsoList"
                 clearable
+                :disabled="('magnitude' === key)"
             >
             </v-select>
           </v-col>
@@ -104,7 +105,6 @@ const fetchDsoList = async () => {
       ...selectedFilters
     };
     const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
-
     items.value = data;
     filtersRef.value = filters;
     totalRef.value = total;
@@ -117,7 +117,7 @@ const fetchDsoList = async () => {
       'httpCode': error.code
     }, { root: true })
   }
-  store.commit('message/setLoading', false);
+  //store.commit('message/setLoading', false);
 };
 
 const showMoreItems = async  () => {
@@ -144,7 +144,9 @@ const showMoreItems = async  () => {
     }, { root: true })
   }
   btnLoading.value = false;
-}
+};
+
+const getCountColumns = (filters) => 12/Object.keys(filters).length;
 
 // Computed
 const nbItems = computed(() => items.value.length);
@@ -157,6 +159,7 @@ const filtersBy = computed(() => {
         });
       }, {})
 });
+
 </script>
 
 <style scoped>
