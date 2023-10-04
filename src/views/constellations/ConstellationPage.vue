@@ -28,10 +28,8 @@
         <DsoBrowser defaultFilterName="constellation" :defaultFilterValue="constellationId"></DsoBrowser>
 
         <SkyMap
-          :centerMap="constellationCenterMap"
           :constellationId="constellationRef.value.id"
           :constellationGeoData="constellationGeoJson"
-          :itemsGeoData="null"
         ></SkyMap>
       </v-container>
     </v-sheet>
@@ -39,8 +37,7 @@
 </template>
 
 <script setup>
-
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, watch} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 
@@ -53,7 +50,7 @@ const DsoBrowser = defineAsyncComponent(() => import('@/components/Content/DsoBr
 const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vue'))
 
 import { geoJsonServices } from "@/services/geojson";
-import {ConstellationWs} from "@/repositories/api/constellations";
+import { ConstellationWs } from "@/repositories/api/constellations";
 
 // Constellation
 const constellationId = ref(route.params.constellationId);
@@ -79,7 +76,7 @@ onMounted(() => {
 const fetchConstellation = async () => {
     try {
       constellationRef.value = await ConstellationWs.GET_CONSTELLATION_ITEM(constellationId.value);
-      setTimeout(() =>  store.commit('message/setLoading', false), 500);
+      store.commit('message/setLoading', false);
     } catch (err) {
       store.commit('message/setMessage', {
         'loading': true,
@@ -90,14 +87,12 @@ const fetchConstellation = async () => {
   }
 };
 
-
 const isLoading = computed(() => store.state.message.loading);
 const constellationCover = computed(() => require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`));
 
 // GeoData
-const constellationCenterMap = computed(() => constellationRef.value.geometry.coordinates)
+// const constellationCenterMap = computed(() => constellationRef.value.geometry.coordinates)
 const constellationGeoJson = computed(() => geoJsonServices.geoJsonConstellation(constellationRef.value));
-
 </script>
 
 <style scoped>

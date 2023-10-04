@@ -50,7 +50,6 @@ import {ConstellationWs} from "@/repositories/api/constellations";
 
 // Components
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
-
 const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'));
 const FilterList = defineAsyncComponent(() => import('@/components/Content/FilterList.vue'));
 const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));

@@ -20,25 +20,28 @@ const COLOR_DN = '#5E35B1';
 const COLOR_POS = '#cccccc';
 const DEFAULT = '#ffffff';
 
-export const color = {
-    gg: COLOR_CLUST_GAL,
-    g: COLOR_GAL_G, // generic
-    s: COLOR_GAL_S, // spirale
-    s0: COLOR_GAL_SO, // lenticulaire
-    sd: COLOR_GAL_SD, // naine
-    e: COLOR_GAL_E, // eliptique
-    i: COLOR_GAL_I, // irreguliere
-    oc: COLOR_OC,
-    gc: COLOR_GC,
-    en: COLOR_EN,
-    bn: COLOR_BN,
-    bpn: DEFAULT,
-    sfr: COLOR_SFR,
-    rn: COLOR_RN,
-    pn: COLOR_PN,
-    snr: COLOR_SNR,
-    dn: COLOR_DN,
-    pos: COLOR_POS,
-    sc: DEFAULT,
-    vn: DEFAULT
+export const dsoColors = {
+    // Galaxies
+    gg: {shape: "circle", fill: COLOR_CLUST_GAL},
+    g: {shape: "ellipse", fill: COLOR_GAL_G},  // generic
+    s: {shape: "ellipse", fill: COLOR_GAL_S}, // spirale
+    s0: {shape: "ellipse", fill: COLOR_GAL_SO}, // lenticulaire
+    sd: {shape: "ellipse", fill: COLOR_GAL_SD}, // naine
+    e: {shape: "ellipse", fill: COLOR_GAL_E}, // eliptique
+    i: {shape: "ellipse", fill: COLOR_GAL_I}, // irreguliere
+    // Cluster
+    oc: {shape: "circle", fill: COLOR_OC, stroke: COLOR_OC, width: 1.5},
+    gc: {shape: "circle", fill: COLOR_GC, stroke: COLOR_GC, width: 2},
+    // Nebula
+    en: {shape: "square", fill: COLOR_EN},
+    rn: {shape: "square", fill: COLOR_RN},
+    pn: {shape: "diamond", fill: COLOR_PN},
+    snr: {shape: "diamond", fill: COLOR_SNR},
+    sfr: {shape: "square", fill: COLOR_SFR, stroke: COLOR_SFR, width: 2},
+    bn: {shape: "square", fill: COLOR_BN, stroke: COLOR_BN, width: 2}, // Generic bright nebula
+    dn: {shape: "square", fill: COLOR_DN, stroke: COLOR_DN, width: 2},
+    pos: {shape: "marker", fill: COLOR_POS, stroke: COLOR_POS, width: 1.5},
+    sc: {shape: "marker", fill: DEFAULT, stroke: DEFAULT, width: 1.5},
+    vn: {shape: "marker", fill: DEFAULT, stroke: DEFAULT, width: 1.5},
+    bpn: {shape: "marker", fill: DEFAULT, stroke: DEFAULT, width: 1.5}
 };

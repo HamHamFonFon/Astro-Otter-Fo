@@ -88,4 +88,10 @@ const otherDesigs = computed(() => dso.value.desigs./*filter((v,i,a) => {
 .v-img {
   border-bottom: solid #1ed760;
 }
+a {
+  text-decoration: none;
+}
+.v-img:hover {
+  cursor: pointer;
+}
 </style>

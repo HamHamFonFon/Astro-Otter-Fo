@@ -34,8 +34,6 @@ onBeforeMount(() => {
   store.commit('message/setLoading', false);
 });
 
-
-
 const isLoading = computed(() => store.state.message.loading);
 </script>
 

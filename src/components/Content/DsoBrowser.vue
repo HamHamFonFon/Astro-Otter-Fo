@@ -98,6 +98,15 @@ const props = defineProps({
 });
 const { defaultFilterName, defaultFilterValue} = toRefs(props);
 
+// onBeforeMount(() => {
+//   store.commit('message/setMessage', {
+//     'loading': true,
+//     'type': 'warning',
+//     'message': 'Loading objets',
+//     'httpCode': null
+//   });
+// })
+
 // On mount
 onMounted(() => {
   fetchDsoList();
@@ -121,6 +130,7 @@ const fetchDsoList = async () => {
     totalRef.value = total;
     offset.value = 20;
     urlShare.value = saveShareLink(route.path, params);
+    // store.commit('message/setLoading', false);
   } catch (error) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -129,7 +139,6 @@ const fetchDsoList = async () => {
       'httpCode': error.code
     }, { root: true })
   }
-  store.commit('message/setLoading', false);
 };
 
 const showMoreItems = async  () => {
