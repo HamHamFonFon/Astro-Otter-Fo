@@ -1,6 +1,5 @@
 export const saveShareLink = (routePath, params) => {
     Object.entries(params).forEach(([key, val])  =>
-        (val && typeof val === 'object') && removeEmpty(val) ||
         (val === null || val === "") && delete params[key]
     );
 

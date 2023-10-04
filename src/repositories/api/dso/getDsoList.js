@@ -3,7 +3,6 @@ import axiosApi from "@/services/axiosApi";
 import {ENDPOINT} from "@/repositories/api/dso/endpoint";
 
 export const GET_DSO_LIST = async (params, offset, limit) => {
-
     offset = offset ?? 0;
     limit = limit ?? 20;
 

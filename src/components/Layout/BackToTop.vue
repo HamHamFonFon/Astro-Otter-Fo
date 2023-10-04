@@ -1,15 +1,15 @@
 <template>
-  <div class="backToTop" :class="{ visible: isVisible }" @click="scrollToTop">
+  <v-btn class="backToTop" :class="{ visible: isVisible }" @click="scrollToTop" :color="backgroundColor">
     <v-icon
       small
       color="green"
       icon="mdi-arrow-up"
     ></v-icon>
-  </div>
+  </v-btn>
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 
 const isVisible = ref(false);
 
@@ -27,6 +27,7 @@ const handleScroll = () => {
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
+const backgroundColor = computed(() => (screen.width <= 760) ? 'primary': 'transparent')
 </script>
 
 <style scoped>
@@ -35,7 +36,7 @@ const scrollToTop = () => {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  bottom: 2em;
+  bottom: 1em;
   right: 5px;
   z-index: 999;
   padding: 0.5rem;

@@ -5,7 +5,7 @@ const COLOR_GAL_SO = '#E53935';
 const COLOR_GAL_SD = '#F44336';
 const COLOR_GAL_E = '#EF5350';
 const COLOR_GAL_I = '#E57373';
-const COLOR_GALAXY = '#ff0000'; // Galaxies
+// const COLOR_GALAXY = '#ff0000'; // Galaxies
 
 const COLOR_OC = '#FF4626'; // Open cluster
 const COLOR_GC = '#ff9900'; // Global Cluster

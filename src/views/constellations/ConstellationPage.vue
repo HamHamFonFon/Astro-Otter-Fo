@@ -26,14 +26,22 @@
 
         <!--  Items-->
         <DsoBrowser defaultFilterName="constellation" :defaultFilterValue="constellationId"></DsoBrowser>
+
+        <SkyMap
+          :centerMap="constellationCenterMap"
+          :constellationId="constellationRef.value.id"
+          :constellationGeoData="constellationGeoJson"
+          :itemsGeoData="null"
+        ></SkyMap>
       </v-container>
     </v-sheet>
   </transition>
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
-import { useStore} from "vuex";
+
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, watch} from "vue";
+import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 
 const store = useStore();
@@ -42,8 +50,9 @@ const route = useRoute();
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitleImageHero = defineAsyncComponent(() => import("@/components/Content/TitleImageHero.vue"));
 const DsoBrowser = defineAsyncComponent(() => import('@/components/Content/DsoBrowser.vue'))
+const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vue'))
 
-
+import { geoJsonServices } from "@/services/geojson";
 import {ConstellationWs} from "@/repositories/api/constellations";
 
 // Constellation
@@ -70,6 +79,7 @@ onMounted(() => {
 const fetchConstellation = async () => {
     try {
       constellationRef.value = await ConstellationWs.GET_CONSTELLATION_ITEM(constellationId.value);
+      setTimeout(() =>  store.commit('message/setLoading', false), 500);
     } catch (err) {
       store.commit('message/setMessage', {
         'loading': true,
@@ -78,11 +88,16 @@ const fetchConstellation = async () => {
         'httpCode': err.code
       }, { root: true })
   }
-  store.commit('message/setLoading', false);
 };
 
+
 const isLoading = computed(() => store.state.message.loading);
-const constellationCover = computed(() =>  require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`));
+const constellationCover = computed(() => require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`));
+
+// GeoData
+const constellationCenterMap = computed(() => constellationRef.value.geometry.coordinates)
+const constellationGeoJson = computed(() => geoJsonServices.geoJsonConstellation(constellationRef.value));
+
 </script>
 
 <style scoped>

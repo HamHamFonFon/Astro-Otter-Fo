@@ -46,9 +46,9 @@ const routes = [
         }
     },
     {
-        path: '/catalogs/:dtoId',
+        path: '/catalog/:id',
         name: 'dso',
-        // component: () => import(''),
+        component: () => import('@/views/dso/DsoPage.vue'),
         meta: {
             layout: 'page',
             key: "menu.dso",

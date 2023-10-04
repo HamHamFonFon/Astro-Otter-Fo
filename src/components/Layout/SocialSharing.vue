@@ -123,7 +123,7 @@ const resolveFunction = (funcName, param) => {
 .hover-button {
   position: fixed;
   transition: all 0.3s ease;
-  bottom: 100px;
+  bottom: 5em;
   right: 5px;
   z-index: 999;
   padding: 0.5rem;
@@ -140,7 +140,7 @@ const resolveFunction = (funcName, param) => {
 .hovered-buttons {
   z-index: 999;
   position: fixed;
-  bottom: 150px;
+  bottom: 6em;
   right: 5px;
 }
 </style>

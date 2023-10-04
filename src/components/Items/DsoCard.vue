@@ -3,7 +3,7 @@
     class="ma-5"
     color="secondary"
   >
-<!--    <router-link :to="{ name: 'dso', params: { dtoId: item.id } }">-->
+    <router-link :to="{ name: 'dso', params: { id: dso.id } }">
       <v-img
         :src="imageCover"
         :lazy-src="imageLazyCover"
@@ -28,7 +28,7 @@
           {{ otherDesigs }}
         </v-card-subtitle>
       </v-img>
-<!--    </router-link>-->
+    </router-link>
 
     <v-card-text v-if="dso.description">
       {{ dso.description.substring(0, 60) }}&hellip;

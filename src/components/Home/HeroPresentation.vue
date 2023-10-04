@@ -31,6 +31,7 @@
             >
           </v-col>
           <v-col cols="12" sm="6">
+            <router-link :to="{name: 'catalogs'}">
               <v-btn
                   block
                   size="x-large"
@@ -39,6 +40,7 @@
                   color="grey"
                 >Browse catalogs
               </v-btn>
+            </router-link>
           </v-col>
         </v-row>
       </v-sheet>

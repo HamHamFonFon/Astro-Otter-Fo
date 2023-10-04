@@ -47,20 +47,25 @@
           ></BtnMoreItems>
         </v-row>
 
+        <div :data-geojson="JSON.stringify(dsoGeoJson)"></div>
+
       </v-container>
     </v-sheet>
   </v-sheet>
 </template>
 
 <script setup>
-import { saveShareLink } from '@/services/saveShareLink';
 import {computed, defineAsyncComponent, onMounted, reactive, ref, toRefs} from "vue";
-import {useStore} from "vuex";
-import {DsoWs} from "@/repositories/api/dso";
-
 import {useRoute} from "vue-router";
+import {useStore} from "vuex";
+
 const route = useRoute();
 const store = useStore();
+
+// Services
+import { saveShareLink } from '@/services/saveShareLink';
+import {DsoWs} from "@/repositories/api/dso";
+import { geoJsonServices } from '@/services/geojson';
 
 // Components
 const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
@@ -153,7 +158,6 @@ const showMoreItems = async  () => {
   btnLoading.value = false;
 };
 
-
 const getCountColumns = (filters) => 12/Object.keys(filters).length;
 
 // Computed
@@ -167,14 +171,7 @@ const filtersBy = computed(() => {
         });
       }, {})
 });
-// const itemsSorted = computed(() => {
-//   return [...items.value].sort(function(a, b) {
-//     return a.id.localeCompare(b.id, undefined, {
-//       numeric: true,
-//       sensitivity: 'base'
-//     });
-//   });
-// })
+const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso(items.value))
 </script>
 
 <style scoped>
