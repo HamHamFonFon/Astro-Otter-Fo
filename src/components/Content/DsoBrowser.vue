@@ -5,12 +5,12 @@
 
         <!--  Filters-->
         <v-row>
-          <v-col cols="12" :sm="getCountColumns(filtersBy)" v-for="(array, key) in filtersBy" v-bind:key="key">
+          <v-col cols="12" :sm="getCountColumns(filtersBy)" v-for="(filtersByTypeData, type) in filtersBy" v-bind:key="type">
             <v-select
-                v-model="selectedFilters[key]"
-                :label="key"
+                v-model="selectedFilters[type]"
+                :label="type"
                 variant="outlined"
-                :items="array"
+                :items="filtersByTypeData"
                 item-title="label"
                 item-value="name"
                 @update:modelValue="fetchDsoList"
@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onMounted, reactive, ref, toRefs} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, toRefs} from "vue";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
 
@@ -78,7 +78,7 @@ const offset = ref(0);
 const limit = ref(20);
 const totalRef = ref(0);
 
-const selectedFilters = reactive({});
+const selectedFilters = ref({});
 const filtersRef = ref([]);
 const urlShare = ref(null);
 const btnLabel = ref('Show more')
@@ -98,14 +98,9 @@ const props = defineProps({
 });
 const { defaultFilterName, defaultFilterValue} = toRefs(props);
 
-// onBeforeMount(() => {
-//   store.commit('message/setMessage', {
-//     'loading': true,
-//     'type': 'warning',
-//     'message': 'Loading objets',
-//     'httpCode': null
-//   });
-// })
+onBeforeMount(() => {
+  selectedFilters.value = route.query;
+})
 
 // On mount
 onMounted(() => {
@@ -116,12 +111,10 @@ onMounted(() => {
 const fetchDsoList = async () => {
   try {
     const defaultFilters = {[defaultFilterName.value]: defaultFilterValue.value}
-    const queryParams = route.query;
     const locale = {locale: 'en'};
     let params = {
       ...defaultFilters,
-      ...queryParams,
-      ...selectedFilters,
+      ...selectedFilters.value,
       ...locale
     };
     const {data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
@@ -148,8 +141,9 @@ const showMoreItems = async  () => {
     const defaultFilters = {[defaultFilterName.value]: defaultFilterValue.value}
     let params = {
       ...defaultFilters,
-      ...selectedFilters
+      ...selectedFilters.value
     };
+
     const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, offset.value, limit.value);
     items.value = [...items.value, ...data]
     filtersRef.value = filters;
