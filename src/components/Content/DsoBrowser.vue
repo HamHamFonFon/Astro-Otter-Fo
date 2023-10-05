@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, toRefs} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, toRefs} from "vue";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
 

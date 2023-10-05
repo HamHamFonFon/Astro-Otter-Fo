@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "core-js": "^3.32.1",
+    "d3-celestial": "^0.7.35",
     "vue": "^3.2.13",
     "vue-router": "^4.2.4",
     "vue3-mobile-detection": "^1.0.5",
