@@ -20,10 +20,8 @@
             <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
               <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
             </v-col>
-          </v-row>
-          <v-row class="card-shadow flex-grow-0" dense>
-            <v-col cols="12" xl="6">
-              <DsoAstrobinCard v-if="null !== dsoCover" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
+            <v-col cols="12" xl="6" v-if="null !== dsoCover" >
+              <DsoAstrobinCard :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
             </v-col>
             <v-col cols="12" xl="6">
               <SkyMap
@@ -123,7 +121,7 @@ const dsoData = computed(() => {
     {icon: 'mdi-account-supervisor', label: 'Discover', value: dsoRef.value.discover},
     {icon: 'mdi-calendar-alert', label: 'Year', value: dsoRef.value.discoverYear},
     {icon: 'mdi-update', label: 'Last update', value: convertDate(dsoRef.value.updatedAt.timestamp)},
-  ].filter(d => d.value !== '' || undefined !== d.value)
+  ].filter(d => d.value !== '' && null !== d.value && undefined !== d.value)
 });
 
 

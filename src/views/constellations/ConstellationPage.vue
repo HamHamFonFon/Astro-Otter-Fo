@@ -25,6 +25,9 @@
         </v-row>
 
         <!--  Items-->
+        <!--        TODO : SEPARE in DsoBrowser into two components : -->
+        <!--         - One for filters-->
+        <!--         - seconds for list-->
         <DsoBrowser defaultFilterName="constellation" :defaultFilterValue="constellationId"></DsoBrowser>
 
         <SkyMap

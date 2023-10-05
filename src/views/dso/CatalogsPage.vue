@@ -13,6 +13,9 @@
         v-if="!isLoading"
     >
       <v-container class="text-left">
+<!--        TODO : SEPARE in DsoBrowser into two components : -->
+<!--         - One for filters-->
+<!--         - seconds for list-->
         <DsoBrowser />
       </v-container>
     </v-sheet>
