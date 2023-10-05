@@ -9,8 +9,8 @@
         color="transparent"
         v-if="!isLoading"
     >
-        <TitleParallax v-if="null !== dsoCover" :title="dso.fullNameAlt" :urlImage="dsoCover" :user="dso.astrobinUser.username"></TitleParallax>
-        <TitlePage v-else :title="dso.fullNameAlt"></TitlePage>
+        <TitleParallax v-if="null !== dsoCover" :title="dsoRef.fullNameAlt" :urlImage="dsoCover" :user="dsoRef.astrobinUser.username"></TitleParallax>
+        <TitlePage v-else :title="dsoRef.fullNameAlt"></TitlePage>
 
         <v-container class="text-left" :style="{margin: 'auto'}">
           <v-row class="flex-0" dense>
@@ -39,7 +39,7 @@
                 </v-list-item>
                 <v-divider></v-divider>
                 <v-card-text>
-                  {{ dso.description }}
+                  {{ dsoRef.description }}
                 </v-card-text>
               </v-card>
             </v-col>
@@ -63,12 +63,12 @@
           </v-row>
 
           <v-img
-              :src="dso.astrobin.url_advanced_skyplot_small"
+              :src="dsoRef.astrobin.url_advanced_skyplot_small"
               cover
           ></v-img>
 
           <SkyMap
-            :constellationId="dso.constellation.id"
+            :constellationId="dsoRef.constellation.id"
             :centerMap="dsoGeoJson.features[0].geometry.coordinates"
             :itemsGeoData="dsoGeoJson"
           ></SkyMap>
@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, watch} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 
@@ -107,13 +107,10 @@ onBeforeMount(() => {
   });
 })
 
-onMounted(() =>  {
-  fetchDso();
-})
-
-const fetchDso = async () => {
+onMounted(async () =>  {
   try {
-    dsoRef.value = await DsoWs.GET_DSO_ITEM(dsoId.value);
+    await fetchDso();
+    await fetchGalleryImages();
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -123,19 +120,32 @@ const fetchDso = async () => {
     }, { root: true })
   }
   store.commit('message/setLoading', false);
+  // check resolve tu run gallery
+})
+
+const fetchDso = () => {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (resolve, reject) => {
+    try {
+      dsoRef.value = await DsoWs.GET_DSO_ITEM(dsoId.value);
+      resolve(dsoRef)
+    } catch (err) {
+      reject(err);
+    }
+  });
 };
 
-const fetchGalleryImages = async (id) => {
+const fetchGalleryImages = async () => {
   try {
     const params = {};
-    params['title__icontains'] = id;
-    return await ImagesWs.GET_IMAGES_BY(params, 0, 10);
+    params['title__icontains'] = dsoRef.value.id;
+    const data = await ImagesWs.GET_IMAGES_BY(params, 0, 10);
+    galleryImages.value = data.listImages;
   } catch (err) { console.error(err.message)}
 }
 
 const isLoading = computed(() => store.state.message.loading);
-const dso = computed(() => dsoRef.value )
-const dsoCover = computed(() => (dso.value.astrobinUser) ? dso.value.astrobin.url_hd: null);
+const dsoCover = computed(() => (dsoRef.value.astrobinUser) ? dsoRef.value.astrobin.url_hd: null);
 const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso([dsoRef.value]))
 const dsoData = computed(() => {
   return [
@@ -152,14 +162,6 @@ const dsoData = computed(() => {
     {icon: 'mdi-update', label: 'Last update', value: convertDate(dsoRef.value.updatedAt.timestamp)},
   ]
 });
-
-watch(dso, (newDso) => {
-  if (newDso) {
-    const galleryResponse = fetchGalleryImages(newDso.id);
-    galleryResponse.then((data) => galleryImages.value = data.listImages);
-  }
-});
-
 const isMobile = computed(() => screen.width <= 760);
 
 const convertDate = (timestamp) => {

@@ -68,7 +68,7 @@ const routes = [
             icon: 'constellation',
             image: backgroundConstellation,
             // seo
-            title: '',
+            title: 'Constellations',
             description: 'Explore the 88 constellations and discover their different objects',
         }
     },
