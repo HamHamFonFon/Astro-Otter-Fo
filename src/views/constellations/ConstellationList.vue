@@ -15,11 +15,11 @@
     >
 
       <v-container class="text-left">
-          <FilterList
-            v-model="filterConstellation"
-            label="Filter constellations"
-            placeholder="Filter by name (e.q. 'Orion', 'Andromeda')..."
-          />
+        <FilterList
+          v-model="filterConstellation"
+          label="Filtering constellations"
+          placeholder="Filter by name (e.q. 'Orion', 'Andromeda')..."
+        />
 
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
           <v-sheet class="pa-3" elevation="0" color="transparent">
