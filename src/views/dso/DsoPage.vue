@@ -13,65 +13,26 @@
         <TitlePage v-else :title="dsoRef.fullNameAlt"></TitlePage>
 
         <v-container class="text-left" :style="{margin: 'auto'}">
-          <v-row class="flex-0" dense>
-            <v-col cols="12" xl="4">
-              <v-card class="card-shadow" color="background">
-                <v-card-title>
-                  <v-icon icon="mdi-information-outline" class="mr-2" left></v-icon>
-                  Informations
-                </v-card-title>
-                <v-list-item
-                    v-for="(item, i) in dsoData"
-                    :key="i"
-                    :value="item"
-                    color="primary"
-                >
-                  <template v-slot:prepend>
-                    <v-icon :icon="item.icon"></v-icon>
-                  </template>
-
-                  <v-list-item-title left>
-                    <v-row>
-                      <v-col v-if="!isMobile" cols="6" sm="4">{{item.label}}</v-col>
-                      <v-col cols="12" sm="8">{{item.value}}</v-col>
-                    </v-row>
-                  </v-list-item-title>
-                </v-list-item>
-                <v-divider></v-divider>
-                <v-card-text>
-                  {{ dsoRef.description }}
-                </v-card-text>
-              </v-card>
+          <v-row class="card-shadow flex-grow-0" dense>
+            <v-col cols="12" xl="6">
+              <DsoDataCard :dsoData="dsoData" :description="dsoRef.description" />
             </v-col>
-
-            <v-col cols="12" md="12" xl="8" v-if="0 < galleryImages.length">
-              <v-carousel
-                  hide-delimiter-background
-                  show-arrows="hover"
-                  v-if="0 < galleryImages.length"
-              >
-                <v-carousel-item
-                  v-for="image in galleryImages"
-                  v-bind:key="image.id"
-                  :src="image.urlHd"
-                  cover
-                >
-                  {{ image.title }}
-                </v-carousel-item>
-              </v-carousel>
+            <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
+              <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
             </v-col>
           </v-row>
-
-          <v-img
-              :src="dsoRef.astrobin.url_advanced_skyplot_small"
-              cover
-          ></v-img>
-
-          <SkyMap
-            :constellationId="dsoRef.constellation.id"
-            :centerMap="dsoGeoJson.features[0].geometry.coordinates"
-            :itemsGeoData="dsoGeoJson"
-          ></SkyMap>
+          <v-row class="card-shadow flex-grow-0" dense>
+            <v-col cols="12" xl="6">
+              <DsoAstrobinCard v-if="null !== dsoCover" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
+            </v-col>
+            <v-col cols="12" xl="6">
+              <SkyMap
+                  :constellationId="dsoRef.constellation.id"
+                  :centerMap="dsoGeoJson.features[0].geometry.coordinates"
+                  :itemsGeoData="dsoGeoJson"
+              ></SkyMap>
+            </v-col>
+          </v-row>
         </v-container>
     </v-sheet>
   </transition>
@@ -92,7 +53,10 @@ const route = useRoute();
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitleParallax = defineAsyncComponent(() => import('@/components/Content/TitleParallax.vue'));
 const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
-const SkyMap = defineAsyncComponent(() => import('@/components//Content/SkyMap.vue'));
+const DsoDataCard = defineAsyncComponent(() => import('@/components/Dso/DsoDataCard.vue'));
+const DsoCarousel = defineAsyncComponent(() => import('@/components/Dso/DsoCarousel.vue'))
+const DsoAstrobinCard = defineAsyncComponent(() => import('@/components/Dso/DsoAstrobinCard.vue'));
+const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vue'));
 
 const dsoId = ref(route.params.id);
 const dsoRef = ref({});
@@ -102,7 +66,7 @@ onBeforeMount(() => {
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',
-    'message': 'Loading DSO data...',
+    'message': `Loading ${route.params.id} data...`,
     'httpCode': null
   });
 })
@@ -158,17 +122,14 @@ const dsoData = computed(() => {
     {icon: 'mdi-latitude', label: 'Declinaison', value: dsoRef.value.declinaison},
     {icon: 'mdi-account-supervisor', label: 'Discover', value: dsoRef.value.discover},
     {icon: 'mdi-calendar-alert', label: 'Year', value: dsoRef.value.discoverYear},
-    {icon: 'mdi-camera', label: 'Astrobin credit', value: dsoRef.value.astrobinUser.username},
     {icon: 'mdi-update', label: 'Last update', value: convertDate(dsoRef.value.updatedAt.timestamp)},
-  ]
+  ].filter(d => d.value !== '' || undefined !== d.value)
 });
-const isMobile = computed(() => screen.width <= 760);
+
 
 const convertDate = (timestamp) => {
   const currentDate = new Date(timestamp*1000);
-  return currentDate.getDate()+
-      "/"+(currentDate.getMonth()+1)+
-      "/"+currentDate.getFullYear();
+  return currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
 };
 </script>
 
