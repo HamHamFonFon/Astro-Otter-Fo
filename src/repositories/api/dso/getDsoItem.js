@@ -13,6 +13,11 @@ export const GET_DSO_ITEM = async (id) => {
         let config = WS.buildApiHeaders(null, null, null);
         let endpoint = ENDPOINT.ITEM + id;
         const response = await axios.get(endpoint, config);
+        if (200 !== response.status) {
+            const error = new Error(response.statusText);
+            error.code = response.status;
+            throw error;
+        }
         return response.data;
     } catch (err) {
         const error = new Error(err.message);

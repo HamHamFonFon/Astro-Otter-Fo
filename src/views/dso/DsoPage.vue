@@ -17,12 +17,6 @@
             <v-col cols="12" xl="6">
               <DsoDataCard :dsoData="dsoData" :description="dsoRef.description" />
             </v-col>
-            <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
-              <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
-            </v-col>
-            <v-col cols="12" xl="6" v-if="null !== dsoCover" >
-              <DsoAstrobinCard :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
-            </v-col>
             <v-col cols="12" xl="6">
               <SkyMap
                   :constellationId="dsoRef.constellation.id"
@@ -30,6 +24,13 @@
                   :itemsGeoData="dsoGeoJson"
               ></SkyMap>
             </v-col>
+            <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
+              <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
+            </v-col>
+            <v-col cols="12" xl="6" v-if="null !== dsoCover" >
+              <DsoAstrobinCard :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
+            </v-col>
+
           </v-row>
         </v-container>
     </v-sheet>
@@ -73,6 +74,7 @@ onMounted(async () =>  {
   try {
     await fetchDso();
     await fetchGalleryImages();
+    store.commit('message/setLoading', false);
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,
@@ -81,8 +83,6 @@ onMounted(async () =>  {
       'httpCode': err.code
     }, { root: true })
   }
-  store.commit('message/setLoading', false);
-  // check resolve tu run gallery
 })
 
 const fetchDso = () => {
@@ -90,7 +90,7 @@ const fetchDso = () => {
   return new Promise(async (resolve, reject) => {
     try {
       dsoRef.value = await DsoWs.GET_DSO_ITEM(dsoId.value);
-      resolve(dsoRef)
+      resolve(dsoRef.value)
     } catch (err) {
       reject(err);
     }
@@ -116,6 +116,7 @@ const dsoData = computed(() => {
     {icon: 'mdi-telescope', label: 'Type', value: dsoRef.value.typeLabel},
     {icon: 'mdi-chart-timeline-variant-shimmer', label: 'Constellation', value: dsoRef.value.constellation.alt},
     {icon: 'mdi-eye-outline', label: 'Magnitude', value: dsoRef.value.magnitude},
+    {icon: 'mdi-star-shooting', label: 'Distance (light-year)', value: dsoRef.value.distanceLightYear},
     {icon: 'mdi-longitude', label: 'Right ascension', value: dsoRef.value.rightAscencion},
     {icon: 'mdi-latitude', label: 'Declinaison', value: dsoRef.value.declinaison},
     {icon: 'mdi-account-supervisor', label: 'Discover', value: dsoRef.value.discover},
@@ -123,7 +124,6 @@ const dsoData = computed(() => {
     {icon: 'mdi-update', label: 'Last update', value: convertDate(dsoRef.value.updatedAt.timestamp)},
   ].filter(d => d.value !== '' && null !== d.value && undefined !== d.value)
 });
-
 
 const convertDate = (timestamp) => {
   const currentDate = new Date(timestamp*1000);

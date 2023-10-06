@@ -1,23 +1,27 @@
 <template>
-  <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
-    <v-sheet class="pa-3" elevation="0" color="transparent">
-      <v-container>
-        <v-row>
-          <div id="celestial-map"></div>
-        </v-row>
+  <v-sheet
+    elevation="1"
+    class="mx-auto landing-warpper"
+    rounded
+    color="transparent"
+  >
+    <div id="celestial-map"></div>
+    <v-container>
+      <v-row>
 
-        <v-row align="center" justify="center">
-          <v-btn
-              @click="centerToConstellation"
-              size="x-large"
-              variant="outlined"
-              class="text-white mr-5"
-              color="grey"
-          > Center
-          </v-btn>
-        </v-row>
-      </v-container>
-    </v-sheet>
+      </v-row>
+
+      <v-row align="center" justify="center">
+        <v-btn
+            @click="centerToConstellation"
+            size="x-large"
+            variant="outlined"
+            class="text-white mr-5"
+            color="grey"
+        > Center
+        </v-btn>
+      </v-row>
+    </v-container>
   </v-sheet>
 </template>
 
