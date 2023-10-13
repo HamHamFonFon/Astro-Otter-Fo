@@ -13,7 +13,7 @@
         <TitlePage v-else :title="dsoRef.fullNameAlt"></TitlePage>
 
         <v-container class="text-left" :style="{margin: 'auto'}">
-          <v-row class="card-shadow flex-grow-0" dense>
+          <v-row class="card-shadow flex-grow-0" dense id="dsoBlocks">
             <v-col cols="12" xl="6">
               <DsoDataCard :dsoData="dsoData" :description="dsoRef.description" />
             </v-col>
@@ -28,7 +28,7 @@
               <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
             </v-col>
             <v-col cols="12" xl="6" v-if="null !== dsoCover" >
-              <DsoAstrobinCard :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
+              <DsoAstrobinCard :astrobinId="dsoRef.astrobinId" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
             </v-col>
 
           </v-row>
@@ -65,7 +65,7 @@ onBeforeMount(() => {
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',
-    'message': `Loading ${route.params.id} data...`,
+    'message': `Please wait while loading ${route.params.id} data...`,
     'httpCode': null
   });
 })
@@ -83,7 +83,7 @@ onMounted(async () =>  {
       'httpCode': err.code
     }, { root: true })
   }
-})
+});
 
 const fetchDso = () => {
   // eslint-disable-next-line no-async-promise-executor
@@ -112,7 +112,7 @@ const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso([dsoRef.value]))
 const dsoData = computed(() => {
   return [
     {icon: 'mdi-book-open-outline', label: 'Catalogs', value: dsoRef.value.catalogsLabel.join(', ')},
-    {icon: 'mdi-list-box-outline', label: 'Others designations', value: dsoRef.value.desigs.join(', ')},
+    {icon: 'mdi-list-box-outline', label: 'Others designations', value: Object.keys(dsoRef.value.otherDesigs).map(key => `${dsoRef.value.otherDesigs[key]}`).join(', ')},
     {icon: 'mdi-telescope', label: 'Type', value: dsoRef.value.typeLabel},
     {icon: 'mdi-chart-timeline-variant-shimmer', label: 'Constellation', value: dsoRef.value.constellation.alt},
     {icon: 'mdi-eye-outline', label: 'Magnitude', value: dsoRef.value.magnitude},
@@ -132,13 +132,11 @@ const convertDate = (timestamp) => {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active, .fade-leave-active {
   transition: opacity 1s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
 </style>

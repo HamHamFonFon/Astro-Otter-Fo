@@ -69,6 +69,10 @@ import { toRefs} from "vue";
 import apiConfig from '@/configs/api';
 
 const props = defineProps({
+  astrobinId: {
+    type: String,
+    default: null
+  },
   astrobinImage: {
     type: Object,
     default: null
@@ -79,7 +83,7 @@ const props = defineProps({
   }
 });
 
-const { astrobinImage, astrobinUser } = toRefs(props);
+const { astrobinId, astrobinImage, astrobinUser } = toRefs(props);
 
 const listDataUser = () => {
   return [
@@ -104,7 +108,7 @@ const listItems = () => {
 };
 
 const astrobinPageUrl = () => {
-  let astrobinUrl = apiConfig.ASTROBIN_HOST + '/' + astrobinImage.id + '/';
+  let astrobinUrl = apiConfig.ASTROBIN_HOST + '/' + astrobinId.value + '/';
   window.open(astrobinUrl, '_blank');
 }
 

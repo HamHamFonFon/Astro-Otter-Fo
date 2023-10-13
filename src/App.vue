@@ -20,8 +20,8 @@ provide('app:layout', layout);
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300|Source+Sans+Pro:300&display=swap');
-#app {
-  font-family: 'Source Sans Pro', 'Open Sans';
+body,#app {
+  font-family: Source Sans Pro,Open sans-serif !important;
   font-size: large;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,5 +33,4 @@ a {
   text-decoration: none;
   all: unset;
 }
-
 </style>

@@ -49,5 +49,4 @@ const isMobile = computed(() => screen.width <= 760);
 </script>
 
 <style scoped>
-
 </style>
