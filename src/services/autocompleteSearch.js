@@ -11,9 +11,10 @@ export const searchItems = async (terms) => {
         // }
         let data = await searchWS.GET_SEARCH_ITEMS(terms);
         return data.map(item => {
+            let otherDesigs = (0 < Object.keys(item.otherDesigs)) ? ' ('+ Object.values(item.otherDesigs).join(', ')+')' : ''
             return {
                 id: item.id,
-                text: item.fullNameAlt + ' (' + Object.values(item.otherDesigs).join(', ') + ')',
+                text: item.fullNameAlt + otherDesigs,
                 type: item.typeLabel,
                 constellation: item.constellation
             }

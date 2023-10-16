@@ -24,28 +24,44 @@
 
       <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
       <Transition>
-        <v-autocomplete
+        <v-text-field
             v-if="!isMobile"
             v-show="showSearch"
 
-            v-model="searchInput"
-            :items="searchResults"
+            v-model="inputSearchItems"
             :loading="loading"
 
             color="secondary"
             variant="outlined"
             density="comfortable"
+            clearable
             prepend-inner-icon="mdi-magnify"
             hide-no-data
             hide-details
             placeholder="Search a galaxy, nebula or constellation..."
-        ></v-autocomplete>
+        ></v-text-field>
       </Transition>
       <v-btn icon @click="toggleInputSearch">
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>{{ iconSearch }}</v-icon>
       </v-btn>
     </v-toolbar>
   </v-app-bar>
+
+  <div class="resultsHeader" v-if="results && 0 < results.length">
+    <ul
+        color="transparent"
+    >
+      <li
+          v-for="item in results"
+          v-bind:key="item"
+      >
+        <router-link :to="{ name: 'dso', params: { id: item.id } }">
+          <span class="v-list-item-title">{{ item.text }}</span>
+          <span class="v-list-item-subtitle">{{ item.type }}</span>
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup>
@@ -53,6 +69,7 @@ import {computed, ref, watch} from "vue";
 
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
+import {searchItems} from "@/services/autocompleteSearch";
 
 // Components
 // const CustomIcon = defineAsyncComponent(() => import("@/components/icons/CustomIcon.vue"));
@@ -61,9 +78,9 @@ import configs from "@/configs";
 const menu = ref(configs.headerMenu);
 const logo = ref(astroOtterLogo);
 const showSearch = ref(false);
-
-const searchInput = ref('');
-const searchResults = ref([]);
+const iconSearch = ref('mdi-magnify');
+const inputSearchItems = ref('');
+const results = ref([]);
 const loading = ref(false);
 
 const isMobile = computed(() => {
@@ -95,25 +112,21 @@ const buildMenu = (items, allRoutes) => {
 };
 const toggleInputSearch = () => {
   showSearch.value = !showSearch.value;
+  iconSearch.value = (false === showSearch.value) ? 'mdi-magnify': 'mdi-close';
+  if (false === showSearch.value) {
+    results.value = [];
+    inputSearchItems.value = '';
+  }
 };
 
 
 /**
  * Run WS and set data
  */
-const fetchData = () => {
-  loading.value = true;
-  console.log('Send to API: ' + searchInput.value);
-  setTimeout(() => {
-    searchResults.value = ['Orion nebula', 'm42']
-    loading.value = false;
-  }, 500);
-};
-
-watch(searchInput, () => {
-  if (searchInput.value.length >= 3 && true === showSearch.value) {
-    fetchData();
-  }
+watch(inputSearchItems, (newSearch) => {
+  setTimeout(async () => {
+    results.value = await searchItems(newSearch);
+  }, 200);
 });
 
 </script>
@@ -129,5 +142,25 @@ watch(searchInput, () => {
   opacity: 0;
 }
 
+.resultsHeader {
+  top: 64px;
+  position: relative;
+  background-color: #1B2A32;
+  text-align: start;
+}
+
+.resultsHeader ul {
+  list-style: none;
+  padding: 10px 0;
+  display: inline-block;
+  min-width: 15%;
+  margin: 0;
+}
+
+.resultsHeader ul li {
+  line-height: 2.2em;
+  padding-left: 1em;
+  cursor: pointer;
+}
 
 </style>

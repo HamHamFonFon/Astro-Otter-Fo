@@ -68,7 +68,6 @@ watch(inputSearchItems, (newSearch) => {
   setTimeout(async () => {
     results.value = await searchItems(newSearch);
   }, 200);
-
 });
 </script>
 

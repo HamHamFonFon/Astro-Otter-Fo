@@ -62,6 +62,7 @@ const dsoRef = ref({});
 const galleryImages = ref({});
 
 onBeforeMount(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',

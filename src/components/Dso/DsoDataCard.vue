@@ -27,7 +27,7 @@
         </v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
-      <v-card-text>
+      <v-card-text align="justify">
         {{ description }}
       </v-card-text>
     </v-card>
