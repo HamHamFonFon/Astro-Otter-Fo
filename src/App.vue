@@ -33,4 +33,16 @@ a {
   text-decoration: none;
   all: unset;
 }
+
+p {
+  line-height: 1.5em;
+}
+
+ul {
+  padding: 0 1em;
+  margin-top: 0.2em;
+}
+li {
+  line-height: 2em;
+}
 </style>

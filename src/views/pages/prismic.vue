@@ -9,21 +9,18 @@
         color="transparent"
         v-if="!isLoading"
     >
-      <TitleImageHero :title="titlePage" :urlImage="prismicData.image_header.url" />
+      <TitlePage :title="titlePage"  />
 
       <v-container class="text-justify" >
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="secondary">
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
               <div v-html="contentPage"></div>
+              <v-divider></v-divider>
+              {{ updatedPage }}
             </v-container>
           </v-sheet>
         </v-sheet>
-
-
-
-        <v-divider></v-divider>
-        {{ updatedPage }}
       </v-container>
     </v-sheet>
   </transition>
@@ -37,8 +34,8 @@ import { usePrismic } from '@prismicio/vue'
 import store from "@/store";
 
 const route = useRoute();
-const { client, asText, asDate, asHTML } = usePrismic()
-const TitleImageHero = defineAsyncComponent(() => import('@/components/Content/TitleImageHero.vue'));
+const { client, asText, asHTML, asDate } = usePrismic()
+const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
 
 const prismicData = reactive({
   title: null,
@@ -59,7 +56,7 @@ const fetchPriscmicData = async (uid) => {
     prismicData.title = document.data.title;
     prismicData.image_header = document.data.image_header;
     prismicData.content = document.data.content;
-    document.last_update = new Date(document.data.last_update);
+    document.last_update = document.data.last_update;
     store.commit('message/setLoading', false);
   } catch (err) {
     store.commit('message/setMessage', {
