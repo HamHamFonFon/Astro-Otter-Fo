@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store';
-import {login, refreshToken} from '@/services/auth';
+import {login} from '@/services/auth';
 
 import backgroundAstrobin from '@/assets/images/background/astrobin.png'
 import backgroundIOTD from '@/assets/images/background/bg-6.webp'
@@ -55,7 +55,6 @@ const routes = [
             text: ''
         }
     },
-
     // Constellations
     {
         path: '/constellations',
@@ -145,6 +144,7 @@ const routes = [
 
         }
     },
+    // Contact
     {
         path: '/contact-us',
         name: 'contact',
@@ -158,9 +158,11 @@ const routes = [
             description: ''
         }
     },
+    // Prismic
     {
-        path: '/support-astro-otter',
-        name: 'support',
+        path: '/:uid',
+        name: 'primisc_content',
+        component: () => import('@/views/pages/prismic.vue'),
         meta: {
             layout: 'page',
             key: 'menu.support',
@@ -170,7 +172,7 @@ const routes = [
             description: ''
         }
     },
-    {
+    /*{
         path: '/legal-notice',
         name: 'legal_notice',
         meta: {
@@ -181,9 +183,9 @@ const routes = [
             title: '',
             description: ''
         }
-    },
+    },*/
     {
-        path: '/help/api',
+        path: '/api',
         name: 'astro_otter_api',
         meta: {
             layout: 'page',
@@ -205,17 +207,20 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
+    routes,
+    scrollBehavior() {
+        return { left: 0, top: 0 }
+    }
 })
 
 router.beforeEach(async (to, from, next) => {
     // Set refresh JWT token for requests
     const timestamp = new Date().getTime()
-
+    // console.log(store.getters["auth/isLoggedIn"])
     if (true === store.getters["auth/isLoggedIn"]) {
         let expireTokenDate = store.getters["auth/getJwtExp"].exp ?? null;
         if (expireTokenDate && expireTokenDate < timestamp) {
-            await refreshToken();
+            //await refreshToken();
         } else {
             await login();
         }
