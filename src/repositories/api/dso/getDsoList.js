@@ -1,6 +1,6 @@
 import * as WS from '@/repositories/api/abstractWebservice';
 import axiosApi from "@/services/axiosApi";
-import {ENDPOINT} from "@/repositories/api/dso/endpoint";
+import {endpoint} from "@/repositories/api/dso/endpoint";
 
 export const GET_DSO_LIST = async (params, offset, limit) => {
     offset = offset ?? 0;
@@ -15,7 +15,7 @@ export const GET_DSO_LIST = async (params, offset, limit) => {
             }
         }
         const config = WS.buildApiHeaders(null, queryParams, null);
-        const response = await axiosApi.get(ENDPOINT.LIST, config);
+        const response = await axiosApi.get(endpoint.LIST, config);
         if (200 !== response.status) {
             const error = new Error(response.statusText);
             error.code = response.status;

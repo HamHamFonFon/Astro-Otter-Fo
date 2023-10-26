@@ -1,4 +1,4 @@
-import { ENDPOINT } from './endpoint'
+import { endpoint } from './endpoint'
 import axiosAstrobin from "@/services/axiosAstrobin";
 import * as WS from '@/repositories/astrobin/abstractWebservice';
 
@@ -15,7 +15,7 @@ export const GET_IMAGES_BY = async (params, offset, limit) => {
             'limit': limit
         };
 
-        let astrobinUrl = WS.buildAstrobinUrl(ENDPOINT, null);
+        let astrobinUrl = WS.buildAstrobinUrl(endpoint, null);
         let config = WS.buildAstrobinQueryParams(
             {
                 ...params,

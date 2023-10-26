@@ -1,4 +1,4 @@
-import { ENDPOINT } from './endpoint'
+import { endpoint } from './endpoint'
 import axiosAstrobin from "@/services/axiosAstrobin";
 import * as WS from '@/repositories/astrobin/abstractWebservice';
 
@@ -10,7 +10,7 @@ export const GET_IMAGE_BY_ID = async (idImage) => {
     }
 
     try {
-        let astrobinUrl = WS.buildAstrobinUrl(ENDPOINT, idImage);
+        let astrobinUrl = WS.buildAstrobinUrl(endpoint, idImage);
         let config = WS.buildAstrobinQueryParams(null);
         const response = await axiosAstrobin.get(astrobinUrl, config);
 

@@ -1,4 +1,4 @@
-import {ENDPOINT} from "@/repositories/api/constellations/endpoint";
+import {endpoint} from "@/repositories/api/constellations/endpoint";
 import * as WS from "@/repositories/api/abstractWebservice";
 import axios from "@/services/axiosApi";
 
@@ -11,8 +11,8 @@ export const GET_CONSTELLATION_ITEM = async (idConstellation) => {
 
     try {
         let config = WS.buildApiHeaders(null, null, null);
-        let endpoint = ENDPOINT.ITEM + idConstellation;
-        const response = await axios.get(endpoint, config);
+        let endpointId = endpoint.ITEM + idConstellation;
+        const response = await axios.get(endpointId, config);
         return response.data;
     } catch (err) {
         const error = new Error(err.message);

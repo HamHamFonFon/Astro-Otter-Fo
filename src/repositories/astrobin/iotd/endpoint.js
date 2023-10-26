@@ -1,1 +1,1 @@
-export const ENDPOINT = 'imageoftheday';
+export const endpoint = 'imageoftheday';

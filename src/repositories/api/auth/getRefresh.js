@@ -1,4 +1,4 @@
-import { ENDPOINT } from "@/repositories/api/auth/endpoint.js";
+import { endpoint } from "@/repositories/api/auth/endpoint.js";
 
 import * as WS from '@/repositories/api/abstractWebservice'
 import axios from "@/services/axiosApi";
@@ -12,7 +12,7 @@ export const GET_REFRESH = async (refreshToken) => {
             }
             let config = WS.buildApiHeaders(null, null, null);
 
-            const response = await axios.post(ENDPOINT.REFRESH, requestBody, config);
+            const response = await axios.post(endpoint.REFRESH, requestBody, config);
             if (200 !== response.status) {
                 const error = new Error(response.statusText);
                 error.code = response.status;

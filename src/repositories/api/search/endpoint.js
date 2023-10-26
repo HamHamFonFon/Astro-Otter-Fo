@@ -1,3 +1,3 @@
-export const ENDPOINT = {
+export const endpoint = {
     SEARCH: 'search'
 }

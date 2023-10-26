@@ -1,4 +1,4 @@
-import { ENDPOINT } from './endpoint'
+import { endpoint } from './endpoint'
 import axiosAstrobin from "@/services/axiosAstrobin";
 import * as WS from '@/repositories/astrobin/abstractWebservice'
 
@@ -9,7 +9,7 @@ export const GET_TODAY_WS = async (offset, limit) => {
     } ;
 
     try {
-        const astrobinUrl = WS.buildAstrobinUrl(ENDPOINT, null);
+        const astrobinUrl = WS.buildAstrobinUrl(endpoint, null);
         const config = WS.buildAstrobinQueryParams(body);
         const response = await axiosAstrobin.get(astrobinUrl, config);
         if (200 !== response.status) {
