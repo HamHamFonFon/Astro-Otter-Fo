@@ -9,7 +9,7 @@
         color="transparent"
         v-if="!isLoading"
     >
-      <TitlePage :title="titlePage"  />
+      <TitlePage :title="titlePage" />
 
       <v-container class="text-justify" >
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="secondary">
