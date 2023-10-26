@@ -45,4 +45,8 @@ ul {
 li {
   line-height: 2em;
 }
+
+.v-messages {
+  font-size: initial !important;
+}
 </style>
