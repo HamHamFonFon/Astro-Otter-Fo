@@ -16,7 +16,7 @@
   </v-main>
 
   <!-- Footer -->
-<!--  <FooterBar :allRoutes="allRoutes" />-->
+  <FooterBar :allRoutes="allRoutes" />
 </template>
 
 <script setup>
@@ -25,7 +25,7 @@ import {computed, defineAsyncComponent} from "vue";
 import {useRouter} from "vue-router";
 
 const HeaderBar = defineAsyncComponent(() => import('@/components/Layout/HeaderBar.vue'));
-// const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
+const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
 
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));

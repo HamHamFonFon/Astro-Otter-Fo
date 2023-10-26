@@ -1,5 +1,5 @@
 import { color } from "@/configs/mapColors";
-// import celestial from "d3-celestial";
+import celestial from "d3-celestial";
 
 export const buildMap = (
     zoom,
@@ -10,7 +10,7 @@ export const buildMap = (
     dataMw
 ) => {
     console.log(dataMw);
-    // let Celestial = celestial.Celestial();
+    let Celestial = celestial.Celestial();
 
     let mwConfig = {
         mw: {
@@ -140,7 +140,7 @@ export const buildMap = (
         ...backgroundConfig,
         ...horizonConfig
     };
-    //
-    // Celestial.display(config);
+
+    Celestial.display(config);
     // Celestial.apply({ mw: { show: false } });
 };

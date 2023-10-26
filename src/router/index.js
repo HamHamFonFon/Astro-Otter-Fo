@@ -217,11 +217,16 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     // Set refresh JWT token for requests
     const timestamp = new Date().getTime()
-    // console.log(store.getters["auth/isLoggedIn"])
     if (true === store.getters["auth/isLoggedIn"]) {
+        /**
+         * TODO fix login/refresh
+         * @type {*|null}
+         */
         let expireTokenDate = store.getters["auth/getJwtExp"].exp ?? null;
-        if (expireTokenDate && expireTokenDate < timestamp) {
+        if (expireTokenDate && expireTokenDate > timestamp) {
+            localStorage.clear();
             //await refreshToken();
+            await login();
         } else {
             await login();
         }

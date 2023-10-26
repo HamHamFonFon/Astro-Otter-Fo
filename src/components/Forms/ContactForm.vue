@@ -3,25 +3,25 @@
     <v-row>
       <v-col cols="12" sm="6">
         <v-text-field
-          label="Lastname"
-          v-model="state.lastName"
-          variant="outlined"
-          :error="v$.lastName.$error"
-          :error-messages="errors.lastName"
-          color="white"
-          clearable
-          required
+            label="Firstname"
+            v-model="state.firstname"
+            variant="outlined"
+            :error="v$.firstname.$error"
+            :error-messages="errors.firstname"
+            clearable
+            required
         >
         </v-text-field>
       </v-col>
 
       <v-col cols="12" sm="6">
         <v-text-field
-          label="Firstname"
-          v-model="state.firstName"
+          label="Lastname"
+          v-model="state.lastname"
           variant="outlined"
-          :error="v$.firstName.$error"
-          :error-messages="errors.firstName"
+          :error="v$.lastname.$error"
+          :error-messages="errors.lastname"
+          color="white"
           clearable
           required
         >
@@ -33,11 +33,11 @@
       <v-col cols="12" sm="6">
         <v-text-field
           type="email"
-          v-model="state.mailAdress"
+          v-model="state.email"
           label="email"
           variant="outlined"
-          :error="v$.mailAdress.$error"
-          :error-messages="errors.mailAdress"
+          :error="v$.email.$error"
+          :error-messages="errors.email"
           clearable
           required
         ></v-text-field>
@@ -61,12 +61,25 @@
         <v-select
           clearable
           text-align="left"
-          label="Select"
+          label="Select an option"
           :items="optionsTopic"
           item-title="value"
           item-value="key"
           variant="outlined"
           v-model="state.topic"
+        ></v-select>
+      </v-col>
+
+      <v-col cols="12" sm="6">
+        <v-select
+            clearable
+            text-align="left"
+            label="Select a country"
+            :items="optionsCountries"
+            item-title="value"
+            item-value="key"
+            variant="outlined"
+            v-model="state.country"
         ></v-select>
       </v-col>
     </v-row>
@@ -88,7 +101,6 @@
         <v-btn
           type="submit"
           block
-          color="succes"
           size="x-large"
           variant="outlined"
           class="text-white mr-5"
@@ -102,36 +114,44 @@
 import {computed, reactive, ref} from "vue";
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
+
 import contactTopics from "@/configs/contactTopics";
+import listCountries from "@/services/listCountries";
 
 const optionsTopic = ref(contactTopics);
+const optionsCountries = ref(listCountries);
+
 const state = reactive({
-  lastName: '',
-  firstName: '',
-  mailAdress: '',
+  firstname: '',
+  lastname: '',
+  email: '',
   confirmEmail: '',
   topic: null,
+  country: null,
   message: ''
 });
 
 const minRequiredLength = ref(2);
 const validations = {
-  lastName: {
+  lastname: {
     required,
     minLength: minLength(minRequiredLength.value)
   },
-  firstName: {
+  firstname: {
     required,
     minLength: minLength(minRequiredLength.value)
   },
-  mailAdress: {
+  email: {
     required,
     email
   },
   confirmEmail: {
     required,
     email,
-    sameAsRef: sameAs(state.mailAdress)
+    sameAsRef: sameAs(computed(() => state.email))
+  },
+  topic: {
+    required
   },
   message: {
     required
@@ -140,7 +160,6 @@ const validations = {
 const v$ = useVuelidate(validations, state, { $lazy: true });
 
 const errors = computed(() =>  {
-  console.log(v$.value.$errors);
   const errors = v$.value.$errors;
   return (0 < errors.length)
       ?
