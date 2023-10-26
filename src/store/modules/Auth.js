@@ -50,8 +50,6 @@ const actions = {
             return false;
         }
     }
-
-
 }
 
 const getters = {
