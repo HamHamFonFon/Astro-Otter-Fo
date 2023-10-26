@@ -148,6 +148,7 @@ const routes = [
     {
         path: '/contact-us',
         name: 'contact',
+        component: () => import('@/views/pages/Contact.vue'),
         meta: {
             layout: 'page',
             icon: 'mdi-pencil',
@@ -184,18 +185,18 @@ const routes = [
             description: ''
         }
     },*/
-    {
-        path: '/api',
-        name: 'astro_otter_api',
-        meta: {
-            layout: 'page',
-            key: 'menu.astro_otter_api',
-            text: 'API',
-            // seo
-            title: '',
-            description: ''
-        }
-    },
+    // {
+    //     path: '/api',
+    //     name: 'astro_otter_api',
+    //     meta: {
+    //         layout: 'page',
+    //         key: 'menu.astro_otter_api',
+    //         text: 'API',
+    //         // seo
+    //         title: '',
+    //         description: ''
+    //     }
+    // },
     {
         path: '/:notFound',
         component: () => import('@/views/NotFound.vue'),
