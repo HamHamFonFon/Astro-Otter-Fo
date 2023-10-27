@@ -112,8 +112,11 @@
 
 <script setup>
 import {computed, reactive, ref} from "vue";
+// VueValidate
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
+//Recaptcha
+import { useReCaptcha } from "vue-recaptcha-v3";
 
 import contactTopics from "@/configs/contactTopics";
 import listCountries from "@/services/listCountries";
@@ -130,6 +133,8 @@ const state = reactive({
   country: null,
   message: ''
 });
+
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 
 const minRequiredLength = ref(2);
 const validations = {
@@ -171,7 +176,10 @@ const errors = computed(() =>  {
 const emit = defineEmits(['submit-form']);
 const submitContactForm = async () => {
   const result = await v$.value.$validate()
-  if (!result) {
+  await recaptchaLoaded()
+  const token = await executeRecaptcha('submit');
+  console.log(token);
+  if (!result && !token) {
     return;
   }
 

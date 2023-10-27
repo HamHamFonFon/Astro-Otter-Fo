@@ -19,6 +19,7 @@
     "i18n-iso-countries": "^7.7.0",
     "prismic-dom": "^2.2.7",
     "vue": "^3.2.13",
+    "vue-recaptcha-v3": "^2.0.1",
     "vue-router": "^4.2.4",
     "vue3-mobile-detection": "^1.0.5",
     "vuetify": "^3.3.13",
