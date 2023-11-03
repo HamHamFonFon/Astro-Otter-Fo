@@ -10,18 +10,14 @@
       <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="background">
         <v-sheet class="pa-3" elevation="0" color="transparent">
           <v-container>
-            <transition v-if="!isLoading"  name="fade">
-              <div>
-                <v-card elevation="0" class="mx-auto my-10" color="transparent">
-                  <div class="text-left">Leave your message and we'll get back to you shortly. </div>
-                </v-card>
-                <ContactForm @submit-form="handleContactFormSubmission" />
-              </div>
-            </transition>
+            <Message v-if="isLoading" />
+            <div v-if="!isLoading">
+              <v-card elevation="0" class="mx-auto my-10" color="transparent">
+                <div class="text-left">Leave your message and we'll get back to you shortly. </div>
+              </v-card>
+              <ContactForm @submit-form="handleContactFormSubmission" />
+            </div>
 
-            <transition name="fade">
-              <Message />
-            </transition>
           </v-container>
         </v-sheet>
       </v-sheet>
@@ -68,7 +64,7 @@ const handleContactFormSubmission = (submitFormData) => {
       }, {root: true});
     } catch (err) {
       store.commit('message/setMessage', {
-        'loading': true,
+        'loading': false,
         'type': 'error',
         'message': err.message,
         'httpCode': null
