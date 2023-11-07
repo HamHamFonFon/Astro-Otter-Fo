@@ -12,8 +12,6 @@ defineProps({
   </v-toolbar>
 </template>
 
-
-
 <style scoped>
 
 </style>

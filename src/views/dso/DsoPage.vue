@@ -9,30 +9,32 @@
         color="transparent"
         v-if="!isLoading"
     >
-        <TitleParallax v-if="null !== dsoCover" :title="dsoRef.fullNameAlt" :urlImage="dsoCover" :user="dsoRef.astrobinUser.username"></TitleParallax>
-        <TitlePage v-else :title="dsoRef.fullNameAlt"></TitlePage>
+      <TitleParallax v-if="null !== dsoCover" :title="dsoRef.fullNameAlt" :urlImage="dsoCover" :user="dsoRef.astrobinUser.username"></TitleParallax>
+      <TitlePage v-else :title="dsoRef.fullNameAlt"></TitlePage>
 
-        <v-container class="text-left" :style="{margin: 'auto'}">
-          <v-row class="card-shadow flex-grow-0" dense id="dsoBlocks">
-            <v-col cols="12" xl="6">
-              <DsoDataCard :dsoData="dsoData" :description="dsoRef.description" />
-            </v-col>
-            <v-col cols="12" xl="6">
-              <SkyMap
-                  :constellationId="dsoRef.constellation.id"
-                  :centerMap="dsoGeoJson.features[0].geometry.coordinates"
-                  :itemsGeoData="dsoGeoJson"
-              ></SkyMap>
-            </v-col>
-            <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
-              <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
-            </v-col>
-            <v-col cols="12" xl="6" v-if="null !== dsoCover" >
-              <DsoAstrobinCard :astrobinId="dsoRef.astrobinId" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
-            </v-col>
+      <v-container class="text-left" :style="{margin: 'auto'}">
+        <v-row class="card-shadow flex-grow-0" dense id="dsoBlocks">
+          <v-col cols="12" xl="6">
+            <DsoDataCard :dsoData="dsoData" :description="dsoRef.description" />
+          </v-col>
+          <v-col cols="12" xl="6">
+            <v-img :src="dsoRef.astrobin.url_advanced_skyplot_small" cover max-height="600"></v-img>
+            <SkyMap
+                v-if="false"
+                :constellationId="dsoRef.constellation.id"
+                :centerMap="dsoGeoJson.features[0].geometry.coordinates"
+                :itemsGeoData="dsoGeoJson"
+            ></SkyMap>
+          </v-col>
+          <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
+            <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
+          </v-col>
+          <v-col cols="12" xl="6" v-if="null !== dsoCover" >
+            <DsoAstrobinCard :astrobinId="dsoRef.astrobinId" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
+          </v-col>
 
-          </v-row>
-        </v-container>
+        </v-row>
+      </v-container>
     </v-sheet>
   </transition>
 </template>

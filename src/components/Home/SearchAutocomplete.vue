@@ -72,10 +72,5 @@ watch(inputSearchItems, (newSearch) => {
 </script>
 
 <style scoped>
-.listeResults {
-  background-color: #1B2A32;
-  text-align: left;
-  color: white;
-  cursor: pointer;
-}
+
 </style>

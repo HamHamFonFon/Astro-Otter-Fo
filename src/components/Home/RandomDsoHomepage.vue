@@ -28,7 +28,6 @@ const getRandomDso = async () => {
   } catch (err) {
     console.error(err.message);
   }
-
 }
 
 </script>

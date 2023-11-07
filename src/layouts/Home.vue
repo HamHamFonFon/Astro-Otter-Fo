@@ -25,11 +25,3 @@ const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToT
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
 const allRoutes = computed(() => useRouter().options.routes)
 </script>
-
-<style>
-  .main-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-</style>

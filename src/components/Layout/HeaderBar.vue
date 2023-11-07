@@ -130,37 +130,3 @@ watch(inputSearchItems, (newSearch) => {
 });
 
 </script>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.8s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-.resultsHeader {
-  top: 64px;
-  position: relative;
-  background-color: #1B2A32;
-  text-align: start;
-}
-
-.resultsHeader ul {
-  list-style: none;
-  padding: 10px 0;
-  display: inline-block;
-  min-width: 15%;
-  margin: 0;
-}
-
-.resultsHeader ul li {
-  line-height: 2.2em;
-  padding-left: 1em;
-  cursor: pointer;
-}
-
-</style>

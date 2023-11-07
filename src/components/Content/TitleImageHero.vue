@@ -26,8 +26,6 @@ const imageHeight = computed(() => (screen.width <= 760) ? '300': '450')
 
 </template>
 
-
-
 <style scoped>
   .lazyBackground {
     background-position: center center;

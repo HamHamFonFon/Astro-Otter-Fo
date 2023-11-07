@@ -1,4 +1,4 @@
-import { color } from "@/configs/mapColors";
+import { dsoColors } from "@/configs/mapColors";
 import celestial from "d3-celestial";
 
 export const buildMap = (
@@ -92,25 +92,25 @@ export const buildMap = (
             namelimit: 1000,
             symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
                 // Galaxies
-                gg: {shape: "circle", fill: color.gc}, // Galaxy cluster
-                g: {shape: "ellipse", fill: color.g},  // Generic galaxy
-                s: {shape: "ellipse", fill: color.s},  // Spiral galaxy
-                s0: {shape: "ellipse", fill: color.s0}, // Lenticular galaxy
-                sd: {shape: "ellipse", fill: color.sd},  // Dwarf galaxy
-                e: {shape: "ellipse", fill: color.e}, // Elliptical galaxy
-                i: {shape: "ellipse", fill: color.i}, // Irregular galaxy
+                gg: {shape: "circle", fill: dsoColors.gc}, // Galaxy cluster
+                g: {shape: "ellipse", fill: dsoColors.g},  // Generic galaxy
+                s: {shape: "ellipse", fill: dsoColors.s},  // Spiral galaxy
+                s0: {shape: "ellipse", fill: dsoColors.s0}, // Lenticular galaxy
+                sd: {shape: "ellipse", fill: dsoColors.sd},  // Dwarf galaxy
+                e: {shape: "ellipse", fill: dsoColors.e}, // Elliptical galaxy
+                i: {shape: "ellipse", fill: dsoColors.i}, // Irregular galaxy
                 // Cluster
-                oc: {shape: "circle", fill: color.oc, stroke: color.oc, width: 1.5},
-                gc: {shape: "circle", fill: color.gc, stroke: color.gc, width: 2},
+                oc: {shape: "circle", fill: dsoColors.oc, stroke: dsoColors.oc, width: 1.5},
+                gc: {shape: "circle", fill: dsoColors.gc, stroke: dsoColors.gc, width: 2},
                 // Nebula
-                en: {shape: "square", fill: color.en},
-                rn: {shape: "square", fill: color.rn},
-                pn: {shape: "diamond", fill: color.pn},
-                snr: {shape: "diamond", fill: color.snr},
-                sfr: {shape: "square", fill: color.sfr, stroke: color.sfr, width: 2},
+                en: {shape: "square", fill: dsoColors.en},
+                rn: {shape: "square", fill: dsoColors.rn},
+                pn: {shape: "diamond", fill: dsoColors.pn},
+                snr: {shape: "diamond", fill: dsoColors.snr},
+                sfr: {shape: "square", fill: dsoColors.sfr, stroke: dsoColors.sfr, width: 2},
 
-                bn: {shape: "square", fill: color.bn, stroke: color.bn, width: 2}, // Generic bright nebula
-                dn: {shape: "square", fill: color.dn, stroke: color.dn, width: 2},               // Dark nebula grey
+                bn: {shape: "square", fill: dsoColors.bn, stroke: dsoColors.bn, width: 2}, // Generic bright nebula
+                dn: {shape: "square", fill: dsoColors.dn, stroke: dsoColors.dn, width: 2},               // Dark nebula grey
                 // TODO : bipolar nebula
                 // Other
                 pos: {shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5}              // Generic marker

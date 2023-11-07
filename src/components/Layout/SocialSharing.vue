@@ -118,29 +118,6 @@ const resolveFunction = (funcName, param) => {
 
 </script>
 
-<style scoped>
-/* Add your CSS styling here */
-.hover-button {
-  position: fixed;
-  transition: all 0.3s ease;
-  bottom: 5em;
-  right: 5px;
-  z-index: 999;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 1px 1px 9px #1ed760;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-.hover-button:hover {
-  box-shadow: 1px 1px 18px green;
-  transition: all 0.5s;
-}
-
-.hovered-buttons {
-  z-index: 999;
-  position: fixed;
-  bottom: 6em;
-  right: 5px;
-}
+<style lang="scss">
+@import "@/assets/scss/components/socialSharing.scss";
 </style>

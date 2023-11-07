@@ -9,5 +9,15 @@ module.exports = defineConfig({
       'www.astro-otter.local',
       'astro-otter.local'
     ]
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        implementation: require('sass'),
+        sassOptions: {
+          indentedSyntax: false, // optional
+        },
+      }
+    }
   }
 })

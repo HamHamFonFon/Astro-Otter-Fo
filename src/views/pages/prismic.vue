@@ -73,9 +73,3 @@ const titlePage = computed(() => asText(prismicData.title) );
 const contentPage = computed(() => asHTML(prismicData.content))
 const updatedPage = computed(() => asDate(prismicData.last_update))
 </script>
-
-<style scoped>
-a {
-  cursor: pointer;
-}
-</style>

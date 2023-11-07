@@ -33,9 +33,3 @@ const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToT
 const allRoutes = computed(() => useRouter().options.routes)
 // import BreadCrumb from "@/components/Layout/BreadCrumb.vue";
 </script>
-
-<style scoped>
-.main-background {
-  background-image: linear-gradient(135deg, #111b27, #633535 ); /** #253A46 **/
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div :style="backgroundStyle" class="background">
+  <div :style="backgroundStyle" class="backgroundNotFound">
     <Error404 />
   </div>
 </template>
@@ -13,14 +13,3 @@ const backgroundStyle = computed(() => ({
   backgroundImage: `url(${backgroundImage})`,
 }));
 </script>
-
-<style scoped>
-.background {
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

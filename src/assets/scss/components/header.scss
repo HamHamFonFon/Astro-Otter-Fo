@@ -1,0 +1,20 @@
+.resultsHeader {
+  top: 64px;
+  position: relative;
+  background-color: #1B2A32;
+  text-align: start;
+
+  ul {
+    list-style: none;
+    padding: 10px 0;
+    display: inline-block;
+    min-width: 15%;
+    margin: 0;
+
+    li {
+      line-height: 2.2em;
+      padding-left: 1em;
+      cursor: pointer;
+    }
+  }
+}

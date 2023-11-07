@@ -18,35 +18,6 @@ router.afterEach((to) => {
 provide('app:layout', layout);
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300|Source+Sans+Pro:300&display=swap');
-body,#app {
-  font-family: Source Sans Pro,Open sans-serif !important;
-  font-size: large;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+<style lang="scss">
 
-}
-
-a {
-  text-decoration: none;
-  all: unset;
-}
-
-p {
-  line-height: 1.5em;
-}
-
-ul {
-  padding: 0 1em;
-  margin-top: 0.2em;
-}
-li {
-  line-height: 2em;
-}
-
-.v-messages {
-  font-size: initial !important;
-}
 </style>
