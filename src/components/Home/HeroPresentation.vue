@@ -59,7 +59,7 @@ const backgroundStyle = computed(() => ({
 /**
  *
  */
-function scrollToSearch() {
+const scrollToSearch = () => {
   const homeSearch = document.getElementById('search');
   if (homeSearch) {
     homeSearch.scrollIntoView({ behavior: "smooth" })

@@ -1,4 +1,4 @@
-export default [
+export const socialNetworks = [
     {
         name: 'Facebook',
         icon: 'mdi-facebook',

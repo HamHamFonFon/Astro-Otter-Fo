@@ -15,7 +15,7 @@
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="background">
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
-              <div v-html="contentPage"></div>
+              <div class="richtext" v-html="contentPage"></div>
               <v-divider></v-divider>
               {{ updatedPage }}
             </v-container>

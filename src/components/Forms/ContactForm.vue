@@ -99,7 +99,19 @@
     <vue-hcaptcha
       :sitekey="hrecaptchaSiteKey"
       @verify="handleHcaptchaVerify"
-      theme="dark"></vue-hcaptcha>
+      theme="dark"
+    >
+    </vue-hcaptcha>
+
+    <v-text-field v-model="state.honeypot" :style="{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: -1,
+      width: 0,
+      height: 0,
+      opacity: 0,
+    }"></v-text-field>
 
     <v-row>
       <v-col cols="12" sm="12" align-self="center">
@@ -121,15 +133,15 @@ import {computed, reactive, ref} from "vue";
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
 //Recaptcha
-import captcha from "@/configs/captcha";
+import { hcaptcha } from "@/configs/captcha";
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';
 
-import contactTopics from "@/configs/contactTopics";
+import { contactTopics } from "@/configs/contactTopics";
 import listCountries from "@/services/listCountries";
 
 const optionsTopic = ref(contactTopics);
 const optionsCountries = ref(listCountries);
-const hrecaptchaSiteKey = ref(captcha.siteKey);
+const hrecaptchaSiteKey = ref(hcaptcha.siteKey);
 const hVerified = ref(false);
 
 const state = reactive({
@@ -139,7 +151,8 @@ const state = reactive({
   confirmEmail: '',
   topic: null,
   country: null,
-  message: ''
+  message: '',
+  honeypot: null
 });
 
 
@@ -188,19 +201,13 @@ const handleHcaptchaVerify = () => {
 const emit = defineEmits(['submit-form']);
 const submitContactForm = async () => {
   const result = await v$.value.$validate()
-  if (!result && !hVerified.value) {
+  if (!result && !hVerified.value && null === state.honeypot) {
     return;
   }
 
   v$.value.$reset();
   emit('submit-form', {...state});
 }
-
-
-// https://codesandbox.io/s/vue-recaptch-v3-demo-gjul7?file=/src/App.vue:187-248
-// https://github.com/AurityLab/vue-recaptcha-v3/issues/642
-// https://github.com/AurityLab/vue-recaptcha-v3/issues/460
-// https://stackoverflow.com/questions/65465425/impossible-to-use-vue-recaptcha-v3/65470872#65470872
 </script>
 
 <style scoped>
