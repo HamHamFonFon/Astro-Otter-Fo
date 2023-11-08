@@ -1,0 +1,54 @@
+.richtext {
+  color: #e9e9e9;
+
+  pre {
+    white-space: pre-wrap;
+    overflow-x: auto;
+    display: flex;
+    font-family: monospace;
+    background: #f8f8f8;
+    color: #3e3d40;
+    padding: 1em 0.5em;
+    width: 100%;
+  }
+
+  p {
+    font-size: large;
+
+    line-height: 1.5em;
+    font: $font
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: dashed;
+
+    &:hover {
+      color: #1ed760;
+    }
+  }
+
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+
+    li {
+      line-height: 1.25;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        top: 0.4em;
+        left: 2px;
+        border: 2px solid;
+        border-radius: 50%;
+      }
+    }
+
+
+  }
+}
