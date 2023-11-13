@@ -54,6 +54,7 @@
       <li
           v-for="item in results"
           v-bind:key="item"
+
       >
         <router-link :to="{ name: 'dso', params: { id: item.id } }">
           <span class="v-list-item-title">{{ item.text }}</span>
@@ -118,7 +119,6 @@ const toggleInputSearch = () => {
     inputSearchItems.value = '';
   }
 };
-
 
 /**
  * Run WS and set data

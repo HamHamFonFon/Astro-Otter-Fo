@@ -13,6 +13,11 @@ export const GET_CONSTELLATION_ITEM = async (idConstellation) => {
         let config = WS.buildApiHeaders(null, null, null);
         let endpointId = endpoint.ITEM + idConstellation;
         const response = await axios.get(endpointId, config);
+        if (200 !== response.status) {
+            const error = new Error(response.statusText);
+            error.code = response.status;
+            throw error;
+        }
         return response.data;
     } catch (err) {
         const error = new Error(err.message);

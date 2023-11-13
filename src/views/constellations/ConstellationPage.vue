@@ -84,7 +84,7 @@ const fetchConstellation = async () => {
       store.commit('message/setMessage', {
         'loading': true,
         'type': 'error',
-        'message': err.message,
+        'message': err.message ?? 'Error loading',
         'httpCode': err.code
       }, { root: true })
   }

@@ -18,16 +18,17 @@
             <DsoDataCard :dsoData="dsoData" :description="dsoRef.description" />
           </v-col>
           <v-col cols="12" xl="6">
-            <v-img :src="dsoRef.astrobin.url_advanced_skyplot_small" cover max-height="600"></v-img>
+            <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
+
+          </v-col>
+          <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
+            <v-img v-if="dsoRef.astrobin.url_advanced_skyplot" :src="dsoRef.astrobin.url_advanced_skyplot" cover max-height="600"></v-img>
             <SkyMap
-                v-if="false"
+                v-else
                 :constellationId="dsoRef.constellation.id"
                 :centerMap="dsoGeoJson.features[0].geometry.coordinates"
                 :itemsGeoData="dsoGeoJson"
             ></SkyMap>
-          </v-col>
-          <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
-            <DsoCarousel :gallery-images="galleryImages"></DsoCarousel>
           </v-col>
           <v-col cols="12" xl="6" v-if="null !== dsoCover" >
             <DsoAstrobinCard :astrobinId="dsoRef.astrobinId" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
@@ -40,7 +41,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, watch} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 
@@ -74,6 +75,18 @@ onBeforeMount(() => {
 })
 
 onMounted(async () =>  {
+  await fetchAllData();
+});
+
+watch(
+  () => route.params.id,
+  async newId => {
+    dsoId.value = newId;
+    await fetchAllData();
+  }
+)
+
+const fetchAllData = async () => {
   try {
     await fetchDso();
     await fetchGalleryImages();
@@ -86,8 +99,12 @@ onMounted(async () =>  {
       'httpCode': err.code
     }, { root: true })
   }
-});
+}
 
+/**
+ * Get DSO data
+ * @returns {Promise<unknown>}
+ */
 const fetchDso = () => {
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
@@ -100,6 +117,10 @@ const fetchDso = () => {
   });
 };
 
+/**
+ * GET Gallery data
+ * @returns {Promise<void>}
+ */
 const fetchGalleryImages = async () => {
   try {
     const params = {};

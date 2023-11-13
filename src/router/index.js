@@ -161,8 +161,8 @@ const routes = [
     },
     // Prismic
     {
-        path: '/:uid',
-        name: 'primisc_content',
+        path: '/pages/:uid',
+        name: 'primisc_content_page',
         component: () => import('@/views/pages/prismic.vue'),
         meta: {
             layout: 'page',
@@ -173,31 +173,21 @@ const routes = [
             description: ''
         }
     },
-    /*{
-        path: '/legal-notice',
-        name: 'legal_notice',
+    {
+        path: '/blog/:uid',
+        name: 'primisc_article_page',
+        component: () => import('@/views/pages/prismic.vue'),
         meta: {
             layout: 'page',
-            key: 'menu.legal_notice',
-            text: 'Legal notice',
+            key: 'menu.support',
+            text: 'Support',
             // seo
             title: '',
             description: ''
         }
-    },*/
-    // {
-    //     path: '/api',
-    //     name: 'astro_otter_api',
-    //     meta: {
-    //         layout: 'page',
-    //         key: 'menu.astro_otter_api',
-    //         text: 'API',
-    //         // seo
-    //         title: '',
-    //         description: ''
-    //     }
-    // },
+    },
     {
+        name: 'pathNotFound',
         path: '/:notFound',
         component: () => import('@/views/NotFound.vue'),
         meta: {
