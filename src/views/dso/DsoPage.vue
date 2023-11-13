@@ -82,6 +82,12 @@ watch(
   () => route.params.id,
   async newId => {
     dsoId.value = newId;
+    store.commit('message/setMessage', {
+      'loading': true,
+      'type': 'warning',
+      'message': `Please wait while loading ${route.params.id} data...`,
+      'httpCode': null
+    });
     await fetchAllData();
   }
 )
