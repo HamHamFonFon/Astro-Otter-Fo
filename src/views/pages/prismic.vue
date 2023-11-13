@@ -29,11 +29,12 @@
 
 <script setup>
 import {computed, defineAsyncComponent, onMounted, reactive, ref} from "vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import { usePrismic } from '@prismicio/vue'
 import store from "@/store";
 
 const route = useRoute();
+const router = useRouter();
 const { client, asText, asHTML, asDate } = usePrismic()
 const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
 
@@ -50,20 +51,23 @@ onMounted(() => {
   fetchPriscmicData(uid.value)
 })
 
-const fetchPriscmicData = async (uid) => {
+const fetchPriscmicData = async (uidPrismic) => {
   try {
-    const document = await client.getByUID('editorial_page', uid, { lang: 'en-gb' });
+    const document = await client.getByUID('editorial_page', uidPrismic, { lang: 'en-gb' });
+    if (!document) {
+      await router.push('/404');
+    }
     prismicData.title = document.data.title;
     prismicData.image_header = document.data.image_header;
     prismicData.content = document.data.content;
     document.last_update = document.data.last_update;
     store.commit('message/setLoading', false);
-  } catch (err) {
+  } catch (error) {
     store.commit('message/setMessage', {
       'loading': true,
       'type': 'error',
-      'message': err.message,
-      'httpCode': err.code
+      'message': error.message,
+      'httpCode': error.code
     }, { root: true })
   }
 };
