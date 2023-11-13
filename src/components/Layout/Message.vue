@@ -10,7 +10,7 @@
 <!--        <img :src="imgLoading" v-if="'warning' === computedType" style="width: 32px;" :alt="computedType">-->
         <div id="blockMessage" style="margin: 1em;">
           <v-progress-circular :color="computedType" indeterminate v-if="'warning' === computedType"></v-progress-circular>
-          <span class="text-grey text-h6">{{ computedMsg }}</span>
+          <span class="text-h6">{{ computedMsg }}</span>
         </div>
 
       </v-alert>
@@ -49,8 +49,5 @@ const isLoading = computed(() => store.state.message.loading);
 // }
 </script>
 
-<style scoped>
-#blockMessage > * {
-  margin: 0 0.5em;
-}
+<style lang="scss">
 </style>

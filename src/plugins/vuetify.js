@@ -22,7 +22,7 @@ const AstroOtterLightThemes = {
         green: '#1ed760'
     },
     theme: {
-        grey: '#a7b6bf' //'#e9e9e9',
+        grey: '#ff0000' //'#e9e9e9',
     }
 };
 
