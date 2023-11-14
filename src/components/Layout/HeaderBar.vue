@@ -28,6 +28,7 @@
             v-if="!isMobile"
             v-show="showSearch"
 
+            ref="inputSearch"
             v-model="inputSearchItems"
             :loading="loading"
 
@@ -54,7 +55,7 @@
       <li
           v-for="item in results"
           v-bind:key="item"
-
+          @click="toggleInputSearch"
       >
         <router-link :to="{ name: 'dso', params: { id: item.id } }">
           <span class="v-list-item-title">{{ item.text }}</span>
@@ -80,8 +81,11 @@ const menu = ref(configs.headerMenu);
 const logo = ref(astroOtterLogo);
 const showSearch = ref(false);
 const iconSearch = ref('mdi-magnify');
+
+const inputSearch = ref(null);
 const inputSearchItems = ref('');
 const results = ref([]);
+
 const loading = ref(false);
 
 const isMobile = computed(() => {
@@ -117,6 +121,9 @@ const toggleInputSearch = () => {
   if (false === showSearch.value) {
     results.value = [];
     inputSearchItems.value = '';
+  } else {
+    // console.log('Autofocus');
+    // inputSearch.value.focus();
   }
 };
 

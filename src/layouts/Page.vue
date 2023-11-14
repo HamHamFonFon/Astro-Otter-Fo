@@ -22,7 +22,17 @@
 <script setup>
 
 import {computed, defineAsyncComponent} from "vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+const route = useRoute();
+import {applySeo} from "@/services/seo";
+
+applySeo({
+  title: route.meta.title,
+  description: route.meta.description,
+  image: '',
+  imageAlt: route.meta.title,
+  fullUrl: route.fullPath
+});
 
 const HeaderBar = defineAsyncComponent(() => import('@/components/Layout/HeaderBar.vue'));
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));

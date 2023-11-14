@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createHead } from '@unhead/vue'
 import App from './App.vue'
 
 // Style
@@ -22,10 +23,12 @@ import vuetify from "@/plugins/vuetify";
 
 // Create APP
 const app = createApp(App);
+const head = createHead()
 
 app.config.globalProperties.$axios = axios;
 
 app.use(router);
+app.use(head)
 app.use(createPrismic(prismicConfig));
 app.use(store);
 app.use(vuetify);

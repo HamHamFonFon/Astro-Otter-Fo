@@ -44,6 +44,7 @@
 import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, watch} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
+import {applySeo} from "@/services/seo";
 
 import {DsoWs} from "@/repositories/api/dso";
 import {ImagesWs} from "@/repositories/astrobin/images";
@@ -95,8 +96,16 @@ watch(
 const fetchAllData = async () => {
   try {
     await fetchDso();
-    await fetchGalleryImages();
     store.commit('message/setLoading', false);
+    await fetchGalleryImages();
+    applySeo({
+      title: dsoRef.value.fullNameAlt,
+      description: dsoRef.value.description,
+      image: dsoRef.value.astrobin.url_thumb,
+      imageAlt: route.meta.title,
+      fullUrl: route.fullPath
+    });
+
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,

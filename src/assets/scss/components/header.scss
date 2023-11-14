@@ -1,9 +1,10 @@
 .resultsHeader {
   top: 64px;
-  position: relative;
+  position: fixed;
   background-color: #1B2A32;
   text-align: start;
-
+  z-index: 1005;
+  width: 100%;
   ul {
     list-style: none;
     padding: 10px 0;

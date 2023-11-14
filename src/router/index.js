@@ -224,9 +224,6 @@ router.beforeEach(async (to, from, next) => {
         await login();
     }
 
-    // SEO
-    document.title = 'Astro-Otter - ' + to.meta.title ?? 'Astro-Otter';
-
     if (true === to.meta.requiresAuth) {
         next("login");
     }

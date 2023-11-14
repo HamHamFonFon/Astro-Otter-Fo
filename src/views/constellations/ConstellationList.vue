@@ -109,11 +109,10 @@ const fetchListConstellations = async () => {
 const isLoading = computed(() => store.state.message.loading);
 const constellations = computed(() => {
   const text = filterConstellation.value ?? '';
-  const listConstellations = constellationsRef;
-  [...listConstellations].sort((a, b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0))
+  const listConstellationSorted = [...constellationsRef].sort((a, b) => (a.id.toLowerCase() < b.id.toLowerCase()) ? -1 : ((b.id.toLowerCase() < a.id.toLowerCase()) ? 1 : 0))
   if (2 < text.length) {
-    return listConstellations.filter(c => c.alt.toLowerCase().startsWith(text.toLowerCase()));
+    return listConstellationSorted.filter(c => c.alt.toLowerCase().startsWith(text.toLowerCase()));
   }
-  return listConstellations;
+  return listConstellationSorted;
 });
 </script>

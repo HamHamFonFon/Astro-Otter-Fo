@@ -17,8 +17,17 @@
 
 <script setup>
 import {computed, defineAsyncComponent} from "vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+const route = useRoute();
+import {applySeo} from "@/services/seo";
 
+applySeo({
+  title: route.meta.title,
+  description: route.meta.description,
+  image: '',
+  imageAlt: route.meta.title,
+  fullUrl: route.fullPath
+});
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
 
