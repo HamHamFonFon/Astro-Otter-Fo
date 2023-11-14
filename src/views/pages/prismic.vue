@@ -17,7 +17,7 @@
             <v-container>
               <div class="richtext" v-html="contentPage"></div>
               <v-divider></v-divider>
-              {{ updatedPage }}
+              <p>{{ updatedPage }}</p>
             </v-container>
           </v-sheet>
         </v-sheet>
@@ -32,6 +32,7 @@ import {computed, defineAsyncComponent, onMounted, reactive, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import { usePrismic } from '@prismicio/vue'
 import store from "@/store";
+import {applySeo} from "@/services/seo";
 
 const route = useRoute();
 const router = useRouter();
@@ -43,14 +44,28 @@ const prismicData = reactive({
   last_update: null,
   image_header: { url: '', alt: '' },
   content: null,
+  seo_title: null,
+  seo_description: null
 });
 const uid = ref(route.params.uid);
 
 onMounted(() => {
   store.commit('message/setLoading', false);
   fetchPriscmicData(uid.value)
+  applySeo({
+    title: asText(prismicData.seo_title),
+    description: seoDesc,
+    image: null,
+    imageAlt: null,
+    fullUrl: route.fullPath
+  })
 })
 
+/**
+ *
+ * @param uidPrismic
+ * @returns {Promise<void>}
+ */
 const fetchPriscmicData = async (uidPrismic) => {
   try {
     const document = await client.getByUID('editorial_page', uidPrismic, { lang: 'en-gb' });
@@ -58,9 +73,12 @@ const fetchPriscmicData = async (uidPrismic) => {
       await router.push('/404');
     }
     prismicData.title = document.data.title;
+    prismicData.last_update = document.data.last_update;
     prismicData.image_header = document.data.image_header;
     prismicData.content = document.data.content;
-    document.last_update = document.data.last_update;
+    prismicData.seo_title = document.data.seo_title;
+    prismicData.seo_description = document.data.seo_description;
+
     store.commit('message/setLoading', false);
   } catch (error) {
     store.commit('message/setMessage', {
@@ -76,4 +94,11 @@ const isLoading = computed(() => store.state.message.loading);
 const titlePage = computed(() => asText(prismicData.title) );
 const contentPage = computed(() => asHTML(prismicData.content))
 const updatedPage = computed(() => asDate(prismicData.last_update))
+const { seoTitle, seoDesc } = computed(() => {
+  console.log(asText(prismicData.seo_title))
+  return {
+    'seoTitle': asText(prismicData.seo_title),
+    'seoDesc': asText(prismicData.seo_description)
+  }
+})
 </script>
