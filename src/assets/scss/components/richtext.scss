@@ -6,25 +6,23 @@
     overflow-x: auto;
     display: flex;
     font-family: monospace;
-    background: #f8f8f8;
-    color: #3e3d40;
+    background: #253A46;
+    color: #a7b6bf;
     padding: 1em 0.5em;
     width: 100%;
   }
 
   p {
     font-size: large;
-
-    line-height: 1.5em;
     font: $font
   }
 
   a {
+    color: #1ed760;
     cursor: pointer;
-    text-decoration: dashed;
-
+    text-decoration-line: underline;
     &:hover {
-      color: #1ed760;
+      color: #a7b6bf;
     }
   }
 
@@ -50,5 +48,9 @@
     }
 
 
+  }
+
+  hr {
+    margin: 1em 0;
   }
 }

@@ -7,14 +7,13 @@ body,#app {
 }
 
 a {
-  text-decoration: dashed;
   all: unset;
   cursor: pointer;
 }
 
 p {
   font: $font;
-  line-height: 1.5em;
+  line-height: 2em;
 }
 
 ul {
