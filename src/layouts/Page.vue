@@ -24,12 +24,14 @@
 import {computed, defineAsyncComponent} from "vue";
 import {useRoute, useRouter} from "vue-router";
 const route = useRoute();
+
 import {applySeo} from "@/services/seo";
+import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 
 applySeo({
   title: route.meta.title,
   description: route.meta.description,
-  image: '',
+  image: astroOtterLogo,
   imageAlt: route.meta.title,
   fullUrl: route.fullPath
 });
