@@ -28,7 +28,7 @@
         <!--        TODO : SEPARE in DsoBrowser into two components : -->
         <!--         - One for filters-->
         <!--         - seconds for list-->
-        <DsoBrowser defaultFilterName="constellation" :defaultFilterValue="constellationId"></DsoBrowser>
+        <DsoBrowser defaultFilterName="constellation" :defaultFilterValue="constellationRef.value.id"></DsoBrowser>
 
         <SkyMap
           :constellationId="constellationRef.value.id"
