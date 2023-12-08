@@ -53,7 +53,7 @@ onMounted(() => {
   store.commit('message/setLoading', false);
   fetchPriscmicData(uid.value)
   applySeo({
-    title: asText(prismicData.seo_title),
+    title: seoTitle,
     description: seoDesc,
     image: null,
     imageAlt: null,

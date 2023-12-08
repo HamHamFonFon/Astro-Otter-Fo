@@ -54,6 +54,7 @@ const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vu
 
 import { geoJsonServices } from "@/services/geojson";
 import { ConstellationWs } from "@/repositories/api/constellations";
+import {applySeo} from "@/services/seo";
 
 // Constellation
 const constellationId = ref(route.params.constellationId);
@@ -80,6 +81,13 @@ const fetchConstellation = async () => {
     try {
       constellationRef.value = await ConstellationWs.GET_CONSTELLATION_ITEM(constellationId.value);
       store.commit('message/setLoading', false);
+      applySeo({
+        title: constellationRef.value.alt,
+        description: constellationRef.value.description,
+        image: constellationCover,
+        imageAlt: constellationRef.value.alt,
+        fullUrl: route.fullPath
+      });
     } catch (err) {
       store.commit('message/setMessage', {
         'loading': true,
