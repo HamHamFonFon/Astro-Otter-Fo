@@ -4,8 +4,7 @@
       class="mx-auto landing-warpper"
       rounded
       color="primary"
-      min-height="10em"
-  >
+    >
     <v-sheet
         color="transparent"
         elevation="0"
@@ -14,8 +13,8 @@
     >
       <v-container>
         <v-row align="center" justify="center">
-          <v-col cols="12" lg="3">
-            <h1 class="text-h5 font-weight-bold text-center text-grey" >
+          <v-col cols="12" lg="3" style="align-self: baseline;">
+            <h1 class="text-h5 font-weight-bold text-center text-grey">
               Seek and find amazing deep space objects
             </h1>
           </v-col>

@@ -1,9 +1,6 @@
 <template>
   <!-- Hero component -->
   <HeroPresentation />
-  <v-toolbar>
-    <v-toolbar-title></v-toolbar-title>
-  </v-toolbar>
 
   <!-- Search autocomplete component -->
   <a ref="search" id="search"></a>
@@ -13,10 +10,7 @@
   <a ref="pages" id="pages"></a>
   <ItemCard :items="processedItems">
     <template v-slot="{item, index}">
-      <v-toolbar>
-        <v-toolbar-title></v-toolbar-title>
-      </v-toolbar>
-      <v-container class="text-center" :data-index="index">
+      <v-container class="text-center" >
         <v-row>
           <v-col cols="12" md="6">
             <v-sheet elevation="0">
@@ -56,6 +50,9 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-toolbar>
+        <v-toolbar-title></v-toolbar-title>
+      </v-toolbar>
     </template>
   </ItemCard>
 
