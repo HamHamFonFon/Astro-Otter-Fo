@@ -10,7 +10,7 @@
   <a ref="pages" id="pages"></a>
   <ItemCard :items="processedItems">
     <template v-slot="{item, index}">
-      <v-container class="text-center" >
+      <v-container class="text-center" :key="index">
         <v-row>
           <v-col cols="12" md="6">
             <v-sheet elevation="0">
