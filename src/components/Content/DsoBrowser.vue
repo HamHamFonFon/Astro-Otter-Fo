@@ -29,7 +29,7 @@
 
         <!-- Items list + cards -->
         <v-row align="center">
-          <ItemsLists :items-list="items" :columns="4">
+          <ItemsLists :items-list="items" :columns="3">
             <template v-slot="{ item, index }">
               <DsoCard v-bind:key="index" :dso="item" v-if="item" />
             </template>
@@ -75,7 +75,7 @@ const BtnMoreItems = defineAsyncComponent(() => import('@/components/Content/btn
 // Data
 const items = ref([]);
 const offset = ref(0);
-const limit = ref(20);
+const limit = ref(21);
 const totalRef = ref(0);
 
 const selectedFilters = ref({});
