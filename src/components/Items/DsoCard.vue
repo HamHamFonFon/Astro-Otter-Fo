@@ -29,7 +29,7 @@
           </template>
           <v-expand-transition>
             <div :class="getCardsCssClass(isDefaultImage, isHovering)" style="height: 100%;">
-              <v-card-title class="text-h5 text-white" v-show="true === isHovering || true === isDefaultImage || true === isMobile">
+              <v-card-title class="text-center text-h5 text-white" v-show="true === isHovering || true === isDefaultImage || true === isMobile">
                 <p>{{ title }}</p>
                 <p v-if="1 < dso.desigs.length" class="text-caption">{{ otherDesigs }}</p>
               </v-card-title>

@@ -25,7 +25,7 @@
           <v-sheet class="pa-3" elevation="0" color="transparent">
             <v-container>
               <v-row align="center">
-                <ItemsLists :items-list="constellations" :columns="5">
+                <ItemsLists :items-list="constellations" :columns="4">
                   <template v-slot="{ item, index }">
                     <ConstellationCard v-bind:key="index" :item="item" />
                   </template>

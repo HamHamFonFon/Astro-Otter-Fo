@@ -1,14 +1,17 @@
 <template>
-  <v-card
+  <v-hover v-slot:default="{ isHovering, props }">
+    <v-card
       class="ma-3"
       color="secondary"
+      :elevation="isHovering ? 18 : 1"
+      v-bind="props"
   >
     <a :href="astrobinImageUrl(item.id)" target="_blank">
       <v-img
           :src="item.image"
           :lazy-src="item.lazyImage"
-          class="bg-grey-lighten-2"
-          height="300"
+          :class="isHovering ? 'zoom bg-grey-lighten-2': 'bg-grey-lighten-2'"
+          height="340"
           cover
       >
         <template v-slot:placeholder>
@@ -23,7 +26,13 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        <v-card-title class="text-h6 text-white">{{ item.title }}</v-card-title>
+        <v-expand-transition>
+          <div class="d-flex transition-fast-in-fast-out text-white v-card--reveal display-3 white--text" style="height: 100%;">
+            <v-card-title class="text-center text-h6 text-white">
+              <p>{{ item.title }}</p>
+            </v-card-title>
+          </div>
+        </v-expand-transition>
       </v-img>
     </a>
     <v-card-actions color="primary">
@@ -40,6 +49,7 @@
       </v-list-item>
     </v-card-actions>
   </v-card>
+  </v-hover>
 </template>
 
 <script setup>
@@ -57,6 +67,15 @@ const astrobinImageUrl = (imageId) => {
 </script>
 
 <style scoped>
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+
 .v-card-title {
   background-color: rgba(0, 0, 0, 0.5);
 }

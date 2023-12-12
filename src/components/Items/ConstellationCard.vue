@@ -1,7 +1,11 @@
 <template>
-  <v-card
+  <v-hover v-slot:default="{ isHovering, props }">
+    <v-card
       class="ma-3"
       color="primary"
+      style="overflow: hidden"
+      :elevation="isHovering ? 18 : 1"
+      v-bind="props"
   >
     <router-link :to="{name: 'constellation', params: { constellationId: item.id.toLowerCase(), constellationName: item.alt.toLowerCase() } }">
       <v-img
@@ -23,18 +27,18 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        <v-card-title class="text-center text-h6 text-white">{{ item.alt }}</v-card-title>
+        <v-expand-transition>
+          <div class="d-flex text-white v-card--reveal display-3 white--text" style="height: 100%;">
+            <v-card-title class="text-center text-h5 text-white">
+              <p>{{ item.alt }}</p>
+              <p class="text-caption"> {{ item.generic }}</p>
+            </v-card-title>
+          </div>
+        </v-expand-transition>
       </v-img>
-
-      <v-card-actions color="background">
-        <v-list-item class="w-100">
-          <template v-slot:prepend>
-            {{ item.generic }}
-          </template>
-        </v-list-item>
-      </v-card-actions>
     </router-link>
   </v-card>
+  </v-hover>
 </template>
 
 <script setup>
@@ -63,6 +67,15 @@ const getCoverUrl = async () => {
 </script>
 
 <style scoped>
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .9;
+  position: absolute;
+  width: 100%;
+}
+
 .v-card-title {
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -70,9 +83,6 @@ const getCoverUrl = async () => {
   border-bottom: solid #1ed760;
 }
 
-a {
-  text-decoration: none;
-}
 .v-img:hover {
   cursor: pointer;
 }
