@@ -4,7 +4,7 @@
       class="ma-5"
       color="primary"
       style="overflow: hidden"
-      :elevation="isHovering ? 12 : 1"
+      :elevation="isHovering ? 18 : 1"
       v-bind="props"
     >
       <router-link :to="{ name: 'dso', params: { id: dso.id } }">
@@ -28,24 +28,15 @@
             </v-row>
           </template>
           <v-expand-transition>
-            <div v-if="isHovering && false === isDefaultImage" class="d-flex transition-fast-in-fast-out text-white v-card--reveal display-3 white--text" style="height: 100%;">
-              <v-card-title class="text-h6 text-white">{{ title }}</v-card-title>
-              <v-card-subtitle v-show="false" v-if="1 < dso.desigs.length" class="text-caption text-white">
-                {{ otherDesigs }}
-              </v-card-subtitle>
-            </div>
-            <div v-else-if="true === isDefaultImage"  class="d-flex text-white v-card--reveal display-3 white--text" style="height: 100%;">
-              <v-card-title class="text-h6 text-white">{{ title }}</v-card-title>
+            <div :class="getCardsCssClass(isDefaultImage, isHovering)" style="height: 100%;">
+              <v-card-title class="text-h5 text-white" v-show="true === isHovering || true === isDefaultImage || true === isMobile">
+                <p>{{ title }}</p>
+                <p v-if="1 < dso.desigs.length" class="text-caption">{{ otherDesigs }}</p>
+              </v-card-title>
             </div>
           </v-expand-transition>
-
-
         </v-img>
       </router-link>
-
-      <v-card-text v-show="false" v-if="dso.description">
-        {{ dso.description.substring(0, 60) }}&hellip;
-      </v-card-text>
 
       <v-card-actions color="background">
         <v-btn text>
@@ -82,17 +73,30 @@ const props = defineProps({
 })
 const { dso } = toRefs(props);
 
+const isMobile = computed(() => {
+  return screen.width <= 760;
+});
+
 const imageCover = computed(() => (dso.value.astrobinUser) ? dso.value.astrobin.url_regular: defaultImage );
 const isDefaultImage = computed(() => (!dso.value.astrobinUser) );
 const imageLazyCover = computed(() => (dso.value.astrobinUser) ? dso.value.astrobin.url_gallery: defaultImage );
 const title = computed(() => dso.value.fullNameAlt );
-const otherDesigs = computed(() => dso.value.desigs./*filter((v,i,a) => {
-  if (props.dso.name === v) {
-    a.splice(i, 1);
-    return true;
+const otherDesigs = computed(() => dso.value.desigs.filter(v => v !== dso.value.name).join(' - '));
+
+const getCardsCssClass = (isDefaultImage, isHovering) => {
+  if (true === isMobile.value) {
+    return 'd-flex text-white v-card--reveal display-3 white--text';
   }
-  return false;
-}).*/join( ' - '));
+
+  if (true === isDefaultImage) {
+      return 'd-flex text-white v-card--reveal display-3 white--text'
+  } else {
+    if (isHovering && false === isDefaultImage) {
+      return 'd-flex transition-fast-in-fast-out text-white v-card--reveal display-3 white--text'
+    }
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -111,9 +115,9 @@ const otherDesigs = computed(() => dso.value.desigs./*filter((v,i,a) => {
 
 .v-img {
   border-bottom: solid #1ed760;
-  .v-image__image { transition: all 0.2s; }
+  .v-img__img { transition: all 0.2s; }
   &.zoom {
-    .v-image__image { transform: scale(1.2); }
+    .v-img__img { transform: scale(1.2); }
   }
 }
 
