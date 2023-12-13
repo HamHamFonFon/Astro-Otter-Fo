@@ -36,9 +36,16 @@
                     v-bind:key="nav.key"
                 >
                   <span class="text-grey">{{ nav.text }}</span>
+                </router-link>
 
-                </router-link
+                <router-link
+                  class="text-primary mx-3 mb-3 font-weight-bold"
+                  v-for="nav in prismicRoutes"
+                  :to="{name: 'primisc_content_page', params: {'uid': nav.path}}"
+                  v-bind:key="nav.key"
                 >
+                  <span class="text-grey">{{ nav.text }}</span>
+                </router-link>
               </div>
             </v-col>
           </v-row>
@@ -51,7 +58,10 @@
 
 <script setup>
 import configs from "@/configs";
-import {computed, ref} from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
+
+import {usePrismic} from "@prismicio/vue";
+const { client, predicate, asText } = usePrismic();
 
 const socialNetworks = ref(configs.socialNetworks);
 const footerPages = ref(configs.footerPages);
@@ -59,8 +69,13 @@ const footerPages = ref(configs.footerPages);
 const props = defineProps({
   allRoutes: {
     type: Array
-  }
+  },
 });
+const prismicRoutes = reactive([]);
+
+onMounted(async () => {
+  await processedFooterPrismic();
+})
 
 const openSocialNetwork= (link) => {
   window.open(link, '_blank')
@@ -80,6 +95,25 @@ const buildMenu = (footerPages, allRoutes) => {
 };
 
 const processedFooterMenu = computed(() => buildMenu );
+const processedFooterPrismic = async () => {
+  try {
+    const items = await client.query(predicate.at('document.type', 'editorial_page'));
+    if (0 === items.results_size) {
+      return null;
+    }
+
+    items.results.forEach(i => {
+      prismicRoutes.push({
+        key: i.id,
+        text: asText(i.data.title),
+        path: i.uid
+      })
+    })
+  } catch (e) {
+    console.error(e.message);
+  }
+
+};
 </script>
 
 <style scoped>

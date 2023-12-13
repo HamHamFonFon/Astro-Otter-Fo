@@ -28,15 +28,18 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onMounted, reactive, ref} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
+import {useStore} from "vuex";
 import { usePrismic } from '@prismicio/vue'
-import store from "@/store";
-import {applySeo} from "@/services/seo";
 
 const route = useRoute();
 const router = useRouter();
+const store = useStore();
 const { client, asText, asHTML, asDate } = usePrismic()
+
+import {applySeo} from "@/services/seo";
+const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
 
 const prismicData = reactive({
@@ -49,6 +52,15 @@ const prismicData = reactive({
 });
 const uid = ref(route.params.uid);
 
+onBeforeMount(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  store.commit('message/setMessage', {
+    'loading': true,
+    'type': 'warning',
+    'message': `Please wait while loading ${uid.value} data...`,
+    'httpCode': null
+  });
+})
 onMounted(() => {
   store.commit('message/setLoading', false);
   fetchPriscmicData(uid.value)
@@ -72,13 +84,13 @@ const fetchPriscmicData = async (uidPrismic) => {
     if (!document) {
       await router.push('/404');
     }
+
     prismicData.title = document.data.title;
     prismicData.last_update = document.data.last_update;
     prismicData.image_header = document.data.image_header;
     prismicData.content = document.data.content;
     prismicData.seo_title = document.data.seo_title;
     prismicData.seo_description = document.data.seo_description;
-
     store.commit('message/setLoading', false);
   } catch (error) {
     store.commit('message/setMessage', {

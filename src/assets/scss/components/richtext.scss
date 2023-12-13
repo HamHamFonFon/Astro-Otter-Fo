@@ -13,8 +13,9 @@
   }
 
   p {
-    font-size: large;
-    font: $font
+    padding: 0.5em 1em;
+    line-height: 2.5em;
+    font-size: 18px;
   }
 
   a {
@@ -49,8 +50,6 @@
         border-radius: 50%;
       }
     }
-
-
   }
 
   hr {

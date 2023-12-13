@@ -1,5 +1,5 @@
 export default [
-    { routeName: 'catalogs'},
-    { routeName: 'constellations'},
-    { routeName: 'astrobin'},
+    { routeName: 'catalogs', component: 'background'},
+    { routeName: 'constellations', component: 'default'},
+    // { routeName: 'astrobin', component: 'default'},
 ];

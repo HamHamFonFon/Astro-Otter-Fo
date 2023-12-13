@@ -10,49 +10,7 @@
   <a ref="pages" id="pages"></a>
   <ItemCard :items="processedItems">
     <template v-slot="{item, index}">
-      <v-container class="text-center" :key="index">
-        <v-row>
-          <v-col cols="12" md="6">
-            <v-sheet elevation="0">
-              <v-card
-                  elevation="0"
-                  max-width="800"
-                  class="mx-auto my-10"
-              >
-                <h1
-                    style="color: #4a4d6d"
-                    class="font-weight-black text-h3 text-lg-h2 text-xl-h1"
-                >
-                  {{ item.text }}
-                </h1>
-                <h2 class="text-h6 text-green mt-4 mx-auto">
-                  {{ item.description }}
-                </h2>
-              </v-card>
-              <div class="text-center">
-                <router-link :to="item.path">
-                  <v-btn size="x-large" class="text-white" color="primary">Explore</v-btn>
-                </router-link>
-              </div>
-            </v-sheet>
-          </v-col>
-          <v-col cols="0" md="6">
-            <v-card>
-              <router-link :to="item.path">
-                <v-img
-                    height="420"
-                    class="v-card--hover"
-                    cover
-                    :src="item.image"
-                ></v-img>
-              </router-link>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-      <v-toolbar>
-        <v-toolbar-title></v-toolbar-title>
-      </v-toolbar>
+      <component :is="homeComponents[item.component]" :item="item" :index="index"></component>
     </template>
   </ItemCard>
 
@@ -62,14 +20,20 @@
 
 <script setup>
 import {computed, defineAsyncComponent} from 'vue'
-
+import { useRouter} from "vue-router";
 import configs from "@/configs";
 
 /**
  * Components
  */
-import ItemCard from "@/components/Home/ItemCard.vue";
-import { useRouter} from "vue-router";
+const ItemCard = defineAsyncComponent(() => import('@/components/Home/ItemCard.vue'));
+const ItemCardDefault = defineAsyncComponent(() => import('@/components/Home/Items/default.vue'));
+const ItemCardBackground = defineAsyncComponent(() => import('@/components/Home/Items/background.vue'));
+const homeComponents = {
+  'default': ItemCardDefault,
+  'background': ItemCardBackground
+};
+
 const HeroPresentation = defineAsyncComponent(() => import('@/components/Home/HeroPresentation.vue'))
 const SearchAutocomplete = defineAsyncComponent(() => import("@/components/Home/SearchAutocomplete.vue"))
 const RandomDsoHomepage = defineAsyncComponent(() => import("@/components/Home/RandomDsoHomepage.vue"))
@@ -100,7 +64,8 @@ function buildHomeItems(homePageRoutes, allRoutes) {
     icon: routeItem.meta.icon,
     text: routeItem.meta.text,
     description: routeItem.meta.description,
-    path: path
+    path: path,
+    component: route.component
   }
 });
 }
