@@ -6,7 +6,8 @@
     elevation="0"
     :style="{
       'background-image': `url(${item.image})`,
-      'background-size': 'auto',
+      'background-size': !isMobile ? 'contain' : 'cover',
+      'background-position': 'top',
       'margin': 0
     }"
   >
@@ -40,7 +41,7 @@
 </template>
 
 <script setup>
-import {toRefs} from "vue";
+import {computed, toRefs} from "vue";
 
 const props = defineProps({
   item: {
@@ -52,7 +53,11 @@ const props = defineProps({
     default: null
   }
 })
-const { item, index } = toRefs(props)
+const { item, index } = toRefs(props);
+
+const isMobile = computed(() => {
+  return screen.width <= 760;
+});
 </script>
 
 <style scoped>
