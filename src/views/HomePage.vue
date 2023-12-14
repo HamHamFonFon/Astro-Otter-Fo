@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onMounted} from 'vue'
+import {computed, defineAsyncComponent, onBeforeMount, onMounted} from 'vue'
 import { useI18n } from "vue-i18n";
 import { useRouter} from "vue-router";
 
@@ -50,7 +50,7 @@ const RandomDsoHomepage = defineAsyncComponent(() => import("@/components/Home/R
  */
 const homePageRoutes = configs.homePages;
 
-onMounted(() => {
+onBeforeMount(() => {
   applySeo({
     title: t('home.explore'),
     description: t('home.description'),

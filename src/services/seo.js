@@ -2,9 +2,9 @@ import { useHead, useSeoMeta } from '@unhead/vue'
 
 export const applySeo = (itemPage) => {
   useHead({
-    title: 'Astro-Otter - ' + itemPage.title,
+    title: () => 'Astro-Otter - ' + itemPage.title,
     meta: [
-      {name: 'title', content: () => 'Astro-Otter - ' +itemPage.title},
+      {name: 'title', content: () => 'Astro-Otter - ' + itemPage.title},
       {name: 'description', content: () => itemPage.description },
     ]
   });
