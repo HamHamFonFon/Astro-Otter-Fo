@@ -19,9 +19,15 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent} from 'vue'
+import {computed, defineAsyncComponent, onMounted} from 'vue'
+import { useI18n } from "vue-i18n";
 import { useRouter} from "vue-router";
+
+const { t } = useI18n();
+
 import configs from "@/configs";
+import backgroundImage from '@/assets/images/background/bg-1.webp'
+import {applySeo} from "@/services/seo";
 
 /**
  * Components
@@ -44,6 +50,16 @@ const RandomDsoHomepage = defineAsyncComponent(() => import("@/components/Home/R
  */
 const homePageRoutes = configs.homePages;
 
+onMounted(() => {
+  applySeo({
+    title: t('home.explore'),
+    description: t('home.description'),
+    image: backgroundImage,
+    imageAlt: '',
+    fullUrl: ''
+  });
+})
+
 /**
  * Computed
  * @type {ComputedRef<*>}
@@ -62,8 +78,8 @@ function buildHomeItems(homePageRoutes, allRoutes) {
     key: routeItem.meta.key,
     image: routeItem.meta.image,
     icon: routeItem.meta.icon,
-    text: routeItem.meta.text,
-    description: routeItem.meta.description,
+    text: t(`${routeName}.title`),
+    description: t(`${routeName}.description`),
     path: path,
     component: route.component
   }

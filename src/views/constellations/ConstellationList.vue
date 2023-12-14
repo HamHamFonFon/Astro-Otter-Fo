@@ -1,5 +1,5 @@
 <template>
-  <TitleImageHero title="Constellations" :url-image="backgroundImage"></TitleImageHero>
+  <TitleImageHero :title="t('constellations.title')" :url-image="backgroundImage"></TitleImageHero>
 
   <transition name="fade">
     <Message />
@@ -17,8 +17,8 @@
       <v-container class="text-left">
         <FilterList
           v-model="filterConstellation"
-          label="Filtering constellations"
-          placeholder="Filter by name (e.q. 'Orion', 'Andromeda')..."
+          :label="$t('constellation.filter.label')"
+          :placeholder="$t('constellation.filter.placeholder')"
         />
 
         <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="transparent">
@@ -43,10 +43,14 @@
 <script setup>
 import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
 import {useStore} from "vuex";
+import { useI18n } from "vue-i18n";
+
 const store = useStore();
+const { t } = useI18n();
 
 import backgroundConstellationImage from '@/assets/images/background/constellations.jpg';
 import {ConstellationWs} from "@/repositories/api/constellations";
+import {applySeo} from "@/services/seo";
 
 // Components
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
@@ -67,7 +71,7 @@ onBeforeMount(() => {
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',
-    'message': 'Loading constellations list...',
+    'message': t('constellation.load.list'),
     'httpCode': null
   }, { root: true });
 })
@@ -77,6 +81,13 @@ onBeforeMount(() => {
  */
 onMounted(() => {
   fetchListConstellations();
+  applySeo({
+    title: t('constellations.title'),
+    description: t('constellations.description'),
+    image: backgroundImage.value,
+    imageAlt: t('constellations.title'),
+    fullUrl: ''
+  });
 })
 
 /**
@@ -89,7 +100,7 @@ const fetchListConstellations = async () => {
     store.commit('message/setMessage', {
       'type': 'success',
       'loading': false,
-      'message': 'Constellations loaded',
+      'message': t('constellation.load.loaded'),
       'httpCode': 200
     }, { root: true });
   } catch (error) {

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import store from '@/store';
 import {login} from '@/services/auth';
 
@@ -22,11 +23,7 @@ const routes = [
         meta: {
             layout: 'home',
             key: "menu.home",
-            text: "Home",
             icon: "mdi-view-dashboard-outline",
-            // seo
-            title: 'Explore wonders and mysteries of the universe',
-            description: 'Astro Otter is a celestial atlas containing more than 9600 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel.'
         }
     },
     // DSO
@@ -37,12 +34,8 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.catalogs",
-            text: 'Catalogs',
             icon: CustomIcon,
             image: backgroundCatalogs,
-            // seo
-            title: '',
-            description: 'Browse all catalogs, seek amazing deep space objects and explore wonders of the universe',
         }
     },
     {
@@ -52,7 +45,6 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.dso",
-            text: ''
         }
     },
     // Constellations
@@ -63,12 +55,8 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.constellations",
-            text: 'Constellations',
             icon: 'constellation',
             image: backgroundConstellation,
-            // seo
-            title: 'Constellations',
-            description: 'Explore the 88 constellations and discover their different objects',
         }
     },
     {
@@ -78,9 +66,6 @@ const routes = [
         meta: {
             layout: 'page',
             key: '',
-            // seo
-            title: '',
-            description: '',
         }
     },
     // Astrobin
@@ -98,7 +83,6 @@ const routes = [
                     key: "menu.astrobin.toppicks",
                     text: 'Top-picks',
                     icon: '',
-                    description: '',
                     image: backgroundConstellation
                 }
             },
@@ -109,9 +93,6 @@ const routes = [
             icon: 'mdi-tooltip-text-outline',
             text: 'Astrobin API',
             image: backgroundAstrobin,
-            // seo
-            title: '',
-            description: 'Search, filter, play and sort images from Astrobin API',
         }
     },
     {
@@ -153,10 +134,6 @@ const routes = [
             layout: 'page',
             icon: 'mdi-pencil',
             key: 'menu.contact',
-            text: 'Contact',
-            // seo
-            title: '',
-            description: ''
         }
     },
     // Prismic
@@ -167,10 +144,6 @@ const routes = [
         meta: {
             layout: 'page',
             key: 'menu.support',
-            text: 'Support',
-            // seo
-            title: '',
-            description: ''
         }
     },
     {
@@ -180,10 +153,6 @@ const routes = [
         meta: {
             layout: 'page',
             key: 'menu.support',
-            text: 'Support',
-            // seo
-            title: '',
-            description: ''
         }
     },
     {

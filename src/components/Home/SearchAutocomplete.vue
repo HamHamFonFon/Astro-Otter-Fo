@@ -15,15 +15,15 @@
         <v-row align="center" justify="center">
           <v-col cols="12" lg="3" style="align-self: baseline;">
             <h1 class="text-h5 font-weight-bold text-center text-grey">
-              Seek and find amazing deep space objects
+              {{ $t('search.seek') }}
             </h1>
           </v-col>
           <v-col cols="12" sm="12" md="9">
             <v-text-field
               v-model="inputSearchItems"
               type="search"
-              label="Search"
-              placeholder="Search for galaxy, nebula, constellation..."
+              :label="$t('search.placeholder')"
+              :placeholder="$t('search.placeholder')"
               rounded
               variant="outlined"
               append-inner-icon="mdi-magnify"

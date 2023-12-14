@@ -39,7 +39,7 @@
             prepend-inner-icon="mdi-magnify"
             hide-no-data
             hide-details
-            placeholder="Search a galaxy, nebula or constellation..."
+            :placeholder="$t('search.placeholder')"
         ></v-text-field>
       </Transition>
       <v-btn icon @click="toggleInputSearch">
@@ -68,6 +68,9 @@
 
 <script setup>
 import {computed, ref, watch} from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
@@ -111,7 +114,8 @@ const buildMenu = (items, allRoutes) => {
       key: routeItem.meta.key,
       icon: routeItem.meta.icon ?? 'mdi-tooltip-text-outline',
       path: routeItem.path,
-      text: routeItem.meta.text
+      text: t(`${routeName}.title`),
+      description: t(`${routeName}.title`)
     };
   })
 };

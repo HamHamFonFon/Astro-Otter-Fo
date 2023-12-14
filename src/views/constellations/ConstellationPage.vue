@@ -43,9 +43,11 @@
 import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const store = useStore();
 const route = useRoute();
+const { t } = useI18n();
 
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitleImageHero = defineAsyncComponent(() => import("@/components/Content/TitleImageHero.vue"));
@@ -64,7 +66,7 @@ onBeforeMount(() => {
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',
-    'message': 'Loading constellation data...',
+    'message': t('constellation.load.data'),
     'httpCode': null
   });
 })

@@ -1,6 +1,6 @@
 export default [
     { routeName: 'catalogs'},
     { routeName: 'constellations'},
-    { routeName: 'astrobin' },
+    // { routeName: 'astrobin' },
     { routeName: 'contact' }
 ]

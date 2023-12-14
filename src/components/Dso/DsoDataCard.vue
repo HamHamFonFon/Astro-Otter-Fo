@@ -7,7 +7,7 @@
     <v-card class="card-shadow" color="background">
       <v-card-title>
         <v-icon icon="mdi-information-outline" class="mr-2" left></v-icon>
-        Informations
+        {{ $t('dso.title.card_information')}}
       </v-card-title>
       <v-list-item
           v-for="(item, i) in dsoData"

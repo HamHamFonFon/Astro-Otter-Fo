@@ -9,10 +9,10 @@
         <h1
             class="font-weight-black text-h3 text-lg-h2 text-xl-h1 text-secondary"
         >
-          404 Error
+          {{ $t('error404.code')}}
         </h1>
         <h2 class="text-h6 text-secondary mt-4 mx-auto align-center">
-          It seems you fall in a black hole
+          {{ $t('error404.message')}}
         </h2>
         <v-spacer></v-spacer>
         <v-card-actions class="justify-center">

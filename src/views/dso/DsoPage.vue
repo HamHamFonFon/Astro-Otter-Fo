@@ -45,6 +45,7 @@ import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, watch} fr
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 import {applySeo} from "@/services/seo";
+import { useI18n } from "vue-i18n";
 
 import {DsoWs} from "@/repositories/api/dso";
 import {ImagesWs} from "@/repositories/astrobin/images";
@@ -52,6 +53,7 @@ import { geoJsonServices } from "@/services/geojson";
 
 const store = useStore();
 const route = useRoute();
+const { t } = useI18n();
 
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitleParallax = defineAsyncComponent(() => import('@/components/Content/TitleParallax.vue'));
@@ -70,7 +72,7 @@ onBeforeMount(() => {
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',
-    'message': `Please wait while loading ${route.params.id} data...`,
+    'message': t('dso.load', {uid: route.params.id}),
     'httpCode': null
   });
 })
@@ -86,7 +88,7 @@ watch(
     store.commit('message/setMessage', {
       'loading': true,
       'type': 'warning',
-      'message': `Please wait while loading ${route.params.id} data...`,
+      'message': t('dso.load', {uid: route.params.id}),
       'httpCode': null
     });
     await fetchAllData();
@@ -150,17 +152,17 @@ const dsoCover = computed(() => (dsoRef.value.astrobinUser) ? dsoRef.value.astro
 const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso([dsoRef.value]))
 const dsoData = computed(() => {
   return [
-    {icon: 'mdi-book-open-outline', label: 'Catalogs', value: dsoRef.value.catalogsLabel.join(', ')},
-    {icon: 'mdi-list-box-outline', label: 'Others designations', value: Object.keys(dsoRef.value.otherDesigs).map(key => `${dsoRef.value.otherDesigs[key]}`).join(', ')},
-    {icon: 'mdi-telescope', label: 'Type', value: dsoRef.value.typeLabel},
-    {icon: 'mdi-chart-timeline-variant-shimmer', label: 'Constellation', value: dsoRef.value.constellation.alt},
-    {icon: 'mdi-eye-outline', label: 'Magnitude', value: dsoRef.value.magnitude},
-    {icon: 'mdi-star-shooting', label: 'Distance (light-year)', value: dsoRef.value.distanceLightYear},
-    {icon: 'mdi-longitude', label: 'Right ascension', value: dsoRef.value.rightAscencion},
-    {icon: 'mdi-latitude', label: 'Declinaison', value: dsoRef.value.declinaison},
-    {icon: 'mdi-account-supervisor', label: 'Discover', value: dsoRef.value.discover},
-    {icon: 'mdi-calendar-alert', label: 'Year', value: dsoRef.value.discoverYear},
-    {icon: 'mdi-update', label: 'Last update', value: convertDate(dsoRef.value.updatedAt.timestamp)},
+    {icon: 'mdi-book-open-outline', label: t('dso.data.catalogsLabel'), value: dsoRef.value.catalogsLabel.join(', ')},
+    {icon: 'mdi-list-box-outline', label: t('dso.data.otherDesigs'), value: Object.keys(dsoRef.value.otherDesigs).map(key => `${dsoRef.value.otherDesigs[key]}`).join(', ')},
+    {icon: 'mdi-telescope', label: t('dso.data.typeLabel'), value: dsoRef.value.typeLabel},
+    {icon: 'mdi-chart-timeline-variant-shimmer', label: t('dso.data.constellation'), value: dsoRef.value.constellation.alt},
+    {icon: 'mdi-eye-outline', label: t('dso.data.magnitude'), value: dsoRef.value.magnitude},
+    {icon: 'mdi-star-shooting', label: t('dso.data.distanceLightYear'), value: dsoRef.value.distanceLightYear},
+    {icon: 'mdi-longitude', label: t('dso.data.rightAscencion'), value: dsoRef.value.rightAscencion},
+    {icon: 'mdi-latitude', label: t('dso.data.declinaison'), value: dsoRef.value.declinaison},
+    {icon: 'mdi-account-supervisor', label: t('dso.data.discover'), value: dsoRef.value.discover},
+    {icon: 'mdi-calendar-alert', label: t('dso.data.discoverYear'), value: dsoRef.value.discoverYear},
+    {icon: 'mdi-update', label: t('dso.data.updatedAt'), value: convertDate(dsoRef.value.updatedAt.timestamp)},
   ].filter(d => d.value !== '' && null !== d.value && undefined !== d.value)
 });
 

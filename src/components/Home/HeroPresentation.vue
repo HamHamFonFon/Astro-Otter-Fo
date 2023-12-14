@@ -16,7 +16,7 @@
         >
 
           <h1 class="text-h2 mt-4 mx-auto text-shades-white">
-            Explore wonders and mysteries of the universe
+            {{ $t('home.explore') }}
           </h1>
         </v-card>
         <v-row class="mt-5">
@@ -27,7 +27,7 @@
                 class="text-white mr-5"
                 color="primary"
                 @click="scrollToSearch"
-            >Search objects</v-btn
+            >{{ $t('home.search') }}</v-btn
             >
           </v-col>
           <v-col cols="12" sm="6">
@@ -38,7 +38,7 @@
                   variant="outlined"
                   class="text-white mr-5"
                   color="grey"
-                >Browse catalogs
+                >{{ $t('home.browse') }}
               </v-btn>
             </router-link>
           </v-col>

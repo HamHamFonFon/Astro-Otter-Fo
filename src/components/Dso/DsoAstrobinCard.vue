@@ -7,7 +7,7 @@
     <v-card class="card-shadow" color="secondary">
       <v-card-title>
         <v-icon icon="mdi-camera-account" class="mr-2" left></v-icon>
-        Astrobin User
+        {{ $t('dso.astrobin.user') }}
       </v-card-title>
       <v-divider></v-divider>
       <v-list-item
@@ -27,7 +27,7 @@
       <v-divider></v-divider>
       <v-card-title>
         <v-icon icon="mdi-data-matrix" class="mr-2" left></v-icon>
-        Astrobin data
+        {{ $t('dso.astrobin.data') }}
       </v-card-title>
       <v-divider></v-divider>
       <v-list-item
@@ -56,7 +56,7 @@
         </div>
       </v-card-item>
       <v-card-actions>
-        <v-btn @click="astrobinPageUrl">Visit Astrobin page</v-btn>
+        <v-btn @click="astrobinPageUrl">{{ $t('dso.astrobin.page')}}</v-btn>
       </v-card-actions>
     </v-card>
   </v-sheet>

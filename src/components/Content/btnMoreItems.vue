@@ -11,12 +11,12 @@
 </template>
 
 <script setup>
-import { toRefs} from "vue";
+import { toRefs } from "vue";
 
 const props = defineProps({
   label: {
     type: String,
-    default: 'Show more'
+    default: ''
   },
   icon: {
     type: String,
@@ -28,7 +28,6 @@ const props = defineProps({
   }
 });
 const { label, icon} = toRefs(props);
-
 const emit = defineEmits(['click-event']);
 const clickEvent = () => {
   emit('click-event');

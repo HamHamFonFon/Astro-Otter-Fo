@@ -13,7 +13,7 @@
             <Message v-if="isLoading" />
             <div v-if="!isLoading">
               <v-card elevation="0" class="mx-auto my-10" color="transparent">
-                <div class="text-left">Leave your message and we'll get back to you shortly. </div>
+                <div class="text-left">{{ $t('contact.header')}}</div>
               </v-card>
               <ContactForm @submit-form="handleContactFormSubmission" />
             </div>
@@ -30,11 +30,14 @@
 <script setup>
 import {computed, defineAsyncComponent, onBeforeMount, ref} from "vue";
 import store from "@/store";
+import { useI18n } from "vue-i18n";
+
 import Message from "@/components/Layout/Message.vue";
 import { messageWs } from '@/repositories/api/contact';
 
+const { t } = useI18n();
 
-const titre = ref('Contact');
+const titre = ref(t('contact.title'));
 const submittedFormData = ref(null);
 
 const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
@@ -48,7 +51,7 @@ const handleContactFormSubmission = (submitFormData) => {
   store.commit('message/setMessage', {
     'loading': true,
     'type': 'warning',
-    'message': 'Sending message in progress',
+    'message': t('contact.send_message'),
     'httpCode': null
   }, { root: true });
   submittedFormData.value = submitFormData;
@@ -59,7 +62,7 @@ const handleContactFormSubmission = (submitFormData) => {
       store.commit('message/setMessage', {
         'loading': true,
         'type': 'success',
-        'message': 'Your message has been received. We will answer you as soon as possible.',
+        'message': t('contact.received_message'),
         'httpCode': null
       }, {root: true});
     } catch (err) {

@@ -1,0 +1,92 @@
+{
+  "error404": {
+    "code": "404 Error",
+    "message": "It seems you fall in a black hole"
+  },
+  "layout": {
+    "btnClose": "Close",
+    "btnMore": "Show more",
+    "copy": "Copy link",
+    "copied": "Link copied"
+  },
+  "share": {
+    "instagram": "Share on Instagram",
+    "twitter": "Share on  X (ex-Twitter)",
+    "facebook": "Share on Facebook",
+    "messenger": "Share on Messenger",
+    "whatsapp": "Share on WhatsApp",
+    "linkedin": "Share on LinkedIn",
+    "twitch": "",
+    "email": "Share by email"
+  },
+  "header": {
+
+  },
+  "footer": {
+    "all_rights": "© All Rights Reserved"
+  },
+  "search": {
+    "label": "Search",
+    "seek": "Seek and find amazing deep space objects",
+    "placeholder": "Search a galaxy, nebula or constellation..."
+  },
+  "home": {
+    "title": "Homepage",
+    "description": "Astro Otter is a celestial atlas containing more than 9600 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel.",
+    "explore": "Explore wonders and mysteries of the universe",
+    "search": "Search objects",
+    "browse": "Browse catalogs"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "",
+    "header": "Leave your message and we'll get back to you shortly.",
+    "send_message": "Sending message in progress",
+    "received_message": "Your message has been received. We will answer you as soon as possible."
+  },
+  "catalogs": {
+    "title": "Catalogs",
+    "description": "Browse all catalogs, seek amazing deep space objects and explore wonders of the universe"
+  },
+  "dso": {
+    "load": "Please wait while loading {uid} data...",
+    "load_list": "Loading data...",
+    "data": {
+      "catalogsLabel": "Catalogs",
+      "otherDesigs": "Others designations",
+      "typeLabel": "Type",
+      "constellation": "Constellation",
+      "magnitude": "Magnitude",
+      "distanceLightYear": "Distance (light-year)",
+      "rightAscencion": "Right ascension",
+      "declinaison": "Declinaison",
+      "discover": "Discover",
+      "discoverYear": "Year",
+      "updatedAt": "Last update"
+    },
+    "title": {
+      "card_information": "Informations"
+    },
+    "carousel": "“{title}” © {user}",
+    "astrobin": {
+      "user": "Astrobin User",
+      "data": "Astrobin data",
+      "page": "Visit Astrobin page"
+    }
+  },
+  "constellations": {
+    "title": "Constellations",
+    "description": "Explore the 88 constellations and discover their different objects"
+  },
+  "constellation": {
+    "filter": {
+      "label": "Filtering constellations",
+      "placeholder": "Filter by name (e.q. 'Orion', 'Andromeda')..."
+    },
+    "load": {
+      "list": "Please wait while loading constellations list.",
+      "loaded": "All constellations are loaded.",
+      "data": "Please wait while loading constellation information"
+    }
+  }
+}

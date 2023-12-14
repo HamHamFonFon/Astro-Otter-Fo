@@ -13,7 +13,7 @@
         >
           <v-row>
             <v-col cols="12" md="6">
-              <p class="my-4 text-grey">Explore wonders and mysteries of the universe</p>
+              <p class="my-4 text-grey">{{ $t('home.explore') }}</p>
             </v-col>
             <v-col cols="12" md="6">
               <div class="d-flex flex-wrap justify-center justify-md-end pb-5">
@@ -50,7 +50,7 @@
             </v-col>
           </v-row>
           <hr class="my-3" />
-          <p class="text-center my-5">© All Rights Reserved</p>
+          <p class="text-center my-5">{{ $t('footer.all_rights') }}</p>
         </v-sheet>
       </v-container>
   </v-sheet>

@@ -18,7 +18,7 @@
       >
 
         <v-row class="title-slider ma-0" align="start">
-          <div class="display-3 text-white">"{{ image.title }}" &copy; {{ image.user }} </div>
+          <div class="display-3 text-white">{{ $t('dso.carousel', {'title': image.title, 'user': image.user}) }}</div>
         </v-row>
       </v-carousel-item>
     </v-carousel>

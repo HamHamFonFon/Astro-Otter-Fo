@@ -47,8 +47,6 @@ const scrollToDsoData = () => {
   </v-parallax>
 </template>
 
-
-
 <style scoped>
 .scrollDown {
   opacity: 1;

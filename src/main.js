@@ -8,6 +8,9 @@ import "./assets/scss/app.scss";
 // Router
 import router from '@/router';
 
+// I18
+import i18n from "@/i18n/i18n";
+
 // Store
 import store from "@/store";
 
@@ -28,6 +31,7 @@ const head = createHead()
 app.config.globalProperties.$axios = axios;
 
 app.use(router);
+app.use(i18n);
 app.use(head)
 app.use(createPrismic(prismicConfig));
 app.use(store);

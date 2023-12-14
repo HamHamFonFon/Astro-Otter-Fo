@@ -58,7 +58,9 @@
 import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, toRefs} from "vue";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const route = useRoute();
 const store = useStore();
 
@@ -81,7 +83,7 @@ const totalRef = ref(0);
 const selectedFilters = ref({});
 const filtersRef = ref([]);
 const urlShare = ref(null);
-const btnLabel = ref('Show more')
+const btnLabel = ref(t('layout.btnMore'))
 const btnIcon = ref('mdi-plus');
 const btnLoading = ref(false);
 
@@ -135,7 +137,7 @@ const fetchDsoList = async () => {
 };
 
 const showMoreItems = async  () => {
-  btnLabel.value = 'Load data...';
+  btnLabel.value = t('dso.load_list');
   btnLoading.value = true;
   try {
     const defaultFilters = {[defaultFilterName.value]: defaultFilterValue.value}
@@ -149,7 +151,7 @@ const showMoreItems = async  () => {
     filtersRef.value = filters;
     totalRef.value = total;
     offset.value += 20;
-    btnLabel.value = 'Show more';
+    btnLabel.value = t('layout.btnMore');
   } catch (err) {
     store.commit('message/setMessage', {
       'loading': true,

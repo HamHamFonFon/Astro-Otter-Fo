@@ -26,7 +26,7 @@
         <v-tooltip
             activator="parent"
             location="left"
-            text="Close"
+            :text="$t('layout.btnClose')"
         ></v-tooltip>
       </v-btn>
 
@@ -63,25 +63,28 @@
     </v-card>
   </transition>
 </template>
+
 <script setup>
 import {computed, reactive, ref} from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 const showButtons = ref(false);
 const showCloseButton = ref(false);
 const socialNetworks = reactive([
   // { label: 'TikTok', icon: 'mdi-tiktok'},
-  {name: 'instagram', label: 'Share on Instagram', icon: 'mdi-instagram', funcName: 'shareOn', param: ''},
-  {name: 'twitter', label: 'Share on  X (ex-Twitter)', icon: 'mdi-twitter', funcName: 'shareOn', param: 'https://twitter.com/intent/tweet?text='},
-  {name: 'facebook', label: 'Share on Facebook', icon: 'mdi-facebook', funcName: 'shareOn', param: 'https://www.facebook.com/sharer/sharer.php?u='},
-  {name: 'messenger', label: 'Share on Messenger', icon: 'mdi-facebook-messenger', funcName: 'shareOn', param: 'fb-messenger://share/?link='},
-  {name: 'whatsapp', label: 'Share on WhatsApp', icon: 'mdi-whatsapp', funcName: 'shareOn', param: 'whatsapp://send?text='},
-  {name: 'linkedin', label: 'Share on LinkedIn', icon: 'mdi-linkedin', funcName: 'shareOn', param: 'https://www.linkedin.com/sharing/share-offsite/?url='},
+  {name: 'instagram', label: t('share.instagram'), icon: 'mdi-instagram', funcName: 'shareOn', param: ''},
+  {name: 'twitter', label: t('share.twitter'), icon: 'mdi-twitter', funcName: 'shareOn', param: 'https://twitter.com/intent/tweet?text='},
+  {name: 'facebook', label: t('share.facebook'), icon: 'mdi-facebook', funcName: 'shareOn', param: 'https://www.facebook.com/sharer/sharer.php?u='},
+  {name: 'messenger', label: t('share.messenger'), icon: 'mdi-facebook-messenger', funcName: 'shareOn', param: 'fb-messenger://share/?link='},
+  {name: 'whatsapp', label: t('share.whatsapp'), icon: 'mdi-whatsapp', funcName: 'shareOn', param: 'whatsapp://send?text='},
+  {name: 'linkedin', label: t('share.linkedin'), icon: 'mdi-linkedin', funcName: 'shareOn', param: 'https://www.linkedin.com/sharing/share-offsite/?url='},
   // {name: 'twitch', label: 'Share on Twitch', icon: 'mdi-twitch'},
-  {name: 'email', label: 'Share by email', icon: 'mdi-email', funcName: '', param: 'mailto:?subject=Check this link'},
+  {name: 'email', label: t('share.email'), icon: 'mdi-email', funcName: '', param: 'mailto:?subject=Check this link'},
 ]);
 
 const copyLink = ref({
-  text: 'Copy link',
+  text: t('layout.copy'),
   icon: 'mdi-bookmark-outline',
   color: 'white'
 });
@@ -95,7 +98,7 @@ const shareOn = (socialNetworkUrl) => {
 }
 
 const pasteUrl = () => {
-  copyLink.value.text = 'Link copied';
+  copyLink.value.text = t('layout.copied');
   copyLink.value.icon = 'mdi-check-all';
   copyLink.value.color = 'green';
   navigator.clipboard.writeText(location.href);
