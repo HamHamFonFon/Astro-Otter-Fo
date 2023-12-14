@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted} from 'vue'
+import {computed, defineAsyncComponent, onBeforeMount} from 'vue'
 import { useI18n } from "vue-i18n";
 import { useRouter} from "vue-router";
 
