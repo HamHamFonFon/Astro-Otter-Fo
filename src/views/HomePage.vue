@@ -26,7 +26,6 @@ import { useRouter} from "vue-router";
 const { t } = useI18n();
 
 import configs from "@/configs";
-import backgroundImage from '@/assets/images/background/bg-1.webp'
 import {applySeo} from "@/services/seo";
 
 /**
