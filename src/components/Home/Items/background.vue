@@ -6,7 +6,7 @@
     elevation="0"
     :style="{
       'background-image': `url(${item.image})`,
-      'background-size': !isMobile ? 'contain' : 'cover',
+      'background-size': 'cover',
       'background-position': 'top',
       'margin': 0
     }"
@@ -55,9 +55,6 @@ const props = defineProps({
 })
 const { item, index } = toRefs(props);
 
-const isMobile = computed(() => {
-  return screen.width <= 760;
-});
 </script>
 
 <style scoped>
