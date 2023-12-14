@@ -54,7 +54,7 @@ onBeforeMount(() => {
   applySeo({
     title: t('home.explore'),
     description: t('home.description'),
-    image: backgroundImage,
+    image: "@/assets/images/logos/astro_otter_200-200.png",
     imageAlt: '',
     fullUrl: ''
   });
