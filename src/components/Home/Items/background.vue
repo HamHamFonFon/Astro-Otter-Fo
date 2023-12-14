@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import {computed, toRefs} from "vue";
+import { toRefs} from "vue";
 
 const props = defineProps({
   item: {
