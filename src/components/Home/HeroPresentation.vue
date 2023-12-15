@@ -24,7 +24,7 @@
             <v-btn
                 block
                 size="x-large"
-                class="text-white mr-5"
+                class="text-white mr-5 font-weight-bold"
                 color="primary"
                 @click="scrollToSearch"
             >{{ $t('home.search') }}</v-btn
@@ -35,7 +35,7 @@
               <v-btn
                   block
                   size="x-large"
-                  class="text-grey mr-5"
+                  class="text-grey mr-5 font-weight-bold"
                   color="grey"
                   variant="outlined"
               ><router-link :to="{name: 'catalogs'}">{{ $t('home.browse') }}</router-link>
