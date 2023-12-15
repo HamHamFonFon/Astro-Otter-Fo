@@ -19,7 +19,7 @@
             {{ $t('home.explore') }}
           </h1>
         </v-card>
-        <v-row class="mt-5">
+        <v-row class="w-auto">
           <v-col cols="12" sm="6">
             <v-btn
                 block
@@ -31,16 +31,15 @@
             >
           </v-col>
           <v-col cols="12" sm="6">
-            <router-link :to="{name: 'catalogs'}">
+
               <v-btn
                   block
                   size="x-large"
-                  variant="outlined"
-                  class="text-white mr-5"
+                  class="text-grey mr-5"
                   color="grey"
-                >{{ $t('home.browse') }}
+                  variant="outlined"
+              ><router-link :to="{name: 'catalogs'}">{{ $t('home.browse') }}</router-link>
               </v-btn>
-            </router-link>
           </v-col>
         </v-row>
       </v-sheet>
