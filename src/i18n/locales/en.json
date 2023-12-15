@@ -7,7 +7,8 @@
     "btnClose": "Close",
     "btnMore": "Show more",
     "copy": "Copy link",
-    "copied": "Link copied"
+    "copied": "Link copied",
+    "submit": "Submit"
   },
   "share": {
     "instagram": "Share on Instagram",
@@ -28,7 +29,9 @@
   "search": {
     "label": "Search",
     "seek": "Seek and find amazing deep space objects",
-    "placeholder": "Search a galaxy, nebula or constellation..."
+    "placeholder": "Search a galaxy, nebula or constellation...",
+    "open": "Open search bar",
+    "close": "Close search bar"
   },
   "home": {
     "title": "Homepage",
@@ -42,11 +45,20 @@
     "description": "",
     "header": "Leave your message and we'll get back to you shortly.",
     "send_message": "Sending message in progress",
-    "received_message": "Your message has been received. We will answer you as soon as possible."
+    "received_message": "Your message has been received. We will answer you as soon as possible.",
+    "topics": {
+      "contact": "Contact Astro-otter team",
+      "data": "Suggest data's addition or correction,",
+      "astrobin": "Suggest an other astrobin image for object",
+      "language": "Suggest language addition or correction",
+      "api": "Question about API",
+      "other": "Other topic"
+    }
   },
   "catalogs": {
     "title": "Catalogs",
-    "description": "Browse all catalogs, seek amazing deep space objects and explore wonders of the universe"
+    "description": "Browse all catalogs, seek amazing deep space objects and explore wonders of the universe",
+    "count": "Results: {nbItems} / {total}"
   },
   "dso": {
     "load": "Please wait while loading {uid} data...",
@@ -88,5 +100,14 @@
       "loaded": "All constellations are loaded.",
       "data": "Please wait while loading constellation information"
     }
+  },
+  "astrobin": {
+    "filters": {
+      "title__icontains": "Title contains…",
+      "user": "Images from user…",
+      "description__icontains":  "Description contains…",
+      "subjects": "Subjects"
+    },
+    "disclaimer": "This product uses the AstroBin API but is not endorsed or certified by AstroBin."
   }
 }

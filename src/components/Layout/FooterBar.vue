@@ -59,7 +59,9 @@
 <script setup>
 import configs from "@/configs";
 import {computed, onMounted, reactive, ref} from "vue";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 import {usePrismic} from "@prismicio/vue";
 const { client, predicate, asText } = usePrismic();
 
@@ -88,7 +90,7 @@ const buildMenu = (footerPages, allRoutes) => {
     let path = routeItem.path;
     return {
       key: routeItem.meta.key,
-      text: routeItem.meta.text,
+      text: t(`${routeName}.title`),
       path: path
     }
   });

@@ -3,7 +3,7 @@
 
   <v-toolbar height="30">
     <v-toolbar-title class="text-h6 align-center">
-      This product uses the AstroBin API but is not endorsed or certified by AstroBin.
+      {{ $t('astrobin.disclaimer')}}
     </v-toolbar-title>
   </v-toolbar>
 
@@ -29,7 +29,7 @@
                   </v-col>
                   <v-col cols="12" sm="4" align="right">
                     <v-select
-                        label="Sort results by..."
+                        label="Sort results by…"
                         variant="outlined"
                         required
                         clearable
@@ -53,7 +53,7 @@
                       color="grey"
                       v-if="totalCount > countItems"
                       @click="moreItems"
-                  > <span>Show more</span> </v-btn>
+                  > <span>{{ $t('layout.btnMore')}}</span> </v-btn>
                 </v-row>
               </v-sheet>
             </v-sheet>

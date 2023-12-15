@@ -4,7 +4,7 @@
       <v-col cols="12" sm="4">
 
         <v-select
-          label="Filtering by..."
+          label="Filtering by…"
           v-model="formData.type"
           :items="astrobinFiltersRef"
           item-value="text"

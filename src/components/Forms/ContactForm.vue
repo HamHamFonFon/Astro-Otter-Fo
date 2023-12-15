@@ -121,7 +121,7 @@
           size="x-large"
           variant="outlined"
           class="text-white mr-5"
-        > Submit </v-btn>
+        > {{ $t('layout.submit')}} </v-btn>
       </v-col>
     </v-row>
   </v-form>
@@ -129,9 +129,11 @@
 
 <script setup>
 import {computed, reactive, ref} from "vue";
+
 // VueValidate
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
+
 //Recaptcha
 import { hcaptcha } from "@/configs/captcha";
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';

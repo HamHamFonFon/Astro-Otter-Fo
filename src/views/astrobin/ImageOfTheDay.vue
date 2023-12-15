@@ -14,7 +14,7 @@
 
       <v-toolbar height="30">
         <v-toolbar-title class="text-h6 align-center">
-          This product uses the AstroBin API but is not endorsed or certified by AstroBin.
+          {{ $t('astrobin.disclaimer') }}
         </v-toolbar-title>
       </v-toolbar>
 

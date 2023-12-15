@@ -23,7 +23,7 @@
         <!-- Sorts -->
         <v-row>
           <v-col align-self="start" cols="6" sm="6">
-            <span class="text-white">{{ nbItems }} items on {{ totalRef }}</span>
+            <span class="text-white">{{ $t('catalogs.count', {'nbItems': nbItems, 'total': totalRef}) }}</span>
           </v-col>
         </v-row>
 

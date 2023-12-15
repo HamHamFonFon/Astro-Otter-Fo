@@ -42,7 +42,7 @@
             :placeholder="$t('search.placeholder')"
         ></v-text-field>
       </Transition>
-      <v-btn icon @click="toggleInputSearch">
+      <v-btn icon @click="toggleInputSearch" :title="searchTitleValue">
         <v-icon>{{ iconSearch }}</v-icon>
       </v-btn>
     </v-toolbar>
@@ -86,9 +86,10 @@ const showSearch = ref(false);
 const iconSearch = ref('mdi-magnify');
 
 const inputSearch = ref(null);
+const searchTitleValue = ref(t('search.open'));
 const inputSearchItems = ref('');
-const results = ref([]);
 
+const results = ref([]);
 const loading = ref(false);
 
 const isMobile = computed(() => {
@@ -122,6 +123,7 @@ const buildMenu = (items, allRoutes) => {
 const toggleInputSearch = () => {
   showSearch.value = !showSearch.value;
   iconSearch.value = (false === showSearch.value) ? 'mdi-magnify': 'mdi-close';
+  searchTitleValue.value = (false === showSearch.value) ? t('search.open') : t('search.close')
   if (false === showSearch.value) {
     results.value = [];
     inputSearchItems.value = '';
