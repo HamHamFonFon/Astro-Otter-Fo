@@ -10,15 +10,10 @@
       </router-link>
       <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
 
-<!--      <CustomIcon icon-name="constellation"></CustomIcon>-->
-<!--      <v-icon :icon="$vuetify.icons.constellation.default"></v-icon>-->
-<!--      <CustomIcon icon-name="test"/>-->
-
-
       <v-btn v-for="(menuItem, index) in processedMenu(menu, props.allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
           <span v-if="!isMobile" class="text-grey">{{ menuItem.text }}</span>
-<!--          <v-icon v-else-if="this.$isMobile()"></v-icon>-->
+          <v-icon v-else-if="isMobile">{{ menuItem.icon }}</v-icon>
         </router-link>
       </v-btn>
 
@@ -49,20 +44,38 @@
   </v-app-bar>
 
   <div class="resultsHeader" v-if="results && 0 < results.length">
-    <ul
-        color="transparent"
-    >
-      <li
+    <v-card color="transparent">
+      <v-list lines="two" bg-color="transparent">
+        <v-list-subheader inset>Objects</v-list-subheader>
+        <v-list-item
+          color="transparent"
+
           v-for="item in results"
-          v-bind:key="item"
-          @click="toggleInputSearch"
-      >
-        <router-link :to="{ name: 'dso', params: { id: item.id } }">
-          <span class="v-list-item-title">{{ item.text }}</span>
-          <span class="v-list-item-subtitle">{{ item.type }}</span>
-        </router-link>
-      </li>
-    </ul>
+          :key="item"
+          :prepend-avatar="logo"
+        >
+          <router-link :to="{ name: 'dso', params: { id: item.id } }">
+            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-subtitle v-text="item.text"></v-list-item-subtitle>
+          </router-link>
+        </v-list-item>
+
+        <v-divider inset></v-divider>
+        <v-list-subheader inset color="transparent">Constellations</v-list-subheader>
+      </v-list>
+    </v-card>
+<!--    <ul color="transparent">-->
+<!--      <li-->
+<!--          v-for="item in results"-->
+<!--          v-bind:key="item"-->
+<!--          @click="toggleInputSearch"-->
+<!--      >-->
+<!--        <router-link :to="{ name: 'dso', params: { id: item.id } }">-->
+<!--          <span class="v-list-item-title">{{ item.text }}</span>-->
+<!--          <span class="v-list-item-subtitle">{{ item.type }}</span>-->
+<!--        </router-link>-->
+<!--      </li>-->
+<!--    </ul>-->
   </div>
 </template>
 
@@ -75,9 +88,6 @@ const { t } = useI18n();
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
 import {searchItems} from "@/services/autocompleteSearch";
-
-// Components
-// const CustomIcon = defineAsyncComponent(() => import("@/components/icons/CustomIcon.vue"));
 
 // Data
 const menu = ref(configs.headerMenu);
@@ -143,3 +153,10 @@ watch(inputSearchItems, (newSearch) => {
 });
 
 </script>
+
+<style>
+.v-list-item:hover {
+  background: #1ed760;
+  color: #a7b6bf;
+}
+</style>

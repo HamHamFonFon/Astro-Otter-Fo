@@ -7,7 +7,6 @@ import backgroundAstrobin from '@/assets/images/background/astrobin.png'
 import backgroundIOTD from '@/assets/images/background/bg-6.webp'
 import backgroundConstellation from '@/assets/images/background/constellations.jpg'
 import backgroundCatalogs from '@/assets/images/background/background_vlt.jpg';
-import CustomIcon from "@/components/icons/CustomIcon.vue"; // '@/assets/images/background/bg-4.webp'
 
 const routes = [
     {
@@ -34,7 +33,7 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.catalogs",
-            icon: CustomIcon,
+            icon: 'iconDso',
             image: backgroundCatalogs,
         }
     },
@@ -55,7 +54,7 @@ const routes = [
         meta: {
             layout: 'page',
             key: "menu.constellations",
-            icon: 'constellation',
+            icon: 'iconConstellation',
             image: backgroundConstellation,
         }
     },
