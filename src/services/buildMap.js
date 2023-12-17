@@ -48,7 +48,7 @@ export const buildMap = (
 
     let backgroundConfig = {
         background: {
-            fill: "#0B182B",   // Area fill
+            fill: "#404040",   // Area fill
             opacity: 1,
             stroke: "#2B2A34", // Outline
             width: 1.5
@@ -77,9 +77,9 @@ export const buildMap = (
                     "11px Helvetica, Arial, sans-serif"]
             },// ranked constellations
             lines: true,   // Show constellation lines, style below
-            linestyle: {stroke: "#cccccc", width: 1, opacity: 0.6},
+            linestyle: {stroke: "#A06060", width: 1, opacity: 0.6},
             bounds: true, // Show constellation boundaries, style below
-            boundstyle: {stroke: "#cccc00", width: 0.5, opacity: 0.8, dash: [2, 4]}
+            boundstyle: {stroke: "#346464", width: 0.5, opacity: 0.8, dash: [2, 4]}
         }
     }
 
