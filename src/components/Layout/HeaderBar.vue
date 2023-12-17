@@ -155,8 +155,10 @@ watch(inputSearchItems, (newSearch) => {
 </script>
 
 <style>
-.v-list-item:hover {
-  background: #1ed760;
-  color: #a7b6bf;
+.resultsHeader {
+  .v-list-item:hover {
+    background: #1ed760;
+    color: #1B2A32;
+  }
 }
 </style>
