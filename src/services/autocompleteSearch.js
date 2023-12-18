@@ -9,15 +9,30 @@ export const searchItems = async (terms) => {
         //     console.log('Regex do not match')
         //     return null;
         // }
-        let data = await searchWS.GET_SEARCH_ITEMS(terms);
-        return data.map(item => {
-            let otherDesigs = (0 < Object.keys(item.otherDesigs)) ? ' ('+ Object.values(item.otherDesigs).join(', ')+')' : ''
-            return {
-                id: item.id,
-                text: item.fullNameAlt + otherDesigs,
-                type: item.typeLabel,
-                constellation: item.constellation
-            }
+        let { dsos, constellations } = await searchWS.GET_SEARCH_ITEMS(terms);
+
+        let dsosList = dsos.map(item => {
+          let otherDesigs = (0 < Object.keys(item.otherDesigs)) ? ' ('+ Object.values(item.otherDesigs).join(', ')+')' : ''
+          return {
+            id: item.id,
+            text: item.fullNameAlt + otherDesigs,
+            type: item.typeLabel,
+            cover: null
+          }
+        });
+
+        let constellationsList = constellations.map(item => {
+          return {
+            id: item.id.toLowerCase(),
+            text: item.alt,
+            cover: item.cover
+          }
         })
+
+        return {
+          'dsos': dsosList,
+          'constellations': constellationsList,
+          'nbItems': (dsosList.length + constellationsList.length)
+        }
     }
 };

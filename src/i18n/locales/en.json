@@ -30,7 +30,7 @@
   "search": {
     "label": "Search",
     "seek": "Seek and find amazing deep space objects",
-    "placeholder": "Search a galaxy, nebula or constellation...",
+    "placeholder": "Search a galaxy, nebula or constellation…",
     "open": "Open search bar",
     "close": "Close search bar"
   },
@@ -62,8 +62,8 @@
     "count": "Results: {nbItems} / {total}"
   },
   "dso": {
-    "load": "Please wait while loading {uid} data...",
-    "load_list": "Loading data...",
+    "load": "Please wait while loading {uid} data…",
+    "load_list": "Loading data…",
     "data": {
       "catalogsLabel": "Catalogs",
       "otherDesigs": "Others designations",
@@ -94,7 +94,7 @@
   "constellation": {
     "filter": {
       "label": "Filtering constellations",
-      "placeholder": "Filter by name (e.q. 'Orion', 'Andromeda')..."
+      "placeholder": "Filter by name (e.q. 'Orion', 'Andromeda')…"
     },
     "load": {
       "list": "Please wait while loading constellations list.",

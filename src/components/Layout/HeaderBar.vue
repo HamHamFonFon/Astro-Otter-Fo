@@ -43,55 +43,25 @@
     </v-toolbar>
   </v-app-bar>
 
-  <div class="resultsHeader" v-if="results && 0 < results.length">
-    <v-card color="transparent">
-      <v-list lines="two" bg-color="transparent">
-        <v-list-subheader inset>Objects</v-list-subheader>
-        <v-list-item
-          color="transparent"
-
-          v-for="item in results"
-          :key="item"
-          :prepend-avatar="logo"
-        >
-          <router-link :to="{ name: 'dso', params: { id: item.id } }">
-            <v-list-item-title v-text="item.text"></v-list-item-title>
-            <v-list-item-subtitle v-text="item.text"></v-list-item-subtitle>
-          </router-link>
-        </v-list-item>
-
-        <v-divider inset></v-divider>
-        <v-list-subheader inset color="transparent">Constellations</v-list-subheader>
-      </v-list>
-    </v-card>
-<!--    <ul color="transparent">-->
-<!--      <li-->
-<!--          v-for="item in results"-->
-<!--          v-bind:key="item"-->
-<!--          @click="toggleInputSearch"-->
-<!--      >-->
-<!--        <router-link :to="{ name: 'dso', params: { id: item.id } }">-->
-<!--          <span class="v-list-item-title">{{ item.text }}</span>-->
-<!--          <span class="v-list-item-subtitle">{{ item.type }}</span>-->
-<!--        </router-link>-->
-<!--      </li>-->
-<!--    </ul>-->
+  <div class="resultsHeader">
+    <SearchListCard v-if="showSearch" :results="results" @click-clear="toggleInputSearch"></SearchListCard>
   </div>
 </template>
 
 <script setup>
-import {computed, ref, watch} from "vue";
+import {computed, defineAsyncComponent, ref, watch} from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
+const SearchListCard = defineAsyncComponent(() => import('@/components/Items/SearchListCard.vue'));
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
 import {searchItems} from "@/services/autocompleteSearch";
 
 // Data
+const logo = ref(astroOtterLogo)
 const menu = ref(configs.headerMenu);
-const logo = ref(astroOtterLogo);
 const showSearch = ref(false);
 const iconSearch = ref('mdi-magnify');
 
@@ -154,11 +124,5 @@ watch(inputSearchItems, (newSearch) => {
 
 </script>
 
-<style>
-.resultsHeader {
-  .v-list-item:hover {
-    background: #1ed760;
-    color: #1B2A32;
-  }
-}
-</style>
+
+

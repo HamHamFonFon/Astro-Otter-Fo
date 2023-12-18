@@ -30,24 +30,25 @@
               clearable="clearable"
             ></v-text-field>
 
-            <v-list v-if="results && 0 < results.length" class="listeResults" >
-              <v-list-item
-                v-for="item in results"
-                color="appBarColor"
-                v-bind:key="item"
-                left
-              >
-                <router-link :to="{ name: 'dso', params: { id: item.id } }">
-                  <v-list-item-title>
-                    {{ item.text }}
-                  </v-list-item-title>
+            <SearchListCard :results="results"></SearchListCard>
+<!--            <v-list v-if="results && 0 < results.length" class="listeResults" >-->
+<!--              <v-list-item-->
+<!--                v-for="item in results.dsos"-->
+<!--                color="appBarColor"-->
+<!--                v-bind:key="item"-->
+<!--                left-->
+<!--              >-->
+<!--                <router-link :to="{ name: 'dso', params: { id: item.id } }">-->
+<!--                  <v-list-item-title>-->
+<!--                    {{ item.text }}-->
+<!--                  </v-list-item-title>-->
 
-                  <v-list-item-subtitle>
-                    {{ item.type }}
-                  </v-list-item-subtitle>
-                </router-link>
-              </v-list-item>
-            </v-list>
+<!--                  <v-list-item-subtitle>-->
+<!--                    {{ item.type }}-->
+<!--                  </v-list-item-subtitle>-->
+<!--                </router-link>-->
+<!--              </v-list-item>-->
+<!--            </v-list>-->
           </v-col>
         </v-row>
 
@@ -58,7 +59,8 @@
 
 <script setup>
 import {searchItems} from "@/services/autocompleteSearch";
-import { ref, watch} from "vue";
+import {defineAsyncComponent, ref, watch} from "vue";
+const SearchListCard = defineAsyncComponent(() => import("@/components/Items/SearchListCard.vue"));
 
 const inputSearchItems = ref('');
 const results = ref([]);
