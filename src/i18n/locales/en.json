@@ -11,6 +11,10 @@
     "submit": "Submit",
     "btnExplore": "Explore"
   },
+  "languages": {
+    "en": "English",
+    "fr": "French"
+  },
   "share": {
     "instagram": "Share on Instagram",
     "twitter": "Share on  X (ex-Twitter)",
@@ -54,6 +58,15 @@
       "language": "Suggest language addition or correction",
       "api": "Question about API",
       "other": "Other topic"
+    },
+    "form": {
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "email": "Email",
+      "confirmEmail": "Confirm email",
+      "topic": "Pick an option",
+      "country": "Pick a country",
+      "message": "Message"
     }
   },
   "catalogs": {

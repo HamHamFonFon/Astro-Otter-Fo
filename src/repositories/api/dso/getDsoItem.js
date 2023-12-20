@@ -1,6 +1,7 @@
 import * as WS from '@/repositories/api/abstractWebservice';
 import axios from "@/services/axiosApi";
 import {endpoint} from "@/repositories/api/dso/endpoint";
+import Trans from "@/services/translation";
 
 export const GET_DSO_ITEM = async (id) => {
     if ('' === id || null === id) {
@@ -10,7 +11,7 @@ export const GET_DSO_ITEM = async (id) => {
     }
 
     try {
-        let config = WS.buildApiHeaders(null, null, null);
+        let config = WS.buildApiHeaders({"Accept-Language": Trans.currentLocale}, null, null);
         let endpointId = endpoint.ITEM + id;
         const response = await axios.get(endpointId, config);
         if (200 !== response.status) {

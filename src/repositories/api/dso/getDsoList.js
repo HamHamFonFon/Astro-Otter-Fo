@@ -1,7 +1,7 @@
 import * as WS from '@/repositories/api/abstractWebservice';
 import axiosApi from "@/services/axiosApi";
 import {endpoint} from "@/repositories/api/dso/endpoint";
-
+import Trans from "@/services/translation";
 export const GET_DSO_LIST = async (params, offset, limit) => {
     offset = offset ?? 0;
     limit = limit ?? 20;
@@ -14,7 +14,7 @@ export const GET_DSO_LIST = async (params, offset, limit) => {
                 limit: limit
             }
         }
-        const config = WS.buildApiHeaders(null, queryParams, null);
+        const config = WS.buildApiHeaders({"Accept-Language": Trans.currentLocale}, queryParams, null);
         const response = await axiosApi.get(endpoint.LIST, config);
         if (200 !== response.status) {
             const error = new Error(response.statusText);

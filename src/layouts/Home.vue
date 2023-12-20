@@ -1,9 +1,8 @@
 <template>
-  <!-- No headerBar -->
-
   <!-- Body -->
   <v-main class="main-container">
     <div class="flex-fill">
+<!--      <LanguageSwitcher></LanguageSwitcher>-->
       <slot></slot>
 
       <SocialSharing />
@@ -19,6 +18,7 @@
 import {computed, defineAsyncComponent} from "vue";
 import {useRoute, useRouter} from "vue-router";
 const route = useRoute();
+
 import {applySeo} from "@/services/seo";
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 
@@ -29,6 +29,8 @@ applySeo({
   imageAlt: route.meta.title,
   fullUrl: route.fullPath
 });
+
+// const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/LanguageSwitcher.vue'))
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
 

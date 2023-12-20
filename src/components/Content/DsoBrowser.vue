@@ -7,14 +7,14 @@
         <v-row>
           <v-col cols="12" :sm="getCountColumns(filtersBy)" v-for="(filtersByTypeData, type) in filtersBy" v-bind:key="type">
             <v-select
-                v-model="selectedFilters[type]"
-                :label="type"
-                variant="outlined"
-                :items="filtersByTypeData"
-                item-title="label"
-                item-value="name"
-                @update:modelValue="fetchDsoList"
-                clearable
+              v-model="selectedFilters[type]"
+              :label="type"
+              variant="outlined"
+              :items="filtersByTypeData"
+              item-title="label"
+              item-value="name"
+              @update:modelValue="fetchDsoList"
+              clearable
             >
             </v-select>
           </v-col>
@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, toRefs} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, toRefs, watch} from "vue";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
 import { useI18n } from "vue-i18n";
@@ -68,6 +68,7 @@ const store = useStore();
 import { saveShareLink } from '@/services/saveShareLink';
 import {DsoWs} from "@/repositories/api/dso";
 import { geoJsonServices } from '@/services/geojson';
+import Trans from "@/services/translation"
 
 // Components
 const ItemsLists = defineAsyncComponent(() => import('@/components/Items/ItemsList.vue'));
@@ -109,21 +110,24 @@ onMounted(() => {
   fetchDsoList();
 })
 
+// When changing locale
+watch(() => Trans.currentLocale, () => {
+  fetchDsoList();
+});
+
 // Methods
 const fetchDsoList = async () => {
   try {
     const defaultFilters = {[defaultFilterName.value]: defaultFilterValue.value}
-    const locale = {locale: 'en'};
     let params = {
       ...defaultFilters,
-      ...selectedFilters.value,
-      ...locale
+      ...selectedFilters.value
     };
     const {data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
     items.value = data;
     filtersRef.value = filters;
     totalRef.value = total;
-    offset.value = 20;
+    offset.value = limit.value;
     urlShare.value = saveShareLink(route.path, params);
     // store.commit('message/setLoading', false);
   } catch (error) {
@@ -150,7 +154,7 @@ const showMoreItems = async  () => {
     items.value = [...items.value, ...data]
     filtersRef.value = filters;
     totalRef.value = total;
-    offset.value += 20;
+    offset.value += limit.value;
     btnLabel.value = t('layout.btnMore');
   } catch (err) {
     store.commit('message/setMessage', {
@@ -169,16 +173,15 @@ const getCountColumns = (filters) => 12/Object.keys(filters).length;
 const nbItems = computed(() => items.value.length);
 const filtersBy = computed(() => {
   return Object.keys(filtersRef.value)
-      .filter((type) => type !== defaultFilterName.value)
-      .reduce((obj, key) => {
-        return Object.assign(obj, {
-          [key]: filtersRef.value[key]
-        });
-      }, {})
+    .filter((type) => type !== defaultFilterName.value)
+    .reduce((obj, key) => {
+      return Object.assign(obj, {
+        [key]: filtersRef.value[key]
+      });
+    }, {})
 });
 const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso(items.value))
 </script>
 
 <style scoped>
-
 </style>

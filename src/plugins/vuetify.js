@@ -7,6 +7,9 @@ import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import * as labs from "vuetify/labs/components";
 
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
+import { useI18n } from 'vue-i18n'
+import i18n from "@/i18n/i18n";
 // import ConstellationIcon from "@/icons/ConstellationIcon.vue";
 
 const AstroOtterLightThemes = {
@@ -84,6 +87,9 @@ export default createVuetify({
     VRadioGroup: {
       color: '#1ed760',
     }
+  },
+  locale: {
+    adapter: createVueI18nAdapter({i18n , useI18n})
   },
   options: {
     customProperties: true

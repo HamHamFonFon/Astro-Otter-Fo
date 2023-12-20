@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="6">
         <v-text-field
-            label="Firstname"
+            :label="t('contact.form.firstname')"
             v-model="state.firstname"
             variant="outlined"
             :error="v$.firstname.$error"
@@ -16,7 +16,7 @@
 
       <v-col cols="12" sm="6">
         <v-text-field
-          label="Lastname"
+          :label="t('contact.form.lastname')"
           v-model="state.lastname"
           variant="outlined"
           :error="v$.lastname.$error"
@@ -34,7 +34,7 @@
         <v-text-field
           type="email"
           v-model="state.email"
-          label="email"
+          :label="t('contact.form.email')"
           variant="outlined"
           :error="v$.email.$error"
           :error-messages="errors.email"
@@ -46,7 +46,7 @@
         <v-text-field
           type="email"
           v-model="state.confirmEmail"
-          label="Confirm email"
+          :label="t('contact.form.confirmEmail')"
           variant="outlined"
           :error="v$.confirmEmail.$error"
           :error-messages="errors.confirmEmail"
@@ -61,7 +61,7 @@
         <v-select
           clearable
           text-align="left"
-          label="Select an option"
+          :label="t('contact.form.topic')"
           :items="optionsTopic"
           item-title="value"
           item-value="key"
@@ -74,7 +74,7 @@
         <v-select
             clearable
             text-align="left"
-            label="Select a country"
+            :label="t('contact.form.country')"
             :items="optionsCountries"
             item-title="value"
             item-value="key"
@@ -89,7 +89,7 @@
         <v-textarea
           variant="outlined"
           v-model="state.message"
-          label="Message"
+          :label="t('contact.form.message')"
           :error="v$.message.$error"
           :error-messages="errors.message"
         ></v-textarea>
@@ -129,6 +129,10 @@
 
 <script setup>
 import {computed, reactive, ref} from "vue";
+
+// I18n
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 // VueValidate
 import { useVuelidate } from '@vuelidate/core';

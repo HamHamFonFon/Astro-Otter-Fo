@@ -1,10 +1,11 @@
 import {endpoint} from "@/repositories/api/constellations/endpoint";
 import * as WS from "@/repositories/api/abstractWebservice";
 import axios from "@/services/axiosApi";
+import Trans from "@/services/translation";
 
 export const GET_CONSTELLATION_LIST = async () => {
     try {
-        let config = WS.buildApiHeaders(null, null, null);
+        let config = WS.buildApiHeaders({"Accept-Language": Trans.currentLocale}, null, null);
         const response = await axios.get(endpoint.LIST, config);
         if (200 !== response.status) {
             const error = new Error(response.statusText);

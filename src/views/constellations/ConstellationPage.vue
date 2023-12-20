@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -57,6 +57,7 @@ const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vu
 import { geoJsonServices } from "@/services/geojson";
 import { ConstellationWs } from "@/repositories/api/constellations";
 import {applySeo} from "@/services/seo";
+import Trans from "@/services/translation";
 
 // Constellation
 const constellationId = ref(route.params.constellationId);
@@ -74,6 +75,11 @@ onBeforeMount(() => {
 onMounted(() => {
   fetchConstellation();
 });
+
+watch(() => Trans.currentLocale, () => {
+  fetchConstellation();
+});
+
 
 /**
  * Load constellation Data

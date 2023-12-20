@@ -17,29 +17,33 @@
         </router-link>
       </v-btn>
 
-      <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
+      <v-spacer></v-spacer>
       <Transition>
         <v-text-field
-            v-if="!isMobile"
-            v-show="showSearch"
+          v-if="!isMobile"
+          v-show="showSearch"
 
-            ref="inputSearch"
-            v-model="inputSearchItems"
-            :loading="loading"
+          ref="inputSearch"
+          v-model="inputSearchItems"
+          :loading="loading"
 
-            color="secondary"
-            variant="outlined"
-            density="comfortable"
-            clearable
-            prepend-inner-icon="mdi-magnify"
-            hide-no-data
-            hide-details
-            :placeholder="$t('search.placeholder')"
+          color="secondary"
+          variant="outlined"
+          density="comfortable"
+          clearable
+          prepend-inner-icon="mdi-magnify"
+          hide-no-data
+          hide-details
+          :placeholder="$t('search.placeholder')"
         ></v-text-field>
       </Transition>
+
       <v-btn icon @click="toggleInputSearch" :title="searchTitleValue">
         <v-icon>{{ iconSearch }}</v-icon>
       </v-btn>
+
+      <div class="d-flex float-right"><LanguageSwitcher /></div>
+
     </v-toolbar>
   </v-app-bar>
 
@@ -55,6 +59,8 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 const SearchListCard = defineAsyncComponent(() => import('@/components/Items/SearchListCard.vue'));
+const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/LanguageSwitcher.vue'))
+
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
 import {searchItems} from "@/services/autocompleteSearch";

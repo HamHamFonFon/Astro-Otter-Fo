@@ -39,6 +39,7 @@ const store = useStore();
 const { client, asText, asHTML, asDate } = usePrismic()
 
 import {applySeo} from "@/services/seo";
+import Trans from "@/services/translation";
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
 const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));
 
@@ -80,7 +81,7 @@ onMounted(() => {
  */
 const fetchPriscmicData = async (uidPrismic) => {
   try {
-    const document = await client.getByUID('editorial_page', uidPrismic, { lang: 'en-gb' });
+    const document = await client.getByUID('editorial_page', uidPrismic, { lang: Trans.getPrismicLocale() });
     if (!document) {
       await router.push('/404');
     }
@@ -107,7 +108,6 @@ const titlePage = computed(() => asText(prismicData.title) );
 const contentPage = computed(() => asHTML(prismicData.content))
 const updatedPage = computed(() => asDate(prismicData.last_update))
 const { seoTitle, seoDesc } = computed(() => {
-  console.log(asText(prismicData.seo_title))
   return {
     'seoTitle': asText(prismicData.seo_title),
     'seoDesc': asText(prismicData.seo_description)

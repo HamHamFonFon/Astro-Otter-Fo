@@ -30,8 +30,8 @@ const head = createHead()
 
 app.config.globalProperties.$axios = axios;
 
-app.use(router);
 app.use(i18n);
+app.use(router);
 app.use(head)
 app.use(createPrismic(prismicConfig));
 app.use(store);

@@ -12,10 +12,10 @@
             max-width="1600"
         >
           <v-row>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="5">
               <p class="my-4 text-grey">{{ $t('home.explore') }}</p>
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="7">
               <div class="d-flex flex-wrap justify-center justify-md-end pb-5">
                 <v-btn v-for="(socialNetwork, index) in socialNetworks"
                        v-bind:key="index"
@@ -65,6 +65,7 @@ const { t } = useI18n();
 import {usePrismic} from "@prismicio/vue";
 const { client, predicate, asText } = usePrismic();
 
+import Trans from "@/services/translation";
 const socialNetworks = ref(configs.socialNetworks);
 const footerPages = ref(configs.footerPages);
 
@@ -99,7 +100,7 @@ const buildMenu = (footerPages, allRoutes) => {
 const processedFooterMenu = computed(() => buildMenu );
 const processedFooterPrismic = async () => {
   try {
-    const items = await client.query(predicate.at('document.type', 'editorial_page'));
+    const items = await client.query(predicate.at('document.type', 'editorial_page'), { lang: Trans.getPrismicLocale() });
     if (0 === items.results_size) {
       return null;
     }

@@ -4,7 +4,7 @@
       class="landing-warpper"
       color="transparent"
   >
-    <TitlePage :title="titre" />
+    <TitlePage :title="t('contact.title')" />
 
     <v-container class="text-left" >
       <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="background">
@@ -32,12 +32,10 @@ import {computed, defineAsyncComponent, onBeforeMount, ref} from "vue";
 import store from "@/store";
 import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 import Message from "@/components/Layout/Message.vue";
 import { messageWs } from '@/repositories/api/contact';
 
-const { t } = useI18n();
-
-const titre = ref(t('contact.title'));
 const submittedFormData = ref(null);
 
 const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitlePage.vue'));

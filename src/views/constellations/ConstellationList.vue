@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
 import { useI18n } from "vue-i18n";
 
@@ -51,6 +51,7 @@ const { t } = useI18n();
 import backgroundConstellationImage from '@/assets/images/background/constellations.jpg';
 import {ConstellationWs} from "@/repositories/api/constellations";
 import {applySeo} from "@/services/seo";
+import Trans from "@/services/translation";
 
 // Components
 const Message = defineAsyncComponent(() => import('@/components/Layout/Message.vue'));
@@ -89,6 +90,11 @@ onMounted(() => {
     fullUrl: ''
   });
 })
+
+watch(() => Trans.currentLocale, () => {
+  constellationsRef.value = [];
+  fetchListConstellations();
+});
 
 /**
  * Functions

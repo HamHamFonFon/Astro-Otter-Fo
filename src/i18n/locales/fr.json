@@ -11,6 +11,10 @@
     "submit": "Valider",
     "btnExplore": "Explore"
   },
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français"
+  },
   "share": {
     "instagram": "Partager sur Instagram",
     "twitter": "Partager sur X (ex-Twitter)",
@@ -42,7 +46,7 @@
     "browse": "Parcourir les catalogues"
   },
   "contact": {
-    "title": "Contact",
+    "title": "Nous contacter",
     "description": "",
     "header": "Laissez-nous un message, nous reviendrons vers vous dès que possible.",
     "send_message": "Envoie du message en cours",
@@ -54,6 +58,15 @@
       "language": "Proposer l'ajout ou la correction d'une traduction",
       "api": "Question sur l'API",
       "other": "Autre sujet"
+    },
+    "form": {
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "email": "Email",
+      "confirmEmail": "Confirmez l'email",
+      "topic": "Selectionnez une option",
+      "country": "Selectionnez un pays",
+      "message": "Message"
     }
   },
   "catalogs": {
