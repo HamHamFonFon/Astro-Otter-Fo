@@ -15,12 +15,16 @@
 
         <!-- Description -->
         <v-row v-if="constellationRef.value.description">
-          <v-col cols="12" md="6">
-            <v-sheet elevation="0">
-              <v-card elevation="0" max-width="800" class="mx-auto my-10">
-                {{ constellationRef.value.description }}
-              </v-card>
-            </v-sheet>
+          <v-col cols="12" md="12">
+            <v-container class="text-justify" >
+              <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="background">
+                <v-sheet class="pa-3" elevation="0" color="transparent">
+                  <v-container>
+                    <div class="richtext">{{ constellationRef.value.description }}</div>
+                  </v-container>
+                </v-sheet>
+              </v-sheet>
+            </v-container>
           </v-col>
         </v-row>
 
@@ -75,6 +79,14 @@ onBeforeMount(() => {
 onMounted(() => {
   fetchConstellation();
 });
+
+watch(
+  () => route.params.constellationId,
+  async newConstellationId => {
+    constellationId.value = newConstellationId;
+    await fetchConstellation();
+  }
+)
 
 watch(() => Trans.currentLocale, () => {
   fetchConstellation();

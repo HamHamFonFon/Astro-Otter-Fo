@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref} from "vue";
+import {computed, defineAsyncComponent, onBeforeMount, onMounted, reactive, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useStore} from "vuex";
 import { usePrismic } from '@prismicio/vue'
@@ -62,9 +62,9 @@ onBeforeMount(() => {
     'httpCode': null
   });
 })
-onMounted(() => {
+onMounted(async () => {
   store.commit('message/setLoading', false);
-  fetchPriscmicData(uid.value)
+  await fetchPriscmicData();
   applySeo({
     title: seoTitle,
     description: seoDesc,
@@ -73,15 +73,21 @@ onMounted(() => {
     fullUrl: route.fullPath
   })
 })
+watch(
+  () => route.params.uid,
+  async newUid => {
+    uid.value = newUid;
+    await fetchPriscmicData();
+  }
+)
 
 /**
  *
- * @param uidPrismic
  * @returns {Promise<void>}
  */
-const fetchPriscmicData = async (uidPrismic) => {
+const fetchPriscmicData = async () => {
   try {
-    const document = await client.getByUID('editorial_page', uidPrismic, { lang: Trans.getPrismicLocale() });
+    const document = await client.getByUID('editorial_page', uid.value, { lang: Trans.getPrismicLocale() });
     if (!document) {
       await router.push('/404');
     }
