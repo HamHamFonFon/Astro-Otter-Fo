@@ -2,9 +2,8 @@
   <!-- Body -->
   <v-main class="main-container">
     <div class="flex-fill">
-<!--      <LanguageSwitcher></LanguageSwitcher>-->
       <slot></slot>
-
+      <HeaderBarHome />
       <SocialSharing />
       <BackToTop />
     </div>
@@ -30,7 +29,7 @@ applySeo({
   fullUrl: route.fullPath
 });
 
-// const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/LanguageSwitcher.vue'))
+const HeaderBarHome = defineAsyncComponent(() => import('@/components/Layout/HeaderBarHome.vue'))
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
 

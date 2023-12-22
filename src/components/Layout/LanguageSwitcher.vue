@@ -4,9 +4,23 @@ import { useLocale } from "vuetify";
 
 import CountryFlag from 'vue-country-flag-next'
 import Tr from "@/services/translation"
+import {toRefs} from "vue";
 
 const { t } = useI18n();
 const { current } = useLocale();
+
+const props = defineProps({
+  btnColor: {
+    type: String,
+    default: ''
+  },
+  iconColor: {
+    type: String,
+    default: 'text-grey'
+  }
+});
+
+const { btnColor, iconColor } = toRefs(props);
 
 const switchLanguage = async (newLocale) => {
   current.value = newLocale;
@@ -18,8 +32,8 @@ const switchLanguage = async (newLocale) => {
 <template>
   <v-menu class="float-right">
     <template v-slot:activator="{ props }">
-      <v-btn icon v-bind="props">
-        <v-icon color="text-grey">mdi-translate</v-icon>
+      <v-btn icon v-bind="props" :color="btnColor">
+        <v-icon :color="iconColor">mdi-translate</v-icon>
       </v-btn>
     </template>
     <v-list nav>
