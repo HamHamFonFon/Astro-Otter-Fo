@@ -7,7 +7,7 @@
   >
     <v-container class="text-center" :style="{margin: 'auto'}">
       <v-sheet color="transparent" elevation="0">
-        <img class="mx-auto" width="200" src="@/assets/images/logos/astro_otter_200-200.png" alt="Astro-Otter logo" style="border-radius: 50%" />
+        <img class="mx-auto" width="200" height="200" src="@/assets/images/logos/astro_otter_200-200.png" :alt="$t('layout.logo')" style="border-radius: 50%" />
         <v-card
           color="transparent"
           elevation="0"
