@@ -48,7 +48,7 @@
           <span class="subheading me-2">{{ dso.typeLabel }}</span>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn text align="right" text-align="right" aria-label="{{ $t('layout.constellation', {'constellation': dso.constellation.alt })}}">
+        <v-btn text align="right" text-align="right" :aria-label="t('layout.btnConstellationTo', {'constellation': dso.constellation.alt })">
           <v-icon class="mr-2" color="grey"><slot name="custom-icon" iconName="constellation"></slot> </v-icon>
           <span class="subheading me-2">
             <router-link :to="{
@@ -57,7 +57,9 @@
                 constellationId: dso.constellation.id.toLowerCase(),
                 constellationName: dso.constellation.alt.toLowerCase()
               }
-            }">
+            }"
+            v-bind:title="t('layout.btnConstellationTo', {'constellation': dso.constellation.alt })"
+            >
               {{ dso.constellation.alt }}
             </router-link>
           </span>
