@@ -7,6 +7,7 @@
       class="text-white mr-5"
       color="grey"
       @click="clickEvent"
+      :aria-label="label"
   > <span>{{ label }}</span> </v-btn>
 </template>
 

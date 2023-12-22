@@ -18,11 +18,12 @@
             <v-col cols="12" md="7">
               <div class="d-flex flex-wrap justify-center justify-md-end pb-5">
                 <v-btn v-for="(socialNetwork, index) in socialNetworks"
-                       v-bind:key="index"
-                       color="blue-grey-darken-2"
-                       class="mx-3"
-                       @click="openSocialNetwork(socialNetwork.to)"
-                       icon
+                   v-bind:key="index"
+                   color="blue-grey-darken-2"
+                   class="mx-3"
+                   @click="openSocialNetwork(socialNetwork.to)"
+                   icon
+                   :aria-label="socialNetwork.name"
                 >
                   <v-icon>{{ socialNetwork.icon }}</v-icon>
                 </v-btn>

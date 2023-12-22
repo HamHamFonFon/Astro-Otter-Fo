@@ -22,24 +22,26 @@
         <v-row class="w-auto">
           <v-col cols="12" sm="6">
             <v-btn
-                block
-                size="x-large"
-                class="text-white mr-5 font-weight-bold"
-                color="primary"
-                @click="scrollToSearch"
+              block
+              size="x-large"
+              class="text-white mr-5 font-weight-bold"
+              color="primary"
+              @click="scrollToSearch"
+              aria-label="{{ $t('home.search_arialabel') }}"
             >{{ $t('home.search') }}</v-btn
             >
           </v-col>
           <v-col cols="12" sm="6">
 
-              <v-btn
-                  block
-                  size="x-large"
-                  class="text-grey mr-5 font-weight-bold"
-                  color="grey"
-                  variant="outlined"
-              ><router-link :to="{name: 'catalogs'}">{{ $t('home.browse') }}</router-link>
-              </v-btn>
+            <v-btn
+              block
+              size="x-large"
+              class="text-grey mr-5 font-weight-bold"
+              color="grey"
+              variant="outlined"
+              aria-label="{{ $t('home.browse_arialabel') }}"
+            ><router-link :to="{name: 'catalogs'}">{{ $t('home.browse') }}</router-link>
+            </v-btn>
           </v-col>
         </v-row>
       </v-sheet>
