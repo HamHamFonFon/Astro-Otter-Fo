@@ -20,7 +20,7 @@
           </v-card>
           <div class="text-center">
             <router-link :to="item.path">
-              <v-btn size="x-large" class="text-white font-weight-bold" color="primary">{{ $t('layout.btnExplore')}}</v-btn>
+              <v-btn size="x-large" class="text-white font-weight-bold" color="primary" :aria-label="$t('layout.btnExplore')">{{ $t('layout.btnExplore') }}</v-btn>
             </router-link>
           </div>
         </v-sheet>

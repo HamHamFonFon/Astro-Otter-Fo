@@ -29,8 +29,8 @@
           </p>
 
           <div class="text-center">
-            <router-link :to="item.path">
-              <v-btn size="x-large" class="text-white font-weight-bold mt-10" color="primary">Explore</v-btn>
+            <router-link :to="item.path" v-bind:title="$t('layout.btnExplore')">
+              <v-btn size="x-large" class="text-white font-weight-bold mt-10" color="primary" :aria-label="$t('layout.btnExplore')">{{ $t('layout.btnExplore') }}</v-btn>
             </router-link>
           </div>
 
