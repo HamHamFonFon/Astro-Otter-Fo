@@ -32,7 +32,7 @@ const switchLanguage = async (newLocale) => {
 <template>
   <v-menu class="float-right">
     <template v-slot:activator="{ props }">
-      <v-btn icon v-bind="props" :color="btnColor">
+      <v-btn icon v-bind="props" :color="btnColor" aria-label="{{ $t('layout.languageSwitcher')}}">
         <v-icon :color="iconColor">mdi-translate</v-icon>
       </v-btn>
     </template>

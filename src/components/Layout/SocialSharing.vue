@@ -3,6 +3,7 @@
     :color="backgroundColor"
     @click="$event => showButtons = !showButtons"
     class="hover-button elevation-10"
+    aria-label="{{ $t('share.open') }}"
   >
     <v-icon color="green" v-if="!showCloseButton">mdi-share-variant</v-icon>
     <v-icon v-else>mdi-close</v-icon>
@@ -39,6 +40,7 @@
           v-for="socialNetwork in socialNetworks"
           v-bind:key="socialNetwork"
           @click="resolveFunction(socialNetwork.funcName, socialNetwork.param)"
+          :aria-label="socialNetwork.label"
       >
         <v-icon size="30">{{ socialNetwork.icon }}</v-icon>
         <v-tooltip
@@ -52,6 +54,7 @@
           color="transparent"
           size="50"
           @click="pasteUrl"
+          :aria-label="copyLink.text"
       >
         <v-icon size="30" :icon="copyLink.icon" :color="copyLink.color"></v-icon>
         <v-tooltip

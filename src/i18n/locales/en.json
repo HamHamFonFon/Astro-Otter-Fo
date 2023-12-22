@@ -9,13 +9,15 @@
     "copy": "Copy link",
     "copied": "Link copied",
     "submit": "Submit",
-    "btnExplore": "Explore"
+    "btnExplore": "Explore",
+    "languageSwitcher": "Change lang"
   },
   "languages": {
     "en": "English",
     "fr": "French"
   },
   "share": {
+    "open": "Share on social networks",
     "instagram": "Share on Instagram",
     "twitter": "Share on  X (ex-Twitter)",
     "facebook": "Share on Facebook",
