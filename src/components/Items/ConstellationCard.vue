@@ -14,6 +14,8 @@
           class="bg-grey-lighten-2"
           height="300"
           cover
+          :alt="item.alt.toLowerCase()"
+          :aria-label="item.alt.toLowerCase()"
       >
         <template v-slot:placeholder>
           <v-row

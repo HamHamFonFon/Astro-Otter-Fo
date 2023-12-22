@@ -10,7 +10,8 @@
     "copied": "Lien copié",
     "submit": "Valider",
     "btnExplore": "Explore",
-    "languageSwitcher": "Changer de langue"
+    "languageSwitcher": "Changer de langue",
+    "btnConstellationTo": "Accès à la page de la constellation {constellation}"
   },
   "languages": {
     "en": "Anglais",

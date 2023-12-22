@@ -14,6 +14,8 @@
           :class="isHovering ? 'zoom bg-grey-lighten-2': 'bg-grey-lighten-2'"
           height="340"
           cover
+          :alt="title"
+          :aria-label="title"
         >
           <template v-slot:placeholder>
             <v-row
@@ -43,7 +45,7 @@
           <span class="subheading me-2">{{ dso.typeLabel }}</span>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn text align="right" text-align="right">
+        <v-btn text align="right" text-align="right" aria-label="{{ $t('layout.constellation', {'constellation': dso.constellation.alt })}}">
           <v-icon class="mr-2" color="grey"><slot name="custom-icon" iconName="constellation"></slot> </v-icon>
           <span class="subheading me-2">
             <router-link :to="{
