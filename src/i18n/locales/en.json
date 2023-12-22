@@ -49,9 +49,9 @@
     "description": "Astro Otter is a celestial atlas containing more than 9600 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel.",
     "explore": "Explore wonders and mysteries of the universe",
     "search": "Search objects",
-    "searchArialabel": "Access to autocomplete search",
+    "searchArialabel": "Search objects access",
     "browse": "Browse catalogs",
-    "browseArialabel": "Access to catalogs page"
+    "browseArialabel": "Browse catalogs access"
   },
   "contact": {
     "title": "Contact",
