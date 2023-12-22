@@ -27,7 +27,7 @@
               class="text-white mr-5 font-weight-bold"
               color="primary"
               @click="scrollToSearch"
-              aria-label="{{ $t('home.search_arialabel') }}"
+              :aria-label="$t('home.searchArialabel')"
             >{{ $t('home.search') }}</v-btn
             >
           </v-col>
@@ -39,7 +39,7 @@
               class="text-grey mr-5 font-weight-bold"
               color="grey"
               variant="outlined"
-              aria-label="{{ $t('home.browse_arialabel') }}"
+              :aria-label="$t('home.browseArialabel')"
             ><router-link :to="{name: 'catalogs'}">{{ $t('home.browse') }}</router-link>
             </v-btn>
           </v-col>
