@@ -19,7 +19,7 @@
             </h2>
           </v-card>
           <div class="text-center">
-            <router-link :to="item.path">
+            <router-link :to="item.path" v-bind:title="$t('layout.btnExplore')">
               <v-btn size="x-large" class="text-white font-weight-bold" color="primary" :aria-label="$t('layout.btnExplore')">{{ $t('layout.btnExplore') }}</v-btn>
             </router-link>
           </div>
@@ -27,7 +27,7 @@
       </v-col>
       <v-col cols="0" md="6">
         <v-card>
-          <router-link :to="item.path">
+          <router-link :to="item.path" v-bind:title="$t('layout.btnExplore')">
             <v-img
               height="420"
               class="v-card--hover"
