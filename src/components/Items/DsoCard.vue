@@ -7,15 +7,18 @@
       :elevation="isHovering ? 18 : 1"
       v-bind="props"
     >
-      <router-link :to="{ name: 'dso', params: { id: dso.id } }">
+      <router-link
+        :to="{ name: 'dso', params: { id: dso.id } }"
+        v-bind:title="t('dso.link', {'dso': title})"
+      >
         <v-img
           :src="imageCover"
           :lazy-src="imageLazyCover"
           :class="isHovering ? 'zoom bg-grey-lighten-2': 'bg-grey-lighten-2'"
           height="340"
           cover
-          :alt="title"
-          :aria-label="title"
+          :alt="t('dso.image', {'dso': title })"
+          :aria-label="t('dso.image', {'dso': title })"
         >
           <template v-slot:placeholder>
             <v-row
@@ -66,7 +69,11 @@
 
 <script setup>
 import {computed, toRefs} from "vue";
+import { useI18n } from 'vue-i18n'
+
+
 const defaultImage = require('@/assets/images/default.png');
+const { t } = useI18n();
 
 const props = defineProps({
   dso: {

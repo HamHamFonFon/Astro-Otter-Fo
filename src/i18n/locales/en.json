@@ -4,6 +4,8 @@
     "message": "It seems you fall in a black hole"
   },
   "layout": {
+    "logo": "Logo Astro-Otter website",
+    "homeAccess": "Access to homepage",
     "btnClose": "Close",
     "btnMore": "Show more",
     "copy": "Copy link",
@@ -83,6 +85,8 @@
   "dso": {
     "load": "Please wait while loading {uid} data…",
     "load_list": "Loading data…",
+    "link": "Access to {dso} page",
+    "image": "Image from Astrobin of {dso}",
     "data": {
       "catalogsLabel": "Catalogs",
       "otherDesigs": "Others designations",

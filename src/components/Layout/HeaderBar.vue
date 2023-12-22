@@ -5,8 +5,10 @@
     :density="!isMobile ? 'default' : 'compact'"
   >
     <v-toolbar color="secondary">
-      <router-link :to="{ name: 'home'}">
-        <v-avatar class="mx-2"><v-img :src="logo" ></v-img></v-avatar>
+      <router-link :to="{ name: 'home'}" v-bind:title="t('layout.homeAccess')">
+        <v-avatar class="mx-2">
+          <v-img :src="logo" :alt="t('layout.logo')"></v-img>
+        </v-avatar>
       </router-link>
       <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
 

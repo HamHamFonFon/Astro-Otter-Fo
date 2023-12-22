@@ -4,6 +4,8 @@
     "message": "Il semblerait que vous soyez tombé dans un trou noir"
   },
   "layout": {
+    "logo": "Logo du site Astro-Otter",
+    "homeAccess": "Accès à la page d'accueil",
     "btnClose": "Fermer",
     "btnMore": "Montrer plus",
     "copy": "Copier lien",
@@ -83,6 +85,8 @@
   "dso": {
     "load": "Veuillez patienter pendant le chargement des données de {uid}…",
     "load_list": "Chargement des données data…",
+    "link": "Accès à la page de {dso}",
+    "image": "Image Astrobin de l'objet {dso}",
     "data": {
       "catalogsLabel": "Catalogues",
       "otherDesigs": "Autres désignations",
