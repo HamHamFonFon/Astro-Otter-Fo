@@ -78,6 +78,19 @@ onBeforeMount(() => {
 
 onMounted(() => {
   fetchConstellation();
+  const files = [
+    'https://d3js.org/d3.v3.min.js',
+    'https://d3js.org/d3-geo-projection.v2.min.js',
+    'https://d3js.org/d3-drag.v1.min.js'
+  ];
+
+  files.forEach(s => {
+    const tag = document.createElement("script");
+    tag.setAttribute("src", s);
+    tag.setAttribute("type", 'text/javascript');
+
+    document.body.appendChild(tag);
+  })
 });
 
 watch(

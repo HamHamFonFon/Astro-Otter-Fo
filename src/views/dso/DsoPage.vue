@@ -22,13 +22,13 @@
 
           </v-col>
           <v-col cols="12" xl="6" v-if="galleryImages && 0 < galleryImages.length">
-            <v-img v-if="dsoRef.astrobin.url_advanced_skyplot" :src="dsoRef.astrobin.url_advanced_skyplot" cover max-height="600"></v-img>
-            <SkyMap
-                v-else
-                :constellationId="dsoRef.constellation.id"
-                :centerMap="dsoGeoJson.features[0].geometry.coordinates"
-                :itemsGeoData="dsoGeoJson"
-            ></SkyMap>
+            <v-img :src="dsoPosition" cover max-height="600" ></v-img>
+<!--            <SkyMap-->
+<!--                v-else-->
+<!--                :constellationId="dsoRef.constellation.id"-->
+<!--                :centerMap="dsoGeoJson.features[0].geometry.coordinates"-->
+<!--                :itemsGeoData="dsoGeoJson"-->
+<!--            ></SkyMap>-->
           </v-col>
           <v-col cols="12" xl="6" v-if="null !== dsoCover" >
             <DsoAstrobinCard :astrobinId="dsoRef.astrobinId" :astrobinImage="dsoRef.astrobin" :astrobinUser="dsoRef.astrobinUser" />
@@ -49,7 +49,7 @@ import { useI18n } from "vue-i18n";
 
 import {DsoWs} from "@/repositories/api/dso";
 import {ImagesWs} from "@/repositories/astrobin/images";
-import { geoJsonServices } from "@/services/geojson";
+// import { geoJsonServices } from "@/services/geojson";
 
 const store = useStore();
 const route = useRoute();
@@ -61,7 +61,7 @@ const TitlePage = defineAsyncComponent(() => import('@/components/Content/TitleP
 const DsoDataCard = defineAsyncComponent(() => import('@/components/Dso/DsoDataCard.vue'));
 const DsoCarousel = defineAsyncComponent(() => import('@/components/Dso/DsoCarousel.vue'))
 const DsoAstrobinCard = defineAsyncComponent(() => import('@/components/Dso/DsoAstrobinCard.vue'));
-const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vue'));
+// const SkyMap = defineAsyncComponent(() => import('@/components/Content/SkyMap.vue'));
 
 const dsoId = ref(route.params.id);
 const dsoRef = ref({});
@@ -149,7 +149,8 @@ const fetchGalleryImages = async () => {
 
 const isLoading = computed(() => store.state.message.loading);
 const dsoCover = computed(() => (dsoRef.value.astrobinUser) ? dsoRef.value.astrobin.url_hd: null);
-const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso([dsoRef.value]))
+const dsoPosition = computed(() => (dsoRef.value.astrobin.url_advanced_skyplot) ? dsoRef.value.astrobin.url_advanced_skyplot : dsoRef.value.astrobin.url_skyplot );
+// const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso([dsoRef.value]))
 const dsoData = computed(() => {
   return [
     {icon: 'mdi-book-open-outline', label: t('dso.data.catalogsLabel'), value: dsoRef.value.catalogsLabel.join(', ')},
