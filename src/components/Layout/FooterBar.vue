@@ -59,7 +59,7 @@
 
 <script setup>
 import configs from "@/configs";
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -78,6 +78,11 @@ const props = defineProps({
 const prismicRoutes = reactive([]);
 
 onMounted(async () => {
+  await processedFooterPrismic();
+})
+
+watch(() => Trans.currentLocale, async () => {
+  prismicRoutes.length = 0;
   await processedFooterPrismic();
 })
 
@@ -105,7 +110,6 @@ const processedFooterPrismic = async () => {
     if (0 === items.results_size) {
       return null;
     }
-
     items.results.forEach(i => {
       prismicRoutes.push({
         key: i.id,
