@@ -15,10 +15,15 @@
 <script setup>
 import DsoCard from "@/components/Items/DsoCard.vue";
 import {DsoWs} from "@/repositories/api/dso";
-import { onMounted, reactive} from "vue";
+import {onMounted, reactive, watch} from "vue";
+import Trans from "@/services/translation";
 const state = reactive({ items: {}});
 
 onMounted(() => {
+  getRandomDso();
+});
+
+watch(() => Trans.currentLocale, () => {
   getRandomDso();
 });
 

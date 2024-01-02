@@ -44,8 +44,10 @@
 import {computed, defineAsyncComponent, onBeforeMount, onMounted, ref, watch} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
-import {applySeo} from "@/services/seo";
 import { useI18n } from "vue-i18n";
+
+import {applySeo} from "@/services/seo";
+import Trans from "@/services/translation";
 
 import {DsoWs} from "@/repositories/api/dso";
 import {ImagesWs} from "@/repositories/astrobin/images";
@@ -94,6 +96,11 @@ watch(
     await fetchAllData();
   }
 )
+
+// When changing locale
+watch(() => Trans.currentLocale, async () => {
+  await fetchAllData();
+});
 
 const fetchAllData = async () => {
   try {

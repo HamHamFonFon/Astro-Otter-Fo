@@ -81,6 +81,10 @@ watch(
   }
 )
 
+watch(() => Trans.currentLocale, async () => {
+  await fetchPriscmicData();
+});
+
 /**
  *
  * @returns {Promise<void>}

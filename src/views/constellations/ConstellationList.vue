@@ -92,7 +92,8 @@ onMounted(() => {
 })
 
 watch(() => Trans.currentLocale, () => {
-  constellationsRef.value = [];
+  // constellationsRef.value = [];
+  Object.assign(constellationsRef, []);
   fetchListConstellations();
 });
 

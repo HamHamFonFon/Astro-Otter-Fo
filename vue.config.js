@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const productionGzipExtensions = ['js', 'css']
+const productionGzipExtensions = ['js', 'css', 'html', 'svg']
 
 module.exports = defineConfig({
   transpileDependencies: true,
