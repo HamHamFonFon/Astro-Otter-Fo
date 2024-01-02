@@ -14,7 +14,9 @@
     "submit-label": "Bouton de soumission du formulaire",
     "btnExplore": "Explore",
     "languageSwitcher": "Changer de langue",
-    "btnConstellationTo": "Accès à la page de la constellation {constellation}"
+    "btnConstellationTo": "Accès à la page de la constellation {constellation}",
+    "notifications": "Notifications",
+    "delete_notifications": "Tout supprimer"
   },
   "languages": {
     "en": "Anglais",

@@ -2,6 +2,7 @@
 import {defineAsyncComponent} from "vue";
 
 const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/LanguageSwitcher.vue'))
+const Notifications = defineAsyncComponent(() => import('@/components/Layout/Notification.vue'))
 </script>
 
 <template>
@@ -14,6 +15,7 @@ const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/
 <!--      <v-spacer></v-spacer>-->
       <div class="headerHome d-flex">
         <v-spacer></v-spacer>
+        <Notifications btnColor="transparent" iconColor="#1ed760"></Notifications>
         <LanguageSwitcher btnColor="transparent" iconColor="#1ed760"></LanguageSwitcher>
       </div>
 <!--    </v-toolbar>-->
