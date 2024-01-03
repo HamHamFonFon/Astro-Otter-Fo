@@ -1,6 +1,7 @@
 body,#app {
   font-family: $font !important;
   font-size: 20px;
+  font-display: swap;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: justify;
@@ -14,7 +15,7 @@ a {
 p {
   font: $font;
   line-height: 2em;
-  font-size: 20px;
+  font-size: 0.75em;
 }
 
 ul {

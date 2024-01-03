@@ -15,8 +15,8 @@ const Notifications = defineAsyncComponent(() => import('@/components/Layout/Not
 <!--      <v-spacer></v-spacer>-->
       <div class="headerHome d-flex">
         <v-spacer></v-spacer>
-        <Notifications btnColor="transparent" iconColor="#1ed760"></Notifications>
-        <LanguageSwitcher btnColor="transparent" iconColor="#1ed760"></LanguageSwitcher>
+        <Notifications btnColor="transparent" iconColor="#1ed760" bgColor="background"></Notifications>
+        <LanguageSwitcher btnColor="transparent" iconColor="#1ed760" bgColor="background"></LanguageSwitcher>
       </div>
 <!--    </v-toolbar>-->
 <!--  </v-app-bar>-->

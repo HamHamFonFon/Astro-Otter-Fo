@@ -14,8 +14,12 @@
 
   p {
     padding: 0.5em 1em;
-    line-height: 2.5em;
-    font-size: 18px;
+    line-height: 2.25em;
+    font-size: 0.8em;
+    @media (max-width: 767px) {
+      padding: 0.25em;
+    }
+
   }
 
   a {
@@ -36,9 +40,14 @@
     list-style: none;
     display: grid;
     gap: 1rem;
-
+    text-align: left;
     li {
-      line-height: 1.25;
+      line-height: 1;
+      font-size: 0.8em;
+      position: relative;
+      overflow: hidden;
+      margin-left: 1.25em;
+      padding-left: 20px;
       &::before {
         content: "";
         position: absolute;

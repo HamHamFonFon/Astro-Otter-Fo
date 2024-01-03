@@ -44,7 +44,9 @@
         <v-icon>{{ iconSearch }}</v-icon>
       </v-btn>
 
-      <div class="d-flex float-right"><LanguageSwitcher /></div>
+      <div class="d-flex float-right">
+        <LanguageSwitcher bgColor="primary" />
+      </div>
 
     </v-toolbar>
   </v-app-bar>

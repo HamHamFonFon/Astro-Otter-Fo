@@ -17,10 +17,14 @@ const props = defineProps({
   iconColor: {
     type: String,
     default: 'text-grey'
+  },
+  bgColor: {
+    type: String,
+    default: 'background'
   }
 });
 
-const { btnColor, iconColor } = toRefs(props);
+const { btnColor, iconColor, bgColor } = toRefs(props);
 
 const switchLanguage = async (newLocale) => {
   current.value = newLocale;
@@ -36,7 +40,7 @@ const switchLanguage = async (newLocale) => {
         <v-icon :color="iconColor">mdi-translate</v-icon>
       </v-btn>
     </template>
-    <v-list nav>
+    <v-list nav :bg-color="bgColor">
       <v-list-item
         v-for="locale in Tr.supportedLocales"
         :key="locale.code"

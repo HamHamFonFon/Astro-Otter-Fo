@@ -41,7 +41,7 @@
   },
   "search": {
     "label": "Recherche",
-    "seek": "Seek and find amazing deep space objects",
+    "seek": "Chercher et trouver des objets du ciel profond",
     "placeholder": "Chercher une galaxie, nébuleuse ou constellation…",
     "open": "Ouverture barre de recherche",
     "close": "Fermeture barre de recherche"
@@ -49,7 +49,7 @@
   "home": {
     "title": "Accueil",
     "description": "Astro Otter est un atlas céleste contenant plus de 9600 objets du ciel profond en base de données, regroupés en différents catalogues ou par type d'objets. Cherchez, découvrez et émerveillez-vous.",
-    "explore": "Explore wonders and mysteries of the universe",
+    "explore": "Explorez les merveilles et mystères de l'univers",
     "search": "Recherche d'objets",
     "searchArialabel": "Accès à la recherche d'objets",
     "browse": "Parcourir les catalogues",

@@ -14,6 +14,10 @@ const props = defineProps({
 const { title, urlImage, user, showButton } = toRefs(props);
 const backgroundColor = computed(() => (screen.width <= 760) ? 'primary': 'transparent')
 
+const isMobile = computed(() => {
+  return screen.width <= 766;
+});
+
 const getHeight = () => {
   return (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)+64;
 }
@@ -31,7 +35,7 @@ const scrollToDsoData = () => {
   >
     <v-row class="w-auto fill-height" align="center" justify="center">
       <div class="text-h2 text-white">
-        <h2 class="text-h2 text-white">{{ title }}</h2>
+        <h2 :class="!isMobile ? 'text-h2 text-white' : 'text-h4 text-white'">{{ title }}</h2>
         <h4 v-if="user" class="text-h6 subheading">
           &#169; {{ user }}
         </h4>

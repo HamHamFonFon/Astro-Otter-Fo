@@ -20,7 +20,9 @@
               <v-sheet elevation="0" class="mx-auto landing-warpper" rounded color="background">
                 <v-sheet class="pa-3" elevation="0" color="transparent">
                   <v-container>
-                    <div class="richtext">{{ constellationRef.value.description }}</div>
+                    <div class="richtext">
+                      <p>{{ constellationRef.value.description }}</p>
+                    </div>
                   </v-container>
                 </v-sheet>
               </v-sheet>
