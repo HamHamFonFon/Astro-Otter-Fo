@@ -12,6 +12,7 @@
 
       <SocialSharing />
       <BackToTop />
+      <Notifications />
     </div>
   </v-main>
 
@@ -41,6 +42,7 @@ const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterB
 
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
+const Notifications = defineAsyncComponent(() => import('@/components/Layout/Notifications.vue'));
 
 const allRoutes = computed(() => useRouter().options.routes)
 // import BreadCrumb from "@/components/Layout/BreadCrumb.vue";

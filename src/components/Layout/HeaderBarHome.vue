@@ -2,24 +2,15 @@
 import {defineAsyncComponent} from "vue";
 
 const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/LanguageSwitcher.vue'))
-const Notifications = defineAsyncComponent(() => import('@/components/Layout/Notification.vue'))
+// const Notifications = defineAsyncComponent(() => import('@/components/Layout/Notifications.vue'))
 </script>
 
 <template>
-<!--  <v-app-bar-->
-<!--    color="transparent"-->
-<!--    mode="shift"-->
-<!--    class="headerHome"-->
-<!--  >-->
-<!--    <v-toolbar color="transparent">-->
-<!--      <v-spacer></v-spacer>-->
       <div class="headerHome d-flex">
         <v-spacer></v-spacer>
-        <Notifications btnColor="transparent" iconColor="#1ed760" bgColor="background"></Notifications>
+<!--        <Notifications btnColor="transparent" iconColor="#1ed760" bgColor="background"></Notifications>-->
         <LanguageSwitcher btnColor="transparent" iconColor="#1ed760" bgColor="background"></LanguageSwitcher>
       </div>
-<!--    </v-toolbar>-->
-<!--  </v-app-bar>-->
 </template>
 
 <style scoped>

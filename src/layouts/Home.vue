@@ -6,6 +6,7 @@
       <HeaderBarHome />
       <SocialSharing />
       <BackToTop />
+      <Notifications />
     </div>
   </v-main>
 
@@ -32,6 +33,7 @@ applySeo({
 const HeaderBarHome = defineAsyncComponent(() => import('@/components/Layout/HeaderBarHome.vue'))
 const SocialSharing = defineAsyncComponent(() => import('@/components/Layout/SocialSharing.vue'))
 const BackToTop = defineAsyncComponent(() => import('@/components/Layout/BackToTop.vue'));
+const Notifications = defineAsyncComponent(() => import('@/components/Layout/Notifications.vue'));
 
 const FooterBar = defineAsyncComponent(() => import('@/components/Layout/FooterBar.vue'));
 const allRoutes = computed(() => useRouter().options.routes)

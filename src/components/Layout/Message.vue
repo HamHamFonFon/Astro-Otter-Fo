@@ -2,10 +2,10 @@
   <div v-if="isLoading" class="d-flex justify-center ma-4">
     <v-col sm="8">
       <v-alert
-          :type="computedType"
-          border="start"
-          prominent
-          closable
+        :type="computedType"
+        border="start"
+        prominent
+        closable
       >
 <!--        <img :src="imgLoading" v-if="'warning' === computedType" style="width: 32px;" :alt="computedType">-->
         <div id="blockMessage" style="margin: 1em;">
