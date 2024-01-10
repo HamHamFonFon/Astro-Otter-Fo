@@ -38,7 +38,7 @@ app.use(store);
 app.use(vuetify);
 
 if (localStorage.getItem('jwtToken')) {
-    store.commit('auth/setAccessToken', localStorage.getItem('jwtToken'));
+  store.commit('auth/setAccessToken', localStorage.getItem('jwtToken'));
 }
 
 app.mount('#app')

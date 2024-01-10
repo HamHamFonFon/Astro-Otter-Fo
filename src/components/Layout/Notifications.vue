@@ -18,22 +18,20 @@ const getNotifications = () => {
       cardProps: {
         color: 'success'
       },
-      prependIcon: 'mdi-check-circle',
-      duration: 10000
+      prependIcon: 'mdi-check-circle'
     });
   };
 
-  // eventSource.onerror = () =>  {
-    // eventSource.close();
-  // }
+  eventSource.onerror = () =>  {
+    console.log("An error occurred while attempting to connect to Mercure Hub.")
+    eventSource.close();
+  }
 }
 
-onMounted(() => {
-  getNotifications()
-})
+onMounted(() => getNotifications())
 </script>
 
 <template>
-  <VSonner expand position="top-right" />
+  <VSonner expand position="bottom-left" :duration="10000" />
 </template>
 
