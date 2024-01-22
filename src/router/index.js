@@ -159,7 +159,7 @@ const routes = [
     name: 'poc-mercure',
     component: () => import('@/views/pages/mercure.vue'),
     meta: {
-      layout: 'default'
+      layout: 'demo'
     }
   },
   {

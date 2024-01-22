@@ -1,9 +1,13 @@
 <script setup>
 
-import {onMounted, reactive, ref, watch} from "vue";
+import {onBeforeMount, onMounted, reactive, ref, watch} from "vue";
+import {useRoute} from "vue-router";
+
 import { mercureConfig } from '@/configs/mercure';
 import api from "@/configs/api";
+import MercureNotification from "@/components/Items/MercureNotification.vue";
 
+const route = useRoute();
 const userName = ref(null);
 const notifications = reactive([]);
 const usersNotifications = reactive([]);
@@ -31,54 +35,55 @@ const getNotificationsForUser = () => {
   }
 }
 
-const deleteItem = (index) =>  notifications.splice(index, 1);
+const deleteItem = (index) => notifications.splice(index, 1);
 const deleteUserItem = (index) => usersNotifications.splice(index, 1);
 
-onMounted(() => {
-  getNotifications();
-
-});
+onBeforeMount(() => {
+  userName.value = route.query.user;
+})
+onMounted(() => getNotifications());
 
 watch(userName, () => getNotificationsForUser())
 </script>
 
 <template>
-  <h1>MERCURE DEMO</h1>
+  <h1 class="text-h2">MERCURE DEMO</h1>
 
   <div class="grid-container">
 
     <div class="grid-child">
       <h2>Global notifications</h2>
-      <div class="Message" v-for="(notification, i) in notifications" v-bind:key="notification">
-        <div class="Message-body">
-          <p>{{ notification.message }}</p>
-        </div>
-        <button class="Message-close js-messageClose" @click="deleteItem(i)"><v-icon icon="mdi-close"></v-icon></button>
-      </div>
+      <MercureNotification
+        v-for="(notification, index) in notifications"
+        v-bind:key="notification"
+        :notification="notification"
+        @click-remove="deleteItem(index)"
+      >
+      </MercureNotification>
     </div>
 
     <div class="grid-child">
       <div>
         <h2>Notification for user {{ userName }}</h2>
-        <v-text-field
+        <!-- v-text-field
           v-model="userName"
           variant="outlined"
           color="white"
           clearable
         >
-        </v-text-field>
+        </v-text-field -->
       </div>
       <hr />
-      <div class="Message" v-for="(notification, i) in usersNotifications" v-bind:key="notification">
-        <div class="Message-body">
-          <p>{{ notification.message }}</p>
-        </div>
-        <button class="Message-close js-messageClose" @click="deleteUserItem(i)"><v-icon icon="mdi-close"></v-icon></button>
-      </div>
+
+      <MercureNotification
+        v-for="(uNotification, index) in usersNotifications"
+        v-bind:key="uNotification"
+        :notification="uNotification"
+        @click-remove="deleteUserItem(index)"
+      >
+      </MercureNotification>
     </div>
   </div>
-
-
 </template>
 
 <style scoped lang="scss">
@@ -93,47 +98,4 @@ watch(userName, () => getNotificationsForUser())
   padding: 0.5em;
 }
 
-.Message {
-  display: table;
-  position: relative;
-  margin: 1em auto 0;
-  width: 500px;
-  border-radius: 5px;
-  background-color: #3E8ED0;
-  color: #F3FDFB;
-  transition: all 0.2s ease;
-
-  &.is-hidden {
-    opacity: 0;
-    height: 0;
-    font-size: 0;
-    padding: 0;
-    margin: 0 auto;
-    display: block;
-  }
-}
-
-.Message-body {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 1em 20px;
-  color: #fff;
-}
-
-.Message-close {
-  padding: 0.25px;
-  border-radius: 50%;
-  position: absolute;
-  background-color: rgba(black, 0.3);
-  color: #fff;
-  border: none;
-  outline: none;
-  font-size: 12px;
-  right: 5px;
-  top: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(black, 0.5);
-  }
-}
 </style>
