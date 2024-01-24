@@ -84,7 +84,6 @@ const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
 import {searchItems} from "@/services/autocompleteSearch";
-import AstroIcon from "@/components/icons/CustomIcon.vue";
 
 // Data
 const logo = ref(astroOtterLogo)
