@@ -11,7 +11,6 @@
         </v-avatar>
       </router-link>
       <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
-      <AstroIcon iconName="constellation"></AstroIcon>
       <v-btn v-for="(menuItem, index) in processedMenu(menu, props.allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
           <span v-if="!isMobile" class="text-grey">{{ menuItem.text }}</span>
