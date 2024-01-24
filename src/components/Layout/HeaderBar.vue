@@ -11,12 +11,13 @@
         </v-avatar>
       </router-link>
       <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
-      <v-btn v-for="(menuItem, index) in processedMenu(menu, props.allRoutes)" stacked="" v-bind:key="index" class="text-none">
-        <router-link :to="menuItem.path">
-          <span v-if="!isMobile" class="text-grey">{{ menuItem.text }}</span>
-          <v-icon v-else-if="isMobile" icon="`$vuetify.icons.${menuItem.icon}`"></v-icon>
-        </router-link>
-      </v-btn>
+      <div v-if="!isMobile">
+        <v-btn v-for="(menuItem, index) in processedMenu(menu, props.allRoutes)" stacked="" v-bind:key="index" class="text-none">
+          <router-link :to="menuItem.path">
+            <span class="text-grey">{{ menuItem.text }}</span>
+          </router-link>
+        </v-btn>
+      </div>
 
       <v-spacer></v-spacer>
       <Transition>
@@ -45,6 +46,7 @@
 
       <div class="d-flex float-right">
         <LanguageSwitcher bgColor="primary" />
+        <MenuMobile v-if="isMobile" :itemsMenu="processedMenu(menu, props.allRoutes)" bgColor="primary"></MenuMobile>
       </div>
 
     </v-toolbar>
@@ -80,6 +82,7 @@ const { t } = useI18n();
 
 const SearchListCard = defineAsyncComponent(() => import('@/components/Items/SearchListCard.vue'));
 const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/LanguageSwitcher.vue'))
+const MenuMobile = defineAsyncComponent(() => import('@/components/Layout/MenuMobile.vue'));
 
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";

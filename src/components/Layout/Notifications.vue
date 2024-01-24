@@ -16,7 +16,7 @@ const getNotifications = () => {
     toast(response.message, {
       description: response.date,
       cardProps: {
-        color: 'success'
+        color: response.type ?? 'success'
       },
       prependIcon: 'mdi-check-circle'
     });
