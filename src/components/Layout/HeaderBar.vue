@@ -11,11 +11,11 @@
         </v-avatar>
       </router-link>
       <v-divider vertical thickness="2" inset :class="!isMobile ? 'ml-5 mr-1' : 'mr-1'"></v-divider>
-
+      <AstroIcon iconName="constellation"></AstroIcon>
       <v-btn v-for="(menuItem, index) in processedMenu(menu, props.allRoutes)" stacked="" v-bind:key="index" class="text-none">
         <router-link :to="menuItem.path">
           <span v-if="!isMobile" class="text-grey">{{ menuItem.text }}</span>
-          <v-icon v-else-if="isMobile">{{ menuItem.icon }}</v-icon>
+          <v-icon v-else-if="isMobile" icon="`$vuetify.icons.${menuItem.icon}`"></v-icon>
         </router-link>
       </v-btn>
 
@@ -51,7 +51,24 @@
     </v-toolbar>
   </v-app-bar>
 
-  <div class="resultsHeader">
+  <div class="resultsHeader" :style="{ top: `${top}`}">
+    <v-text-field
+      v-if="isMobile"
+      v-show="showSearch"
+
+      ref="inputSearch"
+      v-model="inputSearchItems"
+      :loading="loading"
+
+      color="secondary"
+      variant="outlined"
+      density="comfortable"
+      clearable
+      prepend-inner-icon="mdi-magnify"
+      hide-no-data
+      hide-details
+      :placeholder="$t('search.placeholder')"
+    ></v-text-field>
     <SearchListCard v-if="showSearch" :results="results" @click-clear="toggleInputSearch"></SearchListCard>
   </div>
 </template>
@@ -68,6 +85,7 @@ const LanguageSwitcher = defineAsyncComponent(() => import('@/components/Layout/
 import astroOtterLogo from '@/assets/images/logos/astro_otter_200-200.png'
 import configs from "@/configs";
 import {searchItems} from "@/services/autocompleteSearch";
+import AstroIcon from "@/components/icons/CustomIcon.vue";
 
 // Data
 const logo = ref(astroOtterLogo)
@@ -95,6 +113,8 @@ const props = defineProps({
 
 // Computed
 const processedMenu = computed(() => buildMenu);
+
+const top = computed(() => true === isMobile.value ? '48px' : '64px')
 
 // Methods
 const buildMenu = (items, allRoutes) => {
