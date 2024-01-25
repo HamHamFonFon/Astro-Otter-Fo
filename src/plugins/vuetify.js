@@ -46,40 +46,34 @@ export default createVuetify({
     sets: {
       mdi
     },
-    iconConstellation: {
+    constellation: {
       component: () => import('@/components/icons/CustomIcon.vue'),
       props: {
         iconName: "constellation"
       }
     },
-    iconDso: {
+    dso: {
       component: () => import('@/components/icons/CustomIcon.vue'),
       props: {
         iconName: "dso"
       }
     },
-    iconPlanet: {
+    planet: {
       component: () => import('@/components/icons/CustomIcon.vue'),
       props: {
         iconName: "planet"
       }
     },
-    iconTelescop: {
+    telescope: {
       component: () => import('@/components/icons/CustomIcon.vue'),
       props: {
-        iconName: "telescop"
+        iconName: "telescope"
       }
     },
-    iconNebula: {
+    nebula: {
       component: () => import('@/components/icons/CustomIcon.vue'),
       props: {
         iconName: "nebula"
-      }
-    },
-    test: {
-      component: () => import('@/components/icons/CustomIcon.vue'),
-      props: {
-        iconName: "test"
       }
     }
   },

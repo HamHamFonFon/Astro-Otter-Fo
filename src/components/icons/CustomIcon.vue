@@ -1,25 +1,27 @@
 <template>
-  <div v-html="svgContent"></div>
+  <component :is="svgContent" class="fill-curent"></component>
 </template>
 
 <script setup>
-import { ref, onMounted, onErrorCaptured } from "vue";
+import {onErrorCaptured, onMounted, ref, toRefs,} from "vue";
 
 const svgContent = ref(null);
-
 const props = defineProps({
   iconName: {
     type: String,
     required: true
   }
 })
+const { iconName } = toRefs(props)
 
-onMounted(async () => {
+// const svgContent = defineAsyncComponent(() => import(`@/assets/svg/${iconName.value}.svg`))
+
+onMounted(() => {
   try {
-    const svgFile = await import(`@/assets/svg/${props.iconName}.svg`);
-    svgContent.value = svgFile.default;
+    const svgResponse = import(`@/assets/svg/${iconName.value}.svg`);
+    svgContent.value = svgResponse.default;
   } catch (error) {
-    console.error(`Error loading SVG: ${props.iconName}.svg`, error);
+    console.error(`Error loading SVG: ${iconName.value}.svg`, error);
   }
 })
 
@@ -27,5 +29,3 @@ onErrorCaptured((error) => {
   console.error(`Error in CustomIcon component: ${error}`);
 });
 </script>
-<style scoped>
-</style>

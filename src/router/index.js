@@ -33,7 +33,7 @@ const routes = [
     meta: {
       layout: 'page',
       key: "menu.catalogs",
-      icon: 'iconDso',
+      icon: 'dso',
       image: backgroundCatalogs,
     }
   },
@@ -54,7 +54,7 @@ const routes = [
     meta: {
       layout: 'page',
       key: "menu.constellations",
-      icon: 'iconConstellation',
+      icon: 'constellation',
       image: backgroundConstellation,
     }
   },
