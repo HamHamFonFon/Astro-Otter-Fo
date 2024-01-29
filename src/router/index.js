@@ -38,7 +38,7 @@ const routes = [
     }
   },
   {
-    path: '/catalog/:id',
+    path: '/catalog/:id/:name?',
     name: 'dso',
     component: () => import('@/views/dso/DsoPage.vue'),
     meta: {
@@ -160,6 +160,14 @@ const routes = [
     component: () => import('@/views/pages/mercure.vue'),
     meta: {
       layout: 'demo'
+    }
+  },
+  {
+    path: '/search-by-ai',
+    name: 'ai-search',
+    component: () => import('@/views/pages/openaiSearch.vue'),
+    meta: {
+      layout: 'page'
     }
   },
   {
