@@ -163,7 +163,7 @@ const routes = [
     }
   },
   {
-    path: '/search-by-ai',
+    path: '/advanced-search',
     name: 'ai-search',
     component: () => import('@/views/pages/openaiSearch.vue'),
     meta: {

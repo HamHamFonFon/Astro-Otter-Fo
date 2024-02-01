@@ -16,6 +16,7 @@ const submitSearchForm = () => emit('submit-form', { ...formSearch})
       variant="outlined"
       auto-grow
       label="Search criteria"
+      model-value="What are all nebula in orion constellation ?"
       clearable
     ></v-textarea>
 

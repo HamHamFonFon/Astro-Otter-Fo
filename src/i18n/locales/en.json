@@ -137,7 +137,7 @@
     "disclaimer": "This product uses the AstroBin API but is not endorsed or certified by AstroBin."
   },
   "openai": {
-    "title": "Intelligent search powered by OpenAI",
+    "title": "Advanced search with AI",
     "disclaimer": "This is an experimental feature. That means it may or may not become a feature in its current form and results may be inconsistent."
   }
 }

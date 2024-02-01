@@ -15,6 +15,7 @@ const { t } = useI18n();
 
 const submittedFormData = ref(null);
 const items = ref([]);
+const columns = ref(3);
 
 onMounted(() => {
   store.commit('message/setMessage', {
@@ -25,10 +26,11 @@ onMounted(() => {
   }, { root: true });
 })
 
-const handleOpenAiSearch = (submitFormData) => {
+const handleOpenAiSearch = async (submitFormData) => {
   submittedFormData.value = submitFormData;
   try {
-    main(submittedFormData.value);
+    const response = await main(submittedFormData.value);
+    console.log(response)
   } catch (e) {
     console.log(e.message)
   }
@@ -50,7 +52,7 @@ const handleOpenAiSearch = (submitFormData) => {
 
       <ItemsList
         :items-list="items"
-        columns="3"
+        :columns="columns"
       >
         <template v-slot="{ item, index }">
           {{ index }} - {{ item.title }}
