@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading" class="d-flex justify-center ma-4">
+  <div v-if="isLoading" class="d-flex justify-center text-left ma-4">
     <v-col sm="8">
       <v-alert
         :type="computedType"
@@ -8,9 +8,9 @@
         closable
       >
 <!--        <img :src="imgLoading" v-if="'warning' === computedType" style="width: 32px;" :alt="computedType">-->
-        <div id="blockMessage" style="margin: 1em;">
+        <div id="blockMessage">
           <v-progress-circular :color="computedType" indeterminate v-if="'warning' === computedType"></v-progress-circular>
-          <span class="text-h6">{{ computedMsg }}</span>
+          <span class="text-h6 text-left">{{ computedMsg }}</span>
         </div>
 
       </v-alert>
