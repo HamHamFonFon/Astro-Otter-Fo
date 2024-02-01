@@ -21,6 +21,7 @@
     "core-js": "^3.32.1",
     "d3-celestial": "^0.7.35",
     "i18n-iso-countries": "^7.7.0",
+    "openai": "^4.26.0",
     "prismic-dom": "^2.2.7",
     "sass": "^1.69.5",
     "vue": "^3.2.13",
