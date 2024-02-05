@@ -13,6 +13,18 @@ const emit = defineEmits(['click-clear']);
 const clickClear = () => {
   emit('click-clear');
 }
+
+const getParams = (item) => {
+  let params = {
+    id: item.id
+  };
+
+  if (null !== item.urlName) {
+    params.urlName = item.urlName;
+  }
+
+  return params;
+}
 </script>
 
 <template>
@@ -21,12 +33,11 @@ const clickClear = () => {
     <v-list-subheader inset color="grey">Objects</v-list-subheader>
     <v-list-item
       color="transparent"
-
       v-for="item in results.dsos"
       :key="item"
       @click="clickClear"
     >
-      <router-link :to="{ name: 'dso', params: { id: item.id } }">
+      <router-link :to="{ name: 'dso', params: getParams(item) }">
         <v-list-item-title v-text="item.text"></v-list-item-title>
         <v-list-item-subtitle v-text="item.text"></v-list-item-subtitle>
       </router-link>
@@ -34,7 +45,7 @@ const clickClear = () => {
 
     <v-divider inset></v-divider>
 
-    <v-list-subheader color="grey" inset>Constellations</v-list-subheader>
+    <v-list-subheader color="grey" inset>{{ $t('constellations.title')}}</v-list-subheader>
     <v-list-item
       color="transparent"
       v-for="item in results.constellations"
@@ -44,7 +55,7 @@ const clickClear = () => {
 <!--      <template v-slot:prepend>-->
 <!--        <v-avatar :image="`@/assets/images/constellations/cover/${item.cover}`"></v-avatar>-->
 <!--      </template>-->
-      <router-link :to="{ name: 'constellation', params: { constellationId: item.id, constellationName: item.text } }">
+      <router-link :to="{ name: 'constellation', params: { constellationId: item.id, urlName: item.urlName } }">
         <v-list-item-title v-text="item.text"></v-list-item-title>
       </router-link>
     </v-list-item>

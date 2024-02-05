@@ -38,7 +38,7 @@ const routes = [
     }
   },
   {
-    path: '/catalog/:id/:name?',
+    path: '/catalog/:id/:urlName?',
     name: 'dso',
     component: () => import('@/views/dso/DsoPage.vue'),
     meta: {
@@ -59,7 +59,7 @@ const routes = [
     }
   },
   {
-    path: '/constelllations/:constellationId/:constellationName',
+    path: '/constellation/:constellationId/:urlName?',
     name: 'constellation',
     component: () => import('@/views/constellations/ConstellationPage.vue'),
     meta: {

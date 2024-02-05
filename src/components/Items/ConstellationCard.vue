@@ -7,7 +7,7 @@
       :elevation="isHovering ? 18 : 1"
       v-bind="props"
   >
-    <router-link :to="{name: 'constellation', params: { constellationId: item.id.toLowerCase(), constellationName: item.alt.toLowerCase() } }">
+    <router-link :to="{name: 'constellation', params: { constellationId: item.id.toLowerCase(), urlName: item.urlName } }">
       <v-img
           :src="cover"
           :lazy-src="cover"

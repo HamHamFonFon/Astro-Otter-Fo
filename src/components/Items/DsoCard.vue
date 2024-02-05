@@ -8,7 +8,7 @@
       v-bind="props"
     >
       <router-link
-        :to="{ name: 'dso', params: { id: dso.id } }"
+        :to="{ name: 'dso', params: { id: dso.id, urlName: dso.urlName } }"
         v-bind:title="t('dso.link', {'dso': title})"
       >
         <v-img
@@ -59,7 +59,7 @@
                   name: 'constellation',
                   params: {
                     constellationId: dso.constellation.id.toLowerCase(),
-                    constellationName: dso.constellation.alt.toLowerCase()
+                    urlName: dso.constellation.alt.toLowerCase()
                   }
                 }"
                              v-bind:title="t('layout.btnConstellationTo', {'constellation': dso.constellation.alt })"

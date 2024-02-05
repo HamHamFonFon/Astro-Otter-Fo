@@ -18,6 +18,7 @@ export const searchItems = async (terms) => {
         let otherDesigs = (0 < Object.keys(item.otherDesigs)) ? ' ('+ Object.values(item.otherDesigs).join(', ')+')' : ''
         return {
           id: item.id,
+          urlName: item.urlName ?? null,
           text: item.fullNameAlt + otherDesigs,
           type: item.typeLabel,
           cover: null
@@ -30,6 +31,7 @@ export const searchItems = async (terms) => {
       constellationsList = constellations.map(item => {
         return {
           id: item.id.toLowerCase(),
+          urlName: item.urlName ?? null,
           text: item.alt,
           cover: item.cover
         }
