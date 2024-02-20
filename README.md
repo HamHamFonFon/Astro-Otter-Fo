@@ -1,5 +1,7 @@
 # astro-otter-fo
 
+This repository contains the temporary front part (vue3 composition API). It will be closed when [Astro-Otter](https://github.com/HamHamFonFon/Astro-Otter) repo will be finished.
+
 ## Project setup
 ```
 npm install
