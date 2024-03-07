@@ -10,7 +10,7 @@ const API_CREDENTIALS = {
 export const GET_LOGIN = async () => {
     try {
         let requestBody = JSON.stringify({
-            'username': API_CREDENTIALS.login,
+            'email': API_CREDENTIALS.login,
             'password': API_CREDENTIALS.password,
         });
 
