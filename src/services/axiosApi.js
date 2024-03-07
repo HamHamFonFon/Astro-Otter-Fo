@@ -7,6 +7,7 @@ const instance = axios.create({
     baseURL: config.API_URL, // Set your API base URL
 });
 
+// instance.defaults.maxRedirects = 1;
 /**
  * Assign JWT Token to each REQUEST
  */
