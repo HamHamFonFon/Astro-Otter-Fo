@@ -1,4 +1,4 @@
 export const endpoint = {
-    LOGIN: '/auth/login',
+    LOGIN: '/auth',
     REFRESH: '/token/refresh'
 };
