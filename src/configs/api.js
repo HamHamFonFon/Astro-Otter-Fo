@@ -7,7 +7,7 @@ export default {
     ASTROBIN_HOST: ASTROBIN_HOST,
     ASTROBIN_API_URL: ASTROBIN_HOST + '/api/v1/',
     HEADERS: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Accept': 'application/ld+json',
+        'Content-Type': 'application/ld+json'
     }
 };
