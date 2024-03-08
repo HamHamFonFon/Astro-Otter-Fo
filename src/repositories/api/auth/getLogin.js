@@ -1,6 +1,8 @@
 import { endpoint } from "@/repositories/api/auth/endpoint.js";
 import * as WS from '@/repositories/api/abstractWebservice'
-import axios from "@/services/axiosApi";
+// import axios from "@/services/axiosApi";
+import axios from "axios";
+import config from '@/configs/api';
 
 const API_CREDENTIALS = {
     login: process.env.VUE_APP_APILOGIN,
@@ -14,8 +16,8 @@ export const GET_LOGIN = async () => {
             'password': API_CREDENTIALS.password,
         });
 
-        let config = WS.buildApiHeaders(null, null, null);
-        const response = await axios.post(endpoint.LOGIN, requestBody, config);
+        let headersConfig = WS.buildApiHeaders(null, null, null);
+        const response = await axios.post(config.API_HOST + endpoint.LOGIN, requestBody, headersConfig);
 
         if (200 !== response.status) {
             const error = new Error(response.statusText);
