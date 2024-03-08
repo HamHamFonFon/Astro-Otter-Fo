@@ -19,7 +19,7 @@ export const GET_CONSTELLATION_ITEM = async (idConstellation) => {
             error.code = response.status;
             throw error;
         }
-        return response.data;
+        return response.data[0];
     } catch (err) {
         const error = new Error(err.message);
         error.code = 500;
