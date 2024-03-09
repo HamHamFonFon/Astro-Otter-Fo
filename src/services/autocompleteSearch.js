@@ -9,12 +9,13 @@ export const searchItems = async (terms) => {
     //     console.log('Regex do not match')
     //     return null;
     // }
-    let { dsos, constellations } = await searchWS.GET_SEARCH_ITEMS(terms);
+    let items = await searchWS.GET_SEARCH_ITEMS(terms);
 
-    let dsosList, constellationsList = null;
     let nbDso, nbConstellations = 0;
-    if (undefined !== dsos) {
-      dsosList = dsos.map(item => {
+    let dsosList, constellationsList = null;
+
+    if (undefined !== items) {
+      dsosList = items.filter(item => 'App\\Model\\Dso' === item.context).map(item => {
         let otherDesigs = (0 < Object.keys(item.otherDesigs)) ? ' ('+ Object.values(item.otherDesigs).join(', ')+')' : ''
         return {
           id: item.id,
@@ -25,10 +26,8 @@ export const searchItems = async (terms) => {
         }
       });
       nbDso = dsosList.length;
-    }
 
-    if (undefined !== constellations) {
-      constellationsList = constellations.map(item => {
+      constellationsList = items.filter(item => 'App\\Model\\Constellation' === item.context).map(item => {
         return {
           id: item.id.toLowerCase(),
           urlName: item.urlName ?? null,

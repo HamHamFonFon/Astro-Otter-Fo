@@ -9,7 +9,7 @@
         color="transparent"
         v-if="!isLoading"
     >
-      <TitleParallax v-if="null !== dsoCover" :title="dsoRef.fullNameAlt" :urlImage="dsoCover" :user="dsoRef.astrobinUser.username"></TitleParallax>
+      <TitleParallax v-if="null !== dsoCover" :title="dsoRef.fullNameAlt" :urlImage="dsoCover" :user="dsoRef.astrobin.user"></TitleParallax>
       <TitlePage v-else :title="dsoRef.fullNameAlt"></TitlePage>
 
       <v-container class="text-left" :style="{margin: 'auto'}">
@@ -155,7 +155,7 @@ const fetchGalleryImages = async () => {
 }
 
 const isLoading = computed(() => store.state.message.loading);
-const dsoCover = computed(() => (dsoRef.value.astrobinUser) ? dsoRef.value.astrobin.url_hd: null);
+const dsoCover = computed(() => (dsoRef.value.astrobinId) ? dsoRef.value.astrobin.url_hd: null);
 const dsoPosition = computed(() => (dsoRef.value.astrobin.url_advanced_skyplot) ? dsoRef.value.astrobin.url_advanced_skyplot : dsoRef.value.astrobin.url_skyplot );
 // const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso([dsoRef.value]))
 const dsoData = computed(() => {
