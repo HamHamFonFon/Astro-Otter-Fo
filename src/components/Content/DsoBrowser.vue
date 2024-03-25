@@ -29,7 +29,7 @@
 
         <!-- Items list + cards -->
         <v-row align="center">
-          <ItemsLists :items-list="items" :columns="3">
+          <ItemsLists :items-list="dsosRef" :columns="3">
             <template v-slot="{ item, index }">
               <DsoCard v-bind:key="index" :dso="item" v-if="item" />
             </template>
@@ -76,7 +76,7 @@ const DsoCard = defineAsyncComponent(() => import('@/components/Items/DsoCard.vu
 const BtnMoreItems = defineAsyncComponent(() => import('@/components/Content/btnMoreItems.vue'));
 
 // Data
-const items = ref([]);
+const dsosRef = ref([]);
 const offset = ref(0);
 const limit = ref(21);
 const totalRef = ref(0);
@@ -123,10 +123,11 @@ const fetchDsoList = async () => {
       ...defaultFilters,
       ...selectedFilters.value
     };
-    const {data, filters, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
-    items.value = data;
+    const {filters, items, total} = await DsoWs.GET_DSO_LIST(params, 0, limit.value);
+    dsosRef.value = items;
     filtersRef.value = filters;
     totalRef.value = total;
+
     offset.value = limit.value;
     urlShare.value = saveShareLink(route.path, params);
     // store.commit('message/setLoading', false);
@@ -150,8 +151,8 @@ const showMoreItems = async  () => {
       ...selectedFilters.value
     };
 
-    const { data, filters, total} = await DsoWs.GET_DSO_LIST(params, offset.value, limit.value);
-    items.value = [...items.value, ...data]
+    const { filters, items, total} = await DsoWs.GET_DSO_LIST(params, offset.value, limit.value);
+    dsosRef.value = [...dsosRef.value, ...items]
     filtersRef.value = filters;
     totalRef.value = total;
     offset.value += limit.value;
@@ -170,7 +171,7 @@ const showMoreItems = async  () => {
 const getCountColumns = (filters) => 12/Object.keys(filters).length;
 
 // Computed
-const nbItems = computed(() => items.value.length);
+const nbItems = computed(() => dsosRef.value.length);
 const filtersBy = computed(() => {
   return Object.keys(filtersRef.value)
     .filter((type) => type !== defaultFilterName.value)
@@ -180,7 +181,7 @@ const filtersBy = computed(() => {
       });
     }, {})
 });
-const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso(items.value))
+const dsoGeoJson = computed(() => geoJsonServices.geoJsonDso(dsosRef.value))
 </script>
 
 <style scoped>

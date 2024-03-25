@@ -8,7 +8,6 @@ const buildApiHeaders = (customHeaders, queryParams, othersConfig) => {
         },
         'params': queryParams,
         ...othersConfig
-
     }
 }
 
