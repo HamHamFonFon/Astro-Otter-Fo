@@ -34,7 +34,7 @@
         <!--        TODO : SEPARE in DsoBrowser into two components : -->
         <!--         - One for filters-->
         <!--         - seconds for list-->
-        <DsoBrowser defaultFilterName="constellation" :defaultFilterValue="constellationRef.value.id"></DsoBrowser>
+        <DsoBrowser v-if="constellationRef?.value" defaultFilterName="constellation" :defaultFilterValue="constellationRef?.value.id"></DsoBrowser>
 
         <SkyMap
           :constellationId="constellationRef.value.id"
@@ -117,10 +117,10 @@ const fetchConstellation = async () => {
       constellationRef.value = await ConstellationWs.GET_CONSTELLATION_ITEM(constellationId.value);
       store.commit('message/setLoading', false);
       applySeo({
-        title: constellationRef.value.alt,
-        description: constellationRef.value.description,
+        title: constellationRef?.value.alt,
+        description: constellationRef?.value.description,
         image: constellationCover,
-        imageAlt: constellationRef.value.alt,
+        imageAlt: constellationRef?.value.alt,
         fullUrl: route.fullPath
       });
     } catch (err) {
@@ -134,7 +134,7 @@ const fetchConstellation = async () => {
 };
 
 const isLoading = computed(() => store.state.message.loading);
-const constellationCover = computed(() => require(`@/assets/images/constellations/cover/${constellationRef.value.cover}`));
+const constellationCover = computed(() => require(`@/assets/images/constellations/cover/${constellationRef?.value.cover}`));
 
 // GeoData
 // const constellationCenterMap = computed(() => constellationRef.value.geometry.coordinates)
